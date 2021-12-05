@@ -7,16 +7,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -51,95 +48,48 @@ public class Controller {
     List<Integer> list_of_ships1 = new ArrayList<Integer>();
     List<Integer> list_of_ships2 = new ArrayList<Integer>();
 
-    private int iter = 0;
+    public Controller controller;
 
 
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
 
     @FXML
     void changetologin(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("logowanie.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root2));
-        stage.setResizable(false);
-        stage.show();
-        ((Stage) napieprzajbutton.getScene().getWindow()).close();
+
     }
 
     @FXML
     void changetopl1(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("player1View.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        Controller controller = (Controller) fxmlLoader.getController();
-//        controller.createBoard1();
-        stage.setScene(new Scene(root2));
-        stage.setResizable(true);
-        controller.insertBoardPl1();
-        stage.show();
-        ((Stage) login_pl_1.getScene().getWindow()).close();
+
     }
 
     @FXML
     void changetopl2(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("player2View.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        Controller controller = (Controller) fxmlLoader.getController();
-//        controller.createBoard2();
-        stage.setScene(new Scene(root2));
-        stage.setResizable(true);
-        controller.insertBoardPl2();
-        stage.show();
-        ((Stage) login_pl_2.getScene().getWindow()).close();
+
     }
 
     @FXML
     void SignInP2(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignInP2.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root2));
-        stage.setResizable(false);
-        stage.show();
-        ((Stage) switchToP2Button.getScene().getWindow()).close();
+
     }
 
     @FXML
     void BufforToP1View(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BufforToP1View.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root2));
-        stage.setResizable(false);
-        stage.show();
-        try{
-            ((Stage) startGameButton.getScene().getWindow()).close();
-        }catch (Exception e){
 
-        }
     }
     @FXML
     void player1BattleView(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("player1BattleView.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        Controller controller2 = (Controller) fxmlLoader.getController();
-        stage.setScene(new Scene(root2));
-        stage.setResizable(false);
-        controller2.insertBoardPl1Ready();
-        stage.show();
-        try{
-            ((Stage) goP1Turn.getScene().getWindow()).close();
-        }catch (Exception e){
 
-        }
     }
 
     @FXML
     void player2BattleView(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("player2BattleView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/player2BattleView.fxml"));
         Parent root2 = (Parent) fxmlLoader.load();
+        Controller controller = fxmlLoader.getController();
+        controller.setController(controller);
         Stage stage = new Stage();
         stage.setScene(new Scene(root2));
         stage.setResizable(false);
@@ -153,9 +103,11 @@ public class Controller {
 
     @FXML
     void BufforToP2View(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BufforToP2View.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/bufforToP2View.fxml"));
         Parent root2 = (Parent) fxmlLoader.load();
         Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Controller controller = fxmlLoader.getController();
+        controller.setController(controller);
         stage.setScene(new Scene(root2));
         stage.setResizable(false);
         stage.show();
@@ -165,29 +117,32 @@ public class Controller {
 
         }
     }
-    void createBoard1(){
+    public void createBoard1(){
         this.player1Board = createContentPl1();
+        System.out.println("1");
+        System.out.println(player1Board);
+
     }
     void createBoard2(){
         this.player2Board = createContentPl2();
     }
 
-    void insertBoardPl1(){
-        Pane pane = (Pane) (boarderpl1_fxml.getScene().lookup("#pl1Pane #boarderpl1"));
-        pane.getChildren().add(player1Board);
-        System.out.println("xdddddd2");
+    public void insertBoardPl1(Scene scene){
+        Pane pane = (Pane) (scene.lookup("#pl1Pane #boarderpl1"));
+        System.out.println(pane);
+        System.out.println("2");
         System.out.println(player1Board);
+        pane.getChildren().add(player1Board);
     }
 
     void insertBoardPl2(){
         Pane pane = (Pane) (boarderpl2_fxml.getScene().lookup("#pl2Pane #boarderpl2"));
+        player2Board = createContentPl2();
         pane.getChildren().add(player2Board);
     }
 
-    void insertBoardPl1Ready(){
-        Pane pane = (Pane) (myBoardFXML.getScene().lookup("#mainPaneP1Battle #myBoardP1Battle"));
-        System.out.println("xd");
-        System.out.println(player1Board);
+    public void insertBoardPl1Ready(Scene scene){
+        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
         pane.getChildren().add(player1Board);
     }
 
@@ -203,7 +158,7 @@ public class Controller {
         @Override
         public void handle(MouseEvent event) {
             boolean end_s = false;
-            switchToP2Button.setDisable(true);
+//            switchToP2Button.setDisable(true);
 
             Cell cell = (Cell) event.getSource();
             if(!list_of_ships1.isEmpty()) {
@@ -220,7 +175,7 @@ public class Controller {
             }
             else{
                 System.out.println("Juz postawiono wszystkie statki");
-                switchToP2Button.setDisable(false);
+//                switchToP2Button.setDisable(false);
                 end_s = true;
 
             }

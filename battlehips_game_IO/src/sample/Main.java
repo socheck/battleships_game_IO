@@ -14,15 +14,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("startView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/startView.fxml"));
         Parent scene = fxmlLoader.load();
-        Controller controller = (Controller) fxmlLoader.getController();
-        controller.createBoard2();
-        controller.createBoard1();
-
+        System.out.println("1 ");
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(scene));
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
