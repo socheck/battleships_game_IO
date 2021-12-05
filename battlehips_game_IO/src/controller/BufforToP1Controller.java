@@ -29,6 +29,7 @@ public class BufforToP1Controller {
         player1BattleViewController.setController(controller);
         Stage stage = new Stage();
         Scene scene = new Scene(root2);
+        stage.setTitle("player1BattleView");
         stage.setScene(scene);
         stage.setResizable(false);
         controller.insertBoardPl1Ready(scene);

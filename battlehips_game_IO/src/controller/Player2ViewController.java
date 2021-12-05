@@ -14,7 +14,8 @@ public class Player2ViewController {
 
     @FXML
     private Button startGameButton;
-
+    @FXML
+    private Button randomButton;
     Controller controller;
     @FXML
     public void BufforToP1View() throws IOException {
@@ -25,6 +26,7 @@ public class Player2ViewController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root2));
         stage.setResizable(false);
+        stage.setTitle("bufforToP1View.fxml");
         stage.show();
         try{
             ((Stage) startGameButton.getScene().getWindow()).close();
@@ -37,5 +39,24 @@ public class Player2ViewController {
 
     public void setController(Controller controller) {
         this.controller = controller;
+    }
+
+    public Button getStartGameButton() {
+        return startGameButton;
+    }
+    public void setStartGameButtonDisable(){
+        startGameButton.setDisable(true);
+
+    }
+    public void setStartGameButtonEnable(){
+        startGameButton.setDisable(false);
+
+    }
+    public void setStartGameEnable(){             //ustwaienie przycisku na klikalny
+        startGameButton.setDisable(false);
+    }
+    public void randomAction(){
+
+        controller.randomPositionShipPlayer2(randomButton.getScene());
     }
 }

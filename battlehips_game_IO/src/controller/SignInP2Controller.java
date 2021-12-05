@@ -24,12 +24,18 @@ public class SignInP2Controller {
         Player2ViewController player2ViewController = (Player2ViewController) fxmlLoader.getController();
         player2ViewController.setController(controller);
         Stage stage = new Stage();
-        stage.setScene(new Scene(root2));
+        Scene scene = new Scene(root2);
+        stage.setScene(scene);
         stage.setResizable(true);
+        stage.setTitle("player2View.fxml");
 //        controller.insertBoardPl2();
         stage.show();
-        ((Stage) login_pl_2.getScene().getWindow()).close();
 
+        controller.createBoard2();
+        controller.insertBoardPl2(scene);
+        controller.setPlayer2ViewController(player2ViewController);
+        player2ViewController.setStartGameButtonDisable();
+        ((Stage) login_pl_2.getScene().getWindow()).close();
 
     }
 

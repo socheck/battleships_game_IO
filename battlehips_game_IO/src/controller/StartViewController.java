@@ -24,6 +24,7 @@ public class StartViewController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root2));
         stage.setResizable(false);
+        stage.setTitle("logowanie.fxml");
         stage.show();
         ((Stage) napieprzajbutton.getScene().getWindow()).close();
     }

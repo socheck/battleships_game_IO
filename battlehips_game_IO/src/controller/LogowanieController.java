@@ -30,9 +30,13 @@ public class LogowanieController {
         Scene scene = new Scene(root2);
         stage.setScene(scene);
         stage.setResizable(true);
+        stage.setTitle("player1View.fxml");
         stage.show();
+
         controller.createBoard1();
         controller.insertBoardPl1(scene);
+        controller.setPlayer1ViewController(player1ViewController);
+        player1ViewController.setSwitchToP2ButtonDisabel();
         ((Stage) login_pl_1.getScene().getWindow()).close();
 
     }
