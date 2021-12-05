@@ -6,8 +6,8 @@
 
 <Pane id="pl2Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane id="boarderpl2" fx:id="boarderpl2_fxml" layoutX="332.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: RED;" />
-      <Button fx:id="switchToP2Button" layoutX="117.0" layoutY="255.0" mnemonicParsing="false" onAction="#SignInP2" text="Start Game" />
+      <Pane id="boarderpl2" fx:id="boarderpl2_fxml" layoutX="266.0" layoutY="63.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: RED;" />
+      <Button fx:id="startGameButton" layoutX="117.0" layoutY="255.0" mnemonicParsing="false" onAction="#BufforToP1View" text="Start Game" />
       <Label layoutX="117.0" layoutY="223.0" text="Place all Ships First" />
    </children>
 </Pane>

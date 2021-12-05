@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,6 +29,8 @@ public class Controller {
     @FXML
     private Pane boarderpl2_fxml;
     @FXML
+    private Pane myBoardFXML;
+    @FXML
     private Button napieprzajbutton;
 
     @FXML
@@ -37,6 +40,20 @@ public class Controller {
 
     @FXML
     private Button switchToP2Button;
+    @FXML
+    private Button startGameButton;
+    @FXML
+    private Button goP1Turn;
+    @FXML
+    private Button goP2Turn;
+
+    private BoardController player2Board, player1Board;
+    List<Integer> list_of_ships1 = new ArrayList<Integer>();
+    List<Integer> list_of_ships2 = new ArrayList<Integer>();
+
+    private int iter = 0;
+
+
 
     @FXML
     void changetologin(ActionEvent event) throws IOException {
@@ -55,7 +72,7 @@ public class Controller {
         Parent root2 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         Controller controller = (Controller) fxmlLoader.getController();
-
+//        controller.createBoard1();
         stage.setScene(new Scene(root2));
         stage.setResizable(true);
         controller.insertBoardPl1();
@@ -69,7 +86,7 @@ public class Controller {
         Parent root2 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         Controller controller = (Controller) fxmlLoader.getController();
-
+//        controller.createBoard2();
         stage.setScene(new Scene(root2));
         stage.setResizable(true);
         controller.insertBoardPl2();
@@ -88,23 +105,97 @@ public class Controller {
         ((Stage) switchToP2Button.getScene().getWindow()).close();
     }
 
+    @FXML
+    void BufforToP1View(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BufforToP1View.fxml"));
+        Parent root2 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root2));
+        stage.setResizable(false);
+        stage.show();
+        try{
+            ((Stage) startGameButton.getScene().getWindow()).close();
+        }catch (Exception e){
+
+        }
+    }
+    @FXML
+    void player1BattleView(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("player1BattleView.fxml"));
+        Parent root2 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        Controller controller2 = (Controller) fxmlLoader.getController();
+        stage.setScene(new Scene(root2));
+        stage.setResizable(false);
+        controller2.insertBoardPl1Ready();
+        stage.show();
+        try{
+            ((Stage) goP1Turn.getScene().getWindow()).close();
+        }catch (Exception e){
+
+        }
+    }
+
+    @FXML
+    void player2BattleView(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("player2BattleView.fxml"));
+        Parent root2 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root2));
+        stage.setResizable(false);
+        stage.show();
+        try{
+            ((Stage) goP2Turn.getScene().getWindow()).close();
+        }catch (Exception e){
+
+        }
+    }
+
+    @FXML
+    void BufforToP2View(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BufforToP2View.fxml"));
+        Parent root2 = (Parent) fxmlLoader.load();
+        Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root2));
+        stage.setResizable(false);
+        stage.show();
+        try{
+            ((Stage) napieprzajbutton.getScene().getWindow()).close();
+        }catch (Exception e){
+
+        }
+    }
+    void createBoard1(){
+        this.player1Board = createContentPl1();
+    }
+    void createBoard2(){
+        this.player2Board = createContentPl2();
+    }
+
     void insertBoardPl1(){
         Pane pane = (Pane) (boarderpl1_fxml.getScene().lookup("#pl1Pane #boarderpl1"));
-        this.player1Board = createContentPl1();
         pane.getChildren().add(player1Board);
+        System.out.println("xdddddd2");
+        System.out.println(player1Board);
     }
 
     void insertBoardPl2(){
         Pane pane = (Pane) (boarderpl2_fxml.getScene().lookup("#pl2Pane #boarderpl2"));
-        this.player2Board = createContentPl2();
         pane.getChildren().add(player2Board);
+    }
+
+    void insertBoardPl1Ready(){
+        Pane pane = (Pane) (myBoardFXML.getScene().lookup("#mainPaneP1Battle #myBoardP1Battle"));
+        System.out.println("xd");
+        System.out.println(player1Board);
+        pane.getChildren().add(player1Board);
     }
 
 
 
 
-    private BoardController player2Board, player1Board;
-    List<Integer> list_of_ships = new ArrayList<Integer>();
+
+
 
 
 
@@ -115,11 +206,11 @@ public class Controller {
             switchToP2Button.setDisable(true);
 
             Cell cell = (Cell) event.getSource();
-            if(!list_of_ships.isEmpty()) {
-                if (player1Board.placeShip(new Ship(list_of_ships.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
+            if(!list_of_ships1.isEmpty()) {
+                if (player1Board.placeShip(new Ship(list_of_ships1.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
                     try {
-                        System.out.println(list_of_ships.get(0));
-                        list_of_ships.remove(0);
+                        System.out.println(list_of_ships1.get(0));
+                        list_of_ships1.remove(0);
 
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Juz postawiono wszystkie statki");
@@ -142,11 +233,11 @@ public class Controller {
         public void handle(MouseEvent event) {
             boolean end_s = false;
             Cell cell = (Cell) event.getSource();
-            if(!list_of_ships.isEmpty()) {
-                if (player2Board.placeShip(new Ship(list_of_ships.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
+            if(!list_of_ships2.isEmpty()) {
+                if (player2Board.placeShip(new Ship(list_of_ships2.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
                     try {
-                        System.out.println(list_of_ships.get(0));
-                        list_of_ships.remove(0);
+                        System.out.println(list_of_ships2.get(0));
+                        list_of_ships2.remove(0);
 
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Juz postawiono wszystkie statki");
@@ -161,35 +252,36 @@ public class Controller {
     };
 
 
-    private BoardController createContentPl1() {
-        list_of_ships.add(4);
-        list_of_ships.add(3);
-        list_of_ships.add(3);
-        list_of_ships.add(2);
-        list_of_ships.add(2);
-        list_of_ships.add(2);
-        list_of_ships.add(1);
-        list_of_ships.add(1);
-        list_of_ships.add(1);
-        list_of_ships.add(1);
-
+    public BoardController createContentPl1() {
+        list_of_ships1.add(4);
+        list_of_ships1.add(3);
+        list_of_ships1.add(3);
+        list_of_ships1.add(2);
+        list_of_ships1.add(2);
+        list_of_ships1.add(2);
+        list_of_ships1.add(1);
+        list_of_ships1.add(1);
+        list_of_ships1.add(1);
+        list_of_ships1.add(1);
         return new BoardController(false, eventHandler);
     }
 
 
-    private BoardController createContentPl2() {
-        list_of_ships.add(4);
-        list_of_ships.add(3);
-        list_of_ships.add(3);
-        list_of_ships.add(2);
-        list_of_ships.add(2);
-        list_of_ships.add(2);
-        list_of_ships.add(1);
-        list_of_ships.add(1);
-        list_of_ships.add(1);
-        list_of_ships.add(1);
+    public BoardController createContentPl2() {
+        list_of_ships2.add(4);
+        list_of_ships2.add(3);
+        list_of_ships2.add(3);
+        list_of_ships2.add(2);
+        list_of_ships2.add(2);
+        list_of_ships2.add(2);
+        list_of_ships2.add(1);
+        list_of_ships2.add(1);
+        list_of_ships2.add(1);
+        list_of_ships2.add(1);
 
         return new BoardController(false, eventHandler2);
     }
+
+
 
 }

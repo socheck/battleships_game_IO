@@ -33,6 +33,15 @@ public class BoardController extends Parent {
         getChildren().add(rows);
     }
 
+    @Override
+    public String toString() {
+        return "BoardController{" +
+                "rows=" + rows +
+                ", isAI=" + isAI +
+                ", ships=" + ships +
+                '}';
+    }
+
     public boolean placeShip(Ship ship, int x, int y) {
         if (canPlaceShip(ship, x, y)) {
             int length = ship.getType();
