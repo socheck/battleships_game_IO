@@ -195,7 +195,7 @@ public class Controller {
             if(player2Board.isAI()){
 
 
-                
+
             }
         }
     };
