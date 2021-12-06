@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 
 public class BoardController extends Parent {
     private VBox rows = new VBox();
-    private boolean isAI = false;
+    private boolean isAI = false;  // false widzimy nasze statki
     public int ships = 10;
 
     public BoardController(boolean isAI, EventHandler<? super MouseEvent> handler) {
@@ -40,6 +40,36 @@ public class BoardController extends Parent {
                 ", isAI=" + isAI +
                 ", ships=" + ships +
                 '}';
+    }
+    public void render(){
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                Cell cell = getCell(x, y);
+                if(isAI){
+                    cell.setFill(Color.LIGHTGREY);
+                    cell.setStroke(Color.BLACK);
+                    if(cell.get_isWasShot()){
+                        cell.setFill(Color.BLACK);
+                    }
+                }
+                if(!isAI){
+                    cell.setFill(Color.LIGHTGREY);
+                    cell.setStroke(Color.BLACK);
+                    if(cell.ship != null){
+                        cell.setFill(Color.WHITE);
+                        cell.setStroke(Color.GREEN);
+                    }
+
+                }
+
+            }
+        }
+
+
+
+
+
+
     }
 
     public boolean placeShip(Ship ship, int x, int y) {
@@ -164,4 +194,7 @@ public class BoardController extends Parent {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
+    public void setAI(boolean AI) {
+        isAI = AI;
+    }
 }

@@ -47,7 +47,7 @@ public class Controller {
     @FXML
     private Button goP2Turn;
     private Random random = new Random();
-    private BoardController player2Board, player1Board;
+    public BoardController player2Board, player1Board;
     List<Integer> list_of_ships1 = new ArrayList<Integer>();
     List<Integer> list_of_ships2 = new ArrayList<Integer>();
 
@@ -122,6 +122,10 @@ public class Controller {
     public void insertBoardPl1Ready(Scene scene){
         Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
         pane.getChildren().add(player1Board);
+    }
+    public void insertBoardPl2Ready(Scene scene){
+        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
+        pane.getChildren().add(player2Board);
     }
 
 
