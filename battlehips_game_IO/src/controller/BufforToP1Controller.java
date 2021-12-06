@@ -35,9 +35,10 @@ public class BufforToP1Controller {
 //        controller.player1Board.setAI(true);
 //        controller.player1Board.render();
         controller.setPlayer1BattleViewController(player1BattleViewController);
-        controller.insertBoardPl1Ready(scene);
+
         controller.player2Board.setAI(true);
         controller.player2Board.render();
+        controller.insertBoardPl1Ready(scene);
         controller.insertBoardPl2Ready(scene);
 
         stage.show();
@@ -48,6 +49,8 @@ public class BufforToP1Controller {
         }
         player1BattleViewController.nextButton.setDisable(true);
         player1BattleViewController.nextPlayerReadyButton.setDisable(true);
+        player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
+        player1BattleViewController.continueButton.setDisable(true);
 
     }
 }
