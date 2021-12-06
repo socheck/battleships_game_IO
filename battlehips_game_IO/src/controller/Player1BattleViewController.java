@@ -2,6 +2,8 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import sample.Controller;
 
 public class Player1BattleViewController {
@@ -10,6 +12,10 @@ public class Player1BattleViewController {
     public Button nextButton;
     @FXML
     public Button nextPlayerReadyButton;
+    @FXML
+    public Label playerNumberLabel;
+    @FXML
+    public Button continueButton;
 
     Controller controller;
     private boolean ifPlayer1 = true; //true oznacza gracza 1
@@ -25,19 +31,24 @@ public class Player1BattleViewController {
         controller.hideBoardPl2(nextButton.getScene());
     }
     public void player2ReadyAction() {
-        if (ifPlayer1) {
+        if (ifPlayer1) { // skonczyła się tura gracza 1 i przłączamy na gracza 2
             controller.insertBoardPl2Ship(nextPlayerReadyButton.getScene());
             controller.insertBoardPl1Shoot(nextPlayerReadyButton.getScene());
             nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = false;
-        }else {
+            playerNumberLabel.setText("Tura Gracza Nr 2");
+        }else { // przełączamy ba gracza 1
             controller.insertBoardPl1Ship(nextPlayerReadyButton.getScene());
             controller.insertBoardPl2Shoot(nextPlayerReadyButton.getScene());
             nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = true;
+            playerNumberLabel.setText("Tura Gracza Nr 1");
         }
     }
 
+    public void continueAction(){
+        ((Stage)(continueButton.getScene().getWindow())).close();
+    }
 
 
 }

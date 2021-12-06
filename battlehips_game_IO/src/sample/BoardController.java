@@ -78,12 +78,8 @@ public class BoardController extends Parent {
             }
         }
 
-
-
-
-
-
     }
+
 
     public boolean placeShip(Ship ship, int x, int y) {
         if (canPlaceShip(ship, x, y)) {
@@ -230,5 +226,12 @@ public class BoardController extends Parent {
     public void setShips(int ships) {
         this.ships = ships;
     }
+    public boolean endGame(){ //return true = koniec gry
+        if(ships == 0){
+            return true;
+        }
+        return false;
+    }
+
 
 }
