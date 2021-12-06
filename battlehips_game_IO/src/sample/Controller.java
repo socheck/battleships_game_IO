@@ -163,6 +163,9 @@ public class Controller {
 
             }
 
+
+
+
         }
     };
 
@@ -187,6 +190,12 @@ public class Controller {
                 System.out.println("Juz postawiono wszystkie statki");
                 player2ViewController.setStartGameButtonEnable();
                 end_s = true;
+            }
+
+            if(player2Board.isAI()){
+
+
+                
             }
         }
     };

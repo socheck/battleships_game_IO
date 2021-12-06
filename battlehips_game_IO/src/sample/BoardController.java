@@ -197,4 +197,24 @@ public class BoardController extends Parent {
     public void setAI(boolean AI) {
         isAI = AI;
     }
+
+    public VBox getRows() {
+        return rows;
+    }
+
+    public void setRows(VBox rows) {
+        this.rows = rows;
+    }
+
+    public boolean isAI() {
+        return isAI;
+    }
+
+    public int getShips() {
+        return ships;
+    }
+
+    public void setShips(int ships) {
+        this.ships = ships;
+    }
 }
