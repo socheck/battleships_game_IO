@@ -17,6 +17,6 @@
          </font>
       </Label>
       <Button fx:id="nextButton" layoutX="447.0" layoutY="428.0" mnemonicParsing="false" onAction="#nextAction" prefHeight="25.0" prefWidth="107.0" text="NEXT" />
-      <Button fx:id="player2ReadyButton" layoutX="454.0" layoutY="477.0" mnemonicParsing="false" onAction="#player2ReadyAction" text="Player 2 Ready" />
+      <Button fx:id="nextPlayerReadyButton" layoutX="444.0" layoutY="474.0" mnemonicParsing="false" onAction="#player2ReadyAction" text="Next Player Ready" />
    </children>
 </Pane>

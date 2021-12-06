@@ -210,6 +210,7 @@ public class Controller {
             Cell cell = (Cell) event.getSource();
             if(list_of_ships1.isEmpty()){
                 player1AllShipSet = true;
+                player1ViewController.getSwitchToP2Button().setDisable(false);
             }
 
             if (!player1AllShipSet) {
@@ -220,6 +221,7 @@ public class Controller {
                             list_of_ships1.remove(0);
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Juz postawiono wszystkie statki");
+                            player1ViewController.getSwitchToP2Button().setDisable(false);
                         }
                     }
                 }
@@ -269,6 +271,7 @@ public class Controller {
 
             if(list_of_ships2.isEmpty()){
                 player2AllShipSet = true;
+                player2ViewController.setStartGameButtonEnable();
             }
             if (!player2AllShipSet) {
 

@@ -47,7 +47,7 @@ public class BufforToP1Controller {
 
         }
         player1BattleViewController.nextButton.setDisable(true);
-        player1BattleViewController.player2ReadyButton.setDisable(true);
+        player1BattleViewController.nextPlayerReadyButton.setDisable(true);
 
     }
 }

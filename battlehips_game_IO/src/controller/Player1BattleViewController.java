@@ -9,7 +9,7 @@ public class Player1BattleViewController {
     @FXML
     public Button nextButton;
     @FXML
-    public Button player2ReadyButton;
+    public Button nextPlayerReadyButton;
 
     Controller controller;
     private boolean ifPlayer1 = true; //true oznacza gracza 1
@@ -20,20 +20,20 @@ public class Player1BattleViewController {
 
     public void nextAction(){
         nextButton.setDisable(true);
-        player2ReadyButton.setDisable(false);
+        nextPlayerReadyButton.setDisable(false);
         controller.hideBoardPl1(nextButton.getScene());
         controller.hideBoardPl2(nextButton.getScene());
     }
     public void player2ReadyAction() {
         if (ifPlayer1) {
-            controller.insertBoardPl2Ship(player2ReadyButton.getScene());
-            controller.insertBoardPl1Shoot(player2ReadyButton.getScene());
-            player2ReadyButton.setDisable(true);
+            controller.insertBoardPl2Ship(nextPlayerReadyButton.getScene());
+            controller.insertBoardPl1Shoot(nextPlayerReadyButton.getScene());
+            nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = false;
         }else {
-            controller.insertBoardPl1Ship(player2ReadyButton.getScene());
-            controller.insertBoardPl2Shoot(player2ReadyButton.getScene());
-            player2ReadyButton.setDisable(true);
+            controller.insertBoardPl1Ship(nextPlayerReadyButton.getScene());
+            controller.insertBoardPl2Shoot(nextPlayerReadyButton.getScene());
+            nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = true;
         }
     }

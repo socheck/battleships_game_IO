@@ -48,9 +48,13 @@ public class BoardController extends Parent {
                 if(isAI){
                     cell.setFill(Color.LIGHTGREY);
                     cell.setStroke(Color.BLACK);
-                    if(cell.get_isWasShot()){
+                    if(cell.get_isWasShot() && cell.getShip() == null){
                         cell.setFill(Color.BLACK);
                     }
+                    if(cell.get_isWasShot() && cell.getShip() != null){
+                        cell.setFill(Color.RED);
+                    }
+
                 }
                 if(!isAI){
                     cell.setFill(Color.LIGHTGREY);
