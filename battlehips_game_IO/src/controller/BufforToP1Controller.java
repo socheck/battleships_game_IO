@@ -34,10 +34,12 @@ public class BufforToP1Controller {
         stage.setResizable(false);
 //        controller.player1Board.setAI(true);
 //        controller.player1Board.render();
+        controller.setPlayer1BattleViewController(player1BattleViewController);
         controller.insertBoardPl1Ready(scene);
         controller.player2Board.setAI(true);
         controller.player2Board.render();
         controller.insertBoardPl2Ready(scene);
+        player1BattleViewController.nextButton.setDisable();
         stage.show();
         try{
             ((Stage) goP1Turn.getScene().getWindow()).close();

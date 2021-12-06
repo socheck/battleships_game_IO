@@ -2,6 +2,7 @@ package sample;
 
 import bs_game_backend.Cell;
 import bs_game_backend.Ship;
+import controller.Player1BattleViewController;
 import controller.Player1ViewController;
 import controller.Player2ViewController;
 import javafx.event.ActionEvent;
@@ -55,6 +56,14 @@ public class Controller {
 
     public Player1ViewController player1ViewController;
     public Player2ViewController player2ViewController;
+    private Player1BattleViewController player1BattleViewController;
+
+
+    private boolean player2AllShipSet = false , player1AllShipSet = false;
+
+    public void setPlayer1BattleViewController(Player1BattleViewController player1BattleViewController) {
+        this.player1BattleViewController = player1BattleViewController;
+    }
 
     public void setController(Controller controller) {
         this.controller = controller;
@@ -175,30 +184,53 @@ public class Controller {
         public void handle(MouseEvent event) {
             boolean end_s = false;
             Cell cell = (Cell) event.getSource();
-            if(!list_of_ships2.isEmpty()) {
-                if (player2Board.placeShip(new Ship(list_of_ships2.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
-                    try {
-                        System.out.println(list_of_ships2.get(0));
-                        list_of_ships2.remove(0);
+            if(list_of_ships2.isEmpty()){
+                player2AllShipSet = true;
+            }
+            if (!player2AllShipSet) {
 
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Juz postawiono wszystkie statki");
+                if(!list_of_ships2.isEmpty()) {
+                    if (player2Board.placeShip(new Ship(list_of_ships2.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
+                        try {
+                            System.out.println(list_of_ships2.get(0));
+                            list_of_ships2.remove(0);
+
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Juz postawiono wszystkie statki");
+                        }
                     }
                 }
-            }
-            else{
-                System.out.println("Juz postawiono wszystkie statki");
-                player2ViewController.setStartGameButtonEnable();
-                end_s = true;
-            }
+                else{
+                    System.out.println("Juz postawiono wszystkie statki");
+                    player2ViewController.setStartGameButtonEnable();
+                    player2AllShipSet = true;
+                    end_s = true;
+                }
+            }else {
 
-            if(player2Board.isAI()){
+                if (player2Board.isAI()) {
+
+                    if (cell.get_isWasShot()) {
+                        return;
+                    } else {
+                        cell.shoot();
+//                        ODWRACANIE WIDOKU
 
 
 
+
+
+
+
+
+                    }
+
+                }
             }
         }
     };
+
+
 
 
     public BoardController createContentPl1() {

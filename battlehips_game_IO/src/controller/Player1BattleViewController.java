@@ -1,8 +1,13 @@
 package controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import sample.Controller;
 
 public class Player1BattleViewController {
+
+    @FXML
+    public Button nextButton;
 
     Controller controller;
 
@@ -11,6 +16,11 @@ public class Player1BattleViewController {
         this.controller = controller;
     }
 
+    public void nextAction(){
+
+
+
+    }
 
 
 

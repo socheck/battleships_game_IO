@@ -8,6 +8,7 @@ import sample.BoardController;
 public class Cell extends Rectangle {
     private int x;
     private int y;
+    //zmienić na privet
     public Ship ship = null; // Is part of any ship?
     private boolean isWasShot = false;
     private BoardController boardController; // Reference to including on board (my or enemy)
@@ -49,5 +50,35 @@ public class Cell extends Rectangle {
         return false;
     }
 
+    public Ship getShip() {
+        return ship;
+    }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
+    }
+
+    public boolean isWasShot() {
+        return isWasShot;
+    }
+
+    public void setWasShot(boolean wasShot) {
+        isWasShot = wasShot;
+    }
+
+    public BoardController getBoardController() {
+        return boardController;
+    }
+
+    public void setBoardController(BoardController boardController) {
+        this.boardController = boardController;
+    }
 }
