@@ -39,14 +39,15 @@ public class BufforToP1Controller {
         controller.player2Board.setAI(true);
         controller.player2Board.render();
         controller.insertBoardPl2Ready(scene);
-        player1BattleViewController.nextButton.setDisable();
+
         stage.show();
         try{
             ((Stage) goP1Turn.getScene().getWindow()).close();
         }catch (Exception e){
 
         }
-
+        player1BattleViewController.nextButton.setDisable(true);
+        player1BattleViewController.player2ReadyButton.setDisable(true);
 
     }
 }

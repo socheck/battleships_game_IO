@@ -59,11 +59,11 @@ public class BoardController extends Parent {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
                     }
-                    if(cell.get_isWasShot() || cell.getShip() != null){
+                    if(cell.get_isWasShot() && cell.getShip() != null){
                         cell.setFill(Color.BLUE);
                         cell.setStroke(Color.GRAY);
                     }
-                    if(cell.get_isWasShot() || cell.getShip() == null){
+                    if(cell.get_isWasShot() && cell.getShip() == null){
                         cell.setFill(Color.MAROON);
                         cell.setStroke(Color.GRAY);
                     }

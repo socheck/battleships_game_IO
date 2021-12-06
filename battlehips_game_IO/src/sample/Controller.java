@@ -60,6 +60,7 @@ public class Controller {
 
 
     private boolean player2AllShipSet = false , player1AllShipSet = false;
+    private boolean player1ShotNow = true, player2ShotNow = true;
 
     public void setPlayer1BattleViewController(Player1BattleViewController player1BattleViewController) {
         this.player1BattleViewController = player1BattleViewController;
@@ -137,7 +138,63 @@ public class Controller {
         pane.getChildren().add(player2Board);
     }
 
+    public void hideBoardPl1(Scene scene){
+        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
+        try {
+            pane.getChildren().remove(player1Board);
+        } catch (Exception e) {
+        }
+        try {
+            pane.getChildren().remove(player2Board);
+        } catch (Exception e) {
 
+        }
+
+
+    }
+
+    public void hideBoardPl2(Scene scene){
+        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
+        try {
+            pane.getChildren().remove(player2Board);
+        } catch (Exception e) {
+
+        }
+        try {
+            pane.getChildren().remove(player1Board);
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void insertBoardPl2Ship(Scene scene){ // pokazywanie planszy gracza 2 ze statkami, turagracza 2
+        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
+        player2Board.setAI(false);
+        player2Board.render();
+        pane.getChildren().add(player2Board);
+        player2ShotNow = true;
+    }
+    public void insertBoardPl1Shoot(Scene scene){
+        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
+        player1Board.setAI(true);
+        player1Board.render();
+        pane.getChildren().add(player1Board);
+
+    }
+    public void insertBoardPl1Ship(Scene scene){ // pokazywanie planszy gracza 2 ze statkami, turagracza 2
+        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
+        player1Board.setAI(false);
+        player1Board.render();
+        pane.getChildren().add(player1Board);
+        player1ShotNow = true;
+    }
+    public void insertBoardPl2Shoot(Scene scene){
+        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
+        player2Board.setAI(true);
+        player2Board.render();
+        pane.getChildren().add(player2Board);
+
+    }
 
 
 
@@ -150,29 +207,54 @@ public class Controller {
         public void handle(MouseEvent event) {
             boolean end_s = false;
             player1ViewController.getSwitchToP2Button().setDisable(true);
-            System.out.println("1");
             Cell cell = (Cell) event.getSource();
-            if(!list_of_ships1.isEmpty()) {
-                if (player1Board.placeShip(new Ship(list_of_ships1.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
-                    try {
-                        System.out.println(list_of_ships1.get(0));
-                        list_of_ships1.remove(0);
-                        System.out.println("2");
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Juz postawiono wszystkie statki");
+            if(list_of_ships1.isEmpty()){
+                player1AllShipSet = true;
+            }
+
+            if (!player1AllShipSet) {
+                if(!list_of_ships1.isEmpty()) {
+                    if (player1Board.placeShip(new Ship(list_of_ships1.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
+                        try {
+                            System.out.println(list_of_ships1.get(0));
+                            list_of_ships1.remove(0);
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("Juz postawiono wszystkie statki");
+                        }
                     }
                 }
+                else{
+                    System.out.println("Juz postawiono wszystkie statki");
+                    try {
+                        player1ViewController.getSwitchToP2Button().setDisable(false);
+                    } catch (Exception e) {
+                   }
+                    player1AllShipSet = true;
+                    end_s = true;
+                }
+            } else {
+                if (player2ShotNow) {
+                    if (player1Board.isAI()) {
+
+                        if (cell.get_isWasShot()) {
+                            return;
+                        } else {
+                            cell.shoot();
+
+                            if (cell.getShip() == null) {
+                                player2ShotNow = false;
+                                player1BattleViewController.nextButton.setDisable(false);
+                            }
+                            //                        ODWRACANIE WIDOKU
+                        }
+
+                    }
+                } else {
+                }
+
+
 
             }
-            else{
-                System.out.println("Juz postawiono wszystkie statki");
-                player1ViewController.getSwitchToP2Button().setDisable(false);
-                end_s = true;
-                System.out.println("3");
-
-            }
-
-
 
 
         }
@@ -184,6 +266,7 @@ public class Controller {
         public void handle(MouseEvent event) {
             boolean end_s = false;
             Cell cell = (Cell) event.getSource();
+
             if(list_of_ships2.isEmpty()){
                 player2AllShipSet = true;
             }
@@ -194,7 +277,6 @@ public class Controller {
                         try {
                             System.out.println(list_of_ships2.get(0));
                             list_of_ships2.remove(0);
-
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("Juz postawiono wszystkie statki");
                         }
@@ -202,29 +284,33 @@ public class Controller {
                 }
                 else{
                     System.out.println("Juz postawiono wszystkie statki");
-                    player2ViewController.setStartGameButtonEnable();
+                    try {
+                        player2ViewController.setStartGameButtonEnable();
+                    } catch (Exception e) {
+                    }
                     player2AllShipSet = true;
                     end_s = true;
                 }
             }else {
 
-                if (player2Board.isAI()) {
+                if (player1ShotNow) {
+                    System.out.println("xddd1");
+                    if (player2Board.isAI()) {
+                        System.out.println("xddd2");
+                        if (cell.get_isWasShot()) {
+                            return;
+                        } else {
+                            cell.shoot();
 
-                    if (cell.get_isWasShot()) {
-                        return;
-                    } else {
-                        cell.shoot();
-//                        ODWRACANIE WIDOKU
-
-
-
-
-
-
-
+                            if (cell.getShip() == null) {
+                                player1ShotNow = false;
+                                player1BattleViewController.nextButton.setDisable(false);
+                            }
+                            //                        ODWRACANIE WIDOKU
+                        }
 
                     }
-
+                } else {
                 }
             }
         }
