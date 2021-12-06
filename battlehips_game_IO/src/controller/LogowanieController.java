@@ -40,4 +40,18 @@ public class LogowanieController {
         ((Stage) login_pl_1.getScene().getWindow()).close();
 
     }
+
+    @FXML
+    public void changeToPickDiffLevelPlayerVsAI() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/pickDiffLevelOfBot.fxml"));
+        Parent root2 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root2));
+        stage.setResizable(false);
+        stage.setTitle("Pick Level of Bot");
+        stage.show();
+        ((Stage) login_pl_1.getScene().getWindow()).close();
+
+
+    }
 }
