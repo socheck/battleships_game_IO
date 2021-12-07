@@ -43,7 +43,7 @@ public class AI {
         this.board = board;
     }
 
-    public IA(int gameMode, BoardController board){
+    public BoardController AI(int gameMode, BoardController board){
         this.board = board;
         this.gameMode = gameMode;
         this.potentialShoots = new ArrayList<Cell>();
@@ -53,14 +53,14 @@ public class AI {
     }
 
 
-//    public void moveAI(){
-//        switch (getGameMode()) {
-//            case 0 -> easyMode();
-//            case 1 -> mediumMode();//trzeba przesłać zmienne
-//            case 2 -> hardMode();
-//            default -> System.out.println("Nie wybrano żadnego trybu!");
-//        }
-//    }
+    public void moveAI(){
+        switch (getGameMode()) {
+            case 0 -> easyMode();
+            //case 1 -> mediumMode();//trzeba przesłać zmienne
+            case 2 -> hardMode();
+            default -> System.out.println("Nie wybrano żadnego trybu!");
+        }
+    }
 
     private BoardController easyMode(){
 
@@ -117,8 +117,8 @@ public class AI {
                     return board;
                 }
 //              do usunięcia jak działa
-                System.out.println("czegoś nie przewidziałem jeszce");
-                return null;
+                //System.out.println("czegoś nie przewidziałem jeszce");
+                //return null;
 
             }
             else{
