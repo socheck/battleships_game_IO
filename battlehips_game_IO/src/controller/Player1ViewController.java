@@ -16,6 +16,8 @@ public class Player1ViewController {
     private Button switchToP2Button;
     @FXML
     private Button randomButton;
+    @FXML
+    public Button startGameAiButton;
 
     private Controller controller;
     Scene scene;
@@ -42,6 +44,10 @@ public class Player1ViewController {
     public void randomAction(){
 
         controller.randomPositionShipPlayer1(randomButton.getScene());
+    }
+    @FXML
+    public void startGameAiAction(){
+
     }
 
     public void setController(Controller controller) {
