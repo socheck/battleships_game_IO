@@ -16,12 +16,12 @@ public class LogowanieController {
     private Button login_pl_1;
 
     private Controller controller;
+    public int gameMode = 0;  //0 = 1vs1, 1 = 1vsBot, 2 = BotvsBot
 
 
     @FXML
     public void  changetopl1() throws IOException {
         controller = new Controller();
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/player1View.fxml"));
         Parent root2 = (Parent) fxmlLoader.load();
         Player1ViewController player1ViewController = (Player1ViewController) fxmlLoader.getController();
@@ -32,7 +32,6 @@ public class LogowanieController {
         stage.setResizable(true);
         stage.setTitle("player1View.fxml");
         stage.show();
-
         controller.createBoard1();
         controller.insertBoardPl1(scene);
         controller.setPlayer1ViewController(player1ViewController);
@@ -53,5 +52,13 @@ public class LogowanieController {
         ((Stage) login_pl_1.getScene().getWindow()).close();
 
 
+    }
+
+    public int getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(int gameMode) {
+        this.gameMode = gameMode;
     }
 }

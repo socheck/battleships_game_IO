@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import sample.Controller;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -14,46 +13,52 @@ import java.io.IOException;
 public class StartViewController {
 
     @FXML
-    private Button napieprzajbutton;
+    private Button playerVsPlayerButton;
 
     @FXML
     private Button playerVsBotButton;
+    @FXML
+    private Button botVsBotButton;
 
     private String gameMode;
 
 
 
     @FXML
-    public void changetologin() throws IOException {
+    public void playerVsPlayerAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/logowanie.fxml"));
         Parent root2 = (Parent) fxmlLoader.load();
+        LogowanieController logowanieController = (LogowanieController) fxmlLoader.getController();
         Stage stage = new Stage();
         stage.setScene(new Scene(root2));
         stage.setResizable(false);
         stage.setTitle("logowanie.fxml");
-        gameMode = "PVP";
         stage.show();
-        ((Stage) napieprzajbutton.getScene().getWindow()).close();
+        ((Stage) playerVsPlayerButton.getScene().getWindow()).close();
+        logowanieController.setGameMode(0);
+
     }
 
     @FXML
-    public void changetologinPVAI() throws IOException {
+    public void playerVsBotAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/logowanie.fxml"));
         Parent root2 = (Parent) fxmlLoader.load();
+        LogowanieController logowanieController = (LogowanieController) fxmlLoader.getController();
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root2));
         stage.setResizable(false);
         stage.setTitle("logowanie.fxml");
-        gameMode = "PVAI";
+
         stage.show();
-        ((Stage) napieprzajbutton.getScene().getWindow()).close();
+        ((Stage) playerVsBotButton.getScene().getWindow()).close();
+        logowanieController.setGameMode(1);
     }
+    @FXML
+    public void botVsBotAction(){
 
-    public void modeClicked(ActionEvent event){
-        Button b = (Button) event.getSource();
-        gameMode  = b.getText();
+
     }
-
 
 
     public String getGameMode() {

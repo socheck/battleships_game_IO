@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StartViewController">
+   <children>
+      <Label layoutX="252.0" layoutY="46.0" text="Scena startowa" />
+      <Button fx:id="napieprzajbutton" layoutX="229.0" layoutY="188.0" mnemonicParsing="false" onAction="#changetologin" text="Napieprzamy się 1v1" />
+      <Button fx:id="playerVsBotButton" layoutX="249.0" layoutY="236.0" mnemonicParsing="false" onAction="#changetologin" text="Player vs BoT" />
+   </children>
+</AnchorPane>
