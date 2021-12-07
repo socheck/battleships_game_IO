@@ -1,6 +1,5 @@
 package bs_game_backend;
 
-
 import javafx.scene.Parent;
 
 public class Ship extends Parent {

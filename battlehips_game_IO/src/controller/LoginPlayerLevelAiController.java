@@ -45,7 +45,7 @@ public class LoginPlayerLevelAiController {
         stage.show();
         controller.setPlayer1Is(true);
         controller.setAi1Is(true);
-        controller.setAiLevel(aiLevel);
+        controller.setAi1Level(aiLevel);
         controller.createBoardPl1();
         controller.insertBoardPl1(scene);
         controller.setPlayer1ViewController(player1ViewController);

@@ -1,4 +1,4 @@
-package IA;
+package AI;
 
 public class TestAI {
     public static void main(String[] args) {

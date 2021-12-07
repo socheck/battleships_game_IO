@@ -16,6 +16,10 @@ public class Player1BattleViewController {
     public Label playerNumberLabel;
     @FXML
     public Button continueButton;
+    @FXML
+    public Label  player1Label;
+    @FXML
+    public Label  player2Label;
 
     Controller controller;
     private boolean ifPlayer1 = true; //true oznacza gracza 1

@@ -1,39 +1,36 @@
-package IA;
+package AI;
 
 import bs_game_backend.Cell;
-import bs_game_backend.Ship;
-import javafx.scene.Scene;
-import javafx.scene.control.Control;
 import sample.BoardController;
-import sample.Controller;
 
 import java.util.Random;
 
-public class IA {
+public class AI {
     private int gameMode;
     private BoardController board;
     private Random random = new Random();
-    private boolean enemyTurn = false;
+    private boolean enemyTurn = true;
 
 
-    public IA(int gameMode, BoardController board){
+    public AI(int gameMode, BoardController board){
         this.board = board;
         this.gameMode = gameMode;
 
     }
 
 
-    public void moveAI(){
+    public BoardController moveAI(){
         switch (getGameMode()) {
             case 0 -> easyMode();
             case 1 -> mediumMode();
             case 2 -> hardMode();
             default -> System.out.println("Nie wybrano żadnego trybu!");
         }
+        return board;
     }
 
     private BoardController easyMode(){
-        System.out.println("EasyMode");
+
         while (enemyTurn) {
             int x = random.nextInt(10);
             int y = random.nextInt(10);
@@ -43,10 +40,11 @@ public class IA {
                 continue;
 
             enemyTurn = cell.shoot();
+            board.render();
         }
         return board;
 
-        }
+    }
 
     private void mediumMode(){
         System.out.println("MediumMode");

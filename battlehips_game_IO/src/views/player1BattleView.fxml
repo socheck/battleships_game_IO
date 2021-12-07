@@ -9,8 +9,8 @@
    <children>
       <Pane id="enemyBoardP1Battle" fx:id="enemyBoardFXML" layoutX="638.0" layoutY="128.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: RED;" />
       <Pane id="myBoardP1Battle" fx:id="myBoardFXML" layoutX="76.0" layoutY="128.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: GREEN;" />
-      <Label layoutX="753.0" layoutY="78.0" text="Enemy Board" />
-      <Label layoutX="200.0" layoutY="78.0" text="My Board" />
+      <Label fx:id="player2Label" layoutX="753.0" layoutY="78.0" text="Enemy Board" />
+      <Label fx:id="player1Label" layoutX="200.0" layoutY="78.0" text="My Board" />
       <Label fx:id="playerNumberLabel" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="343.0" layoutY="14.0" prefHeight="53.0" prefWidth="315.0" text="Label" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font size="36.0" />

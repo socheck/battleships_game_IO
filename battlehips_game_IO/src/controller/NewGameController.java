@@ -42,7 +42,7 @@ public class NewGameController {
         LoginPlayerLevelAiController loginPlayerLevelAiController = (LoginPlayerLevelAiController) fxmlLoader.getController();
 
         Stage primaryStage = new Stage();
-        primaryStage.setTitle("MENU");
+        primaryStage.setTitle("Player VS AI");
         primaryStage.setScene(new Scene(pane));
         primaryStage.show();
         ((Stage) backToMenuButton.getScene().getWindow()).close();
@@ -50,7 +50,16 @@ public class NewGameController {
 
     }
     @FXML
-    public void aiVsAiAction(){
+    public void aiVsAiAction() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/levelAiLevelAiScreen.fxml"));
+        Parent pane =(Parent) fxmlLoader.load();
+        LevelAiLevelAiController levelAiLevelAiController = (LevelAiLevelAiController) fxmlLoader.getController();
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("AI Vs AI");
+        primaryStage.setScene(new Scene(pane));
+        primaryStage.show();
+        ((Stage) aiVsAiButton.getScene().getWindow()).close();
+        levelAiLevelAiController.setStartGameButtonDisable();
 
     }
     @FXML
