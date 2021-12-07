@@ -50,5 +50,19 @@ public class Player1BattleViewController {
         ((Stage)(continueButton.getScene().getWindow())).close();
     }
 
+    public void setContinueButtonDisable(){
+        continueButton.setDisable(true);
+    }
+    public void setContinueButtonEnable(){
+        continueButton.setDisable(false);
+    }
+    public void setNextButtonDisable(){
+        nextButton.setDisable(true);
+    }
+    public void setNextButtonEnable(){
+        nextButton.setDisable(false);
+    }
+
+
 
 }

@@ -14,11 +14,12 @@ import javafx.scene.paint.Color;
 
 public class BoardController extends Parent {
     private VBox rows = new VBox();
-    private boolean isAI = false;  // false widzimy nasze statki
+    private boolean enableShot = false;  // false widzimy nasze statki//
+    private boolean boardIsAi = false;      //false planasza jest gracza
     public int ships = 10;
 
-    public BoardController(boolean isAI, EventHandler<? super MouseEvent> handler) {
-        this.isAI = isAI;
+    public BoardController(boolean boardIsAi, EventHandler<? super MouseEvent> handler) {
+        this.boardIsAi = boardIsAi;
         for (int y = 0; y < 10; y++) {
             HBox row = new HBox();
             for (int x = 0; x < 10; x++) {
@@ -37,7 +38,7 @@ public class BoardController extends Parent {
     public String toString() {
         return "BoardController{" +
                 "rows=" + rows +
-                ", isAI=" + isAI +
+                ", isAI=" + enableShot +
                 ", ships=" + ships +
                 '}';
     }
@@ -45,7 +46,7 @@ public class BoardController extends Parent {
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
                 Cell cell = getCell(x, y);
-                if(isAI){
+                if(enableShot){
                     cell.setFill(Color.LIGHTGREY);
                     cell.setStroke(Color.BLACK);
                     if(cell.get_isWasShot() && cell.getShip() == null){
@@ -56,7 +57,7 @@ public class BoardController extends Parent {
                     }
 
                 }
-                if(!isAI){
+                if(!enableShot){
                     cell.setFill(Color.LIGHTGREY);
                     cell.setStroke(Color.BLACK);
                     if(cell.ship != null){
@@ -89,7 +90,7 @@ public class BoardController extends Parent {
                 for (int i = y; i < y + length; i++) {
                     Cell cell = getCell(x, i);
                     cell.ship = ship;
-                    if (!isAI) {
+                    if (!enableShot) {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
                     }
@@ -99,7 +100,7 @@ public class BoardController extends Parent {
                 for (int i = x; i < x + length; i++) {
                     Cell cell = getCell(i, y);
                     cell.ship = ship;
-                    if (!isAI) {
+                    if (!enableShot) {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
                     }
@@ -203,8 +204,8 @@ public class BoardController extends Parent {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
-    public void setAI(boolean AI) {
-        isAI = AI;
+    public void setEnableShot(boolean enableShot) {
+        this.enableShot = enableShot;
     }
 
     public VBox getRows() {
@@ -215,8 +216,8 @@ public class BoardController extends Parent {
         this.rows = rows;
     }
 
-    public boolean isAI() {
-        return isAI;
+    public boolean isEnableShot() {
+        return enableShot;
     }
 
     public int getShips() {

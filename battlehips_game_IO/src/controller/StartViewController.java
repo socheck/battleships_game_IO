@@ -35,7 +35,7 @@ public class StartViewController {
         stage.setTitle("logowanie.fxml");
         stage.show();
         ((Stage) playerVsPlayerButton.getScene().getWindow()).close();
-        logowanieController.setGameMode(0);
+
 
     }
 
@@ -52,7 +52,7 @@ public class StartViewController {
 
         stage.show();
         ((Stage) playerVsBotButton.getScene().getWindow()).close();
-        logowanieController.setGameMode(1);
+
     }
     @FXML
     public void botVsBotAction(){

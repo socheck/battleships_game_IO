@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.newGameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewGameController">
    <children>
       <Button fx:id="playerVsPlayerButton" layoutX="250.0" layoutY="97.0" mnemonicParsing="false" onAction="#playerVsPlayerAction" text="Player VS Player" />
       <Button fx:id="playerVsAiButton" layoutX="260.0" layoutY="149.0" mnemonicParsing="false" onAction="#playerVsAiAction" text="Player VS AI" />

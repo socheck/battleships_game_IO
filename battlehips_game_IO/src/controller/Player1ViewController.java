@@ -19,8 +19,9 @@ public class Player1ViewController {
     @FXML
     public Button startGameAiButton;
 
+    private boolean nextGameWithAi = false; // true następna gra jest z botem
     private Controller controller;
-    Scene scene;
+    private Scene scene;
 
     public void initialize(){
         switchToP2Button.setDisable(false);
@@ -42,11 +43,38 @@ public class Player1ViewController {
 
 
     public void randomAction(){
-
         controller.randomPositionShipPlayer1(randomButton.getScene());
     }
     @FXML
-    public void startGameAiAction(){
+    public void startGameAiAction() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/player1BattleView.fxml"));
+        Parent root2 = (Parent) fxmlLoader.load();
+        Player1BattleViewController player1BattleViewController = (Player1BattleViewController) fxmlLoader.getController();
+        player1BattleViewController.setController(controller);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root2);
+        stage.setTitle("player1BattleView");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        controller.setPlayer1BattleViewController(player1BattleViewController);
+        controller.insertBoardPl1Ready(scene);
+        controller.insertBoardAi1Shoot(scene);
+
+        stage.show();
+        try{
+            ((Stage) startGameAiButton.getScene().getWindow()).close();
+        }catch (Exception e){
+
+        }
+        player1BattleViewController.nextButton.setDisable(true);
+        player1BattleViewController.nextPlayerReadyButton.setDisable(true);
+        player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
+        player1BattleViewController.continueButton.setDisable(true);
+
+
+
+
+
 
     }
 
@@ -62,6 +90,26 @@ public class Player1ViewController {
      }
     public void setSwitchToP2ButtonEnable(){             //ustwaienie przycisku na klikalny
         switchToP2Button.setDisable(false);
+    }
+    public void setStartGameAiButtonDisable(){
+        startGameAiButton.setDisable(true);
+    }
+    public void setStartGameAiButtonEnable(){
+        startGameAiButton.setDisable(false);
+    }
+
+
+    public boolean isNextGameWithAi() {
+        return nextGameWithAi;
+    }
+
+    public void setNextGameWithAi(boolean nextGameWithAi) {
+        this.nextGameWithAi = nextGameWithAi;
+    }
+
+
+    public Button getStartGameAiButton() {
+        return startGameAiButton;
     }
 }
 
