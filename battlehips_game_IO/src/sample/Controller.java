@@ -371,6 +371,7 @@ public class Controller {
                             return;
                         } else {
                             cell.shoot();
+
                             if(player1Board.endGame()){
                                 System.out.println("Wygrał gracz Nr 2");
                                 hideBoardPl1(player1BattleViewController.nextButton.getScene());
@@ -481,8 +482,8 @@ public class Controller {
                                 player1BattleViewController.playerNumberLabel.setText("Strzela Komputer");
 
                                 /// do wyjebania przydatbne w testach
-                                //ai = new AI(ai1Level, player1Board);
-                                //player1Board = ai.moveAI();
+//                                ai = new AI(ai1Level, player1Board);
+//                                player1Board = ai.moveAI();
                                 if(player1Board.endGame()){
                                     System.out.println("Wygrało AI");
                                     hideBoardPl1(player1BattleViewController.nextButton.getScene());

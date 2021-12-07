@@ -43,26 +43,26 @@ public class AI {
         this.board = board;
     }
 
-    public BoardController AI(int gameMode, BoardController board){
+    public AI(int gameMode, BoardController board){
         this.board = board;
         this.gameMode = gameMode;
         this.potentialShoots = new ArrayList<Cell>();
         this.earlierShot = null;
         this.forbiddenShoots = new ArrayList<Cell>();
-        return board;
+
     }
 
 
     public void moveAI(){
         switch (getGameMode()) {
             case 0 -> easyMode();
-            //case 1 -> mediumMode();//trzeba przesłać zmienne
-            case 2 -> hardMode();
+//            case 1 -> mediumMode();//trzeba przesłać zmienne
+//            case 2 -> hardMode();
             default -> System.out.println("Nie wybrano żadnego trybu!");
         }
     }
 
-    private BoardController easyMode(){
+    public BoardController easyMode(){
 
         while (enemyTurn) {
             int x = random.nextInt(10);
@@ -80,7 +80,7 @@ public class AI {
 
     }
 
-    private BoardController mediumMode(Cell trafiona, boolean isUsedByOtherMode){
+    public BoardController mediumMode(Cell trafiona, boolean isUsedByOtherMode){
         System.out.println("MediumMode");
 
 //        if(czy_był_zatopiony w poprzednim_kroku && !isUsedByOtherMode){
@@ -114,14 +114,14 @@ public class AI {
                     continue;
                 }else{
                     enemyTurn = cell.shoot();
-                    return board;
+                    return this.board;
                 }
 //              do usunięcia jak działa
-                //System.out.println("czegoś nie przewidziałem jeszce");
-                //return null;
+////                System.out.println("czegoś nie przewidziałem jeszce");
+//
+////                return null;
 
-            }
-            else{
+            }else{
                 return easyMode();
             }
 
@@ -137,7 +137,7 @@ public class AI {
         return null;
     }
 
-    private void hardMode(){
+    public void hardMode(){
         System.out.println("HardMode");
 //        to samo co medium tylko mamy jeszcze zakazane pola jak zatopiony to dodajemy pola obwódki do zakazanych i sprawdzamy czy w nie nie strzeeliliśmy wpętli i dopiero oddajemy strzał w jakiś dozwolony
 
