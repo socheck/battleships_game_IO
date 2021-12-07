@@ -383,7 +383,7 @@ public class Controller {
         player1ViewController.setSwitchToP2ButtonEnable();
 
     }
-    public void randomPositionShipPlayer2(Scene scene){        //randowmowe ustawianie staktów dla player 1
+    public void randomPositionShipPlayer2(Scene scene){        //randowmowe ustawianie staktów dla player 2
         int type = list_of_ships2.size();
         if(type == 0){
             createBoard2();
