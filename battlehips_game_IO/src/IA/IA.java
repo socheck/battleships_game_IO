@@ -1,6 +1,7 @@
 package IA;
-
+import bs_game_backend.*;
 import bs_game_backend.Cell;
+//import bs_game_backend.Cell;
 import bs_game_backend.Ship;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
@@ -56,14 +57,14 @@ public class IA {
     }
 
 
-    public void moveAI(){
-        switch (getGameMode()) {
-            case 0 -> easyMode();
-            case 1 -> mediumMode();//trzeba przesłać zmienne
-            case 2 -> hardMode();
-            default -> System.out.println("Nie wybrano żadnego trybu!");
-        }
-    }
+//    public void moveAI(){
+//        switch (getGameMode()) {
+//            case 0 -> easyMode();
+//            case 1 -> mediumMode();//trzeba przesłać zmienne
+//            case 2 -> hardMode();
+//            default -> System.out.println("Nie wybrano żadnego trybu!");
+//        }
+//    }
 
     private BoardController easyMode(){
         System.out.println("EasyMode");
