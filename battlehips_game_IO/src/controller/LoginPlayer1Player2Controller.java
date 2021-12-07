@@ -36,9 +36,12 @@ public class LoginPlayer1Player2Controller {
         stage.setResizable(true);
         stage.setTitle("player1View.fxml");
         stage.show();
-        controller.createBoard1();
+        controller.setPlayer1Is(true);
+        controller.setPlayer2Is(true);
+        controller.createBoardPl1();
         controller.insertBoardPl1(scene);
         controller.setPlayer1ViewController(player1ViewController);
+
         player1ViewController.setSwitchToP2ButtonDisabel();
         player1ViewController.startGameAiButton.setDisable(true);
         ((Stage) startGameButton.getScene().getWindow()).close();

@@ -32,11 +32,8 @@ public class BufforToP1Controller {
         stage.setTitle("player1BattleView");
         stage.setScene(scene);
         stage.setResizable(false);
-//        controller.player1Board.setAI(true);
-//        controller.player1Board.render();
         controller.setPlayer1BattleViewController(player1BattleViewController);
-
-        controller.player2Board.setAI(true);
+        controller.player2Board.setEnableShot(true);
         controller.player2Board.render();
         controller.insertBoardPl1Ready(scene);
         controller.insertBoardPl2Ready(scene);

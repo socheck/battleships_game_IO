@@ -31,7 +31,7 @@ public class SignInP2Controller {
 //        controller.insertBoardPl2();
         stage.show();
 
-        controller.createBoard2();
+        controller.createBoardPl2();
         controller.insertBoardPl2(scene);
         controller.setPlayer2ViewController(player2ViewController);
         player2ViewController.setStartGameButtonDisable();
