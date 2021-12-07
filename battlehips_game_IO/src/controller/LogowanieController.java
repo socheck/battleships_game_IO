@@ -16,7 +16,7 @@ public class LogowanieController {
     private Button login_pl_1;
 
     private Controller controller;
-    public int gameMode = 0;  //0 = 1vs1, 1 = 1vsBot, 2 = BotvsBot
+
 
 
     @FXML
@@ -32,7 +32,7 @@ public class LogowanieController {
         stage.setResizable(true);
         stage.setTitle("player1View.fxml");
         stage.show();
-        controller.createBoard1();
+        controller.createBoardPl1();
         controller.insertBoardPl1(scene);
         controller.setPlayer1ViewController(player1ViewController);
         player1ViewController.setSwitchToP2ButtonDisabel();
@@ -54,11 +54,5 @@ public class LogowanieController {
 
     }
 
-    public int getGameMode() {
-        return gameMode;
-    }
 
-    public void setGameMode(int gameMode) {
-        this.gameMode = gameMode;
-    }
 }

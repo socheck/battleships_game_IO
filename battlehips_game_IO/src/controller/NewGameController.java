@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class newGameController {
+public class NewGameController {
 
     @FXML
     public Button playerVsPlayerButton;
@@ -39,11 +39,14 @@ public class newGameController {
     public void playerVsAiAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/loginPlayerLevelAiScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
+        LoginPlayerLevelAiController loginPlayerLevelAiController = (LoginPlayerLevelAiController) fxmlLoader.getController();
+
         Stage primaryStage = new Stage();
         primaryStage.setTitle("MENU");
         primaryStage.setScene(new Scene(pane));
         primaryStage.show();
         ((Stage) backToMenuButton.getScene().getWindow()).close();
+        loginPlayerLevelAiController.setStartGameButtonDisable();
 
     }
     @FXML
