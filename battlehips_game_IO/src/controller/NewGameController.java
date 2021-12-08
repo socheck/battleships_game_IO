@@ -61,6 +61,11 @@ public class NewGameController {
         ((Stage) aiVsAiButton.getScene().getWindow()).close();
         levelAiLevelAiController.setStartGameButtonDisable();
 
+        //do wyrzucenia ułatwienie testowania
+        levelAiLevelAiController.easyRadioButton1.setSelected(true);
+        levelAiLevelAiController.easyRadioButton2.setSelected(true);
+        levelAiLevelAiController.startGameButton.setDisable(false);
+        //
     }
     @FXML
     public void exitAction(){

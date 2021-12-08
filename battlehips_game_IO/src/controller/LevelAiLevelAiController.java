@@ -62,11 +62,15 @@ public class LevelAiLevelAiController {
         controller.setAi2Is(true);
         controller.setAi1Level(ai1Level);
         controller.setAi2Level(ai2Level);
+
+        controller.aiVsAiStartGame();
+
+
         controller.createBoardAi1();
         controller.createBoardAi2();
         controller.insertBoardAi1Ship(scene);
         controller.insertBoardAi2Shoot(scene);
-
+        //ustawiono staki 1 i strzelanie 2
         ((Stage) startGameButton.getScene().getWindow()).close();
 
     }
