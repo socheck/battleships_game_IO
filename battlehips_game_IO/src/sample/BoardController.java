@@ -25,8 +25,11 @@ public class BoardController extends Parent {
         return forbiddenShoots;
     }
 
-    public boolean isPreviousShotTelling(){
-        return this.getLatestShot().isWasShot();
+    public boolean isPreviousShotTelling(){ //true jeżeli ostatni strzał byl trafiony
+        if(getLatestShot().isWasShot() && getLatestShot().getShip() != null){
+            return true;
+        }
+        return false;
     }
 
     public Cell getLatestShot() {

@@ -70,6 +70,8 @@ public class Controller {
     private int ai1Level = 0;
     private int ai2Level = 0;
 
+    private boolean aiSootWithPlayer1Now = false; // true ai grajace z graczem 1 strzela teraz
+
 
     private AI ai;
 
@@ -483,7 +485,7 @@ public class Controller {
         @Override
         public void handle(MouseEvent event) {
             Cell cell = (Cell) event.getSource();
-                if (player1ShotNow) {
+                if (player1ShotNow && !aiSootWithPlayer1Now) {
                     if (ai1Board.isEnableShot()) {
                         if (cell.get_isWasShot()) {
                             return;
@@ -503,46 +505,42 @@ public class Controller {
                                 player1BattleViewController.playerNumberLabel.setText("Strzela Komputer");
 
                                 /// do wyjebania przydatbne w testach
-                                ai = new AI(ai1Level, player1Board);
-                                player1Board = ai.moveAI();
-                                if(player1Board.endGame()){
-                                    System.out.println("Wygrało AI");
-                                    hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                                    hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                                    player1BattleViewController.playerNumberLabel.setText("Wygrało AI");
-                                    player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                                    player1BattleViewController.setContinueButtonEnable();
-                                    return;
-                                }
-                                hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                                insertBoardPl1Ship(player1BattleViewController.nextButton.getScene());
-                                player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
+//                                ai = new AI(ai1Level, player1Board);
+//                                player1Board = ai.moveAI();
+////                                System.out.println("dupa1");
+////                                System.out.println(player1Board.getLatestShot());
+////                                while (player1Board.isPreviousShotTelling()){
+////                                    long time = System.nanoTime();
+////                                    AnimationTimer timerAi1Shoot = new AnimationTimer() {
+////                                        @Override
+////                                        public void handle(long l) {
+////                                            if(l - 500_000 > time){
+////                                                ai = new AI(ai1Level, player1Board);
+////                                                player1Board = ai.moveAI();
+////                                                super.stop();
+////                                            }
+////                                        }
+////                                    };
+////                                    timerAi1Shoot.start();
+////                                }
+//
+//
+//                                if(player1Board.endGame()){
+//                                    System.out.println("Wygrało AI");
+//                                    hideBoardPl1(player1BattleViewController.nextButton.getScene());
+//                                    hideBoardPl2(player1BattleViewController.nextButton.getScene());
+//                                    player1BattleViewController.playerNumberLabel.setText("Wygrało AI");
+//                                    player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
+//                                    player1BattleViewController.setContinueButtonEnable();
+//                                    return;
+//                                }
+//                                hideBoardPl1(player1BattleViewController.nextButton.getScene());
+//                                insertBoardPl1Ship(player1BattleViewController.nextButton.getScene());
+//                                player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
                                 ///
                                 //to zostawić
-//                                long time = System.nanoTime();
-//                                AnimationTimer timerAi = new AnimationTimer() {
-//                                    @Override
-//                                    public void handle(long l) {
-//                                        if(l - 1_000_000_000 > time){
-//                                            ai = new AI(aiLevel, player1Board);
-//                                            player1Board = ai.moveAI();
-            //                                if(player1Board.endGame()){
-            //                                    System.out.println("Wygrało AI");
-            //                                    hideBoardPl1(player1BattleViewController.nextButton.getScene());
-            //                                    hideBoardPl2(player1BattleViewController.nextButton.getScene());
-            //                                    player1BattleViewController.playerNumberLabel.setText("Wygrało AI");
-            //                                    player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-            //                                    player1BattleViewController.setContinueButtonEnable();
-            //                                    return;
-            //                                }
-//                                            hideBoardPl1(player1BattleViewController.nextButton.getScene());
-//                                            insertBoardPl1Ship(player1BattleViewController.nextButton.getScene());
-//                                            player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
-//                                            super.stop();
-//                                        }
-//                                    }
-//                                };
-//                                timerAi.start();
+                                aiSootWithPlayer1Now = true;
+                                aiShootInPlayer1();
                                 if(ai1Board.endGame()){
                                     System.out.println("Wygrał gracz Nr 1");
                                     hideBoardPl1(player1BattleViewController.nextButton.getScene());
@@ -565,9 +563,127 @@ public class Controller {
             }
 
     };
+    public void ai1ShootInAi2(){
+        long time = System.nanoTime();
+        AnimationTimer timerAi = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                // zmienić 1 na 1_000_000_000
+                if(l - 1_000_000_000> time){
+                    ai = new AI(ai1Level, ai2Board);
+                    ai2Board = ai.moveAI();
+
+                    if(ai2Board.endGame()){
+                        System.out.println("Wygrało AI 1");
+                        hideBoardPl1(player1BattleViewController.nextButton.getScene());
+                        hideBoardPl2(player1BattleViewController.nextButton.getScene());
+                        player1BattleViewController.playerNumberLabel.setText("Wygrało AI 1");
+                        player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
+                        player1BattleViewController.setContinueButtonEnable();
+                        super.stop();
+                        return;
+                    }
+                    hideBoardPl2(player1BattleViewController.nextButton.getScene());
+                    insertBoardAi2Shoot(player1BattleViewController.nextButton.getScene());
+                    super.stop();
+
+                    if(ai2Board.isPreviousShotTelling()){
+                        ai1ShootInAi2();
+                    }
+                }
+            }
+        };
+        timerAi.start();
+    }
+    public void ai2ShootInAi1(){
+
+        long time = System.nanoTime();
+        AnimationTimer changeView2 = new AnimationTimer() {
+            long time = System.nanoTime();
+            @Override
+            public void handle(long l) {
+                if(l - 1_000_000_000 > time){
+                    hideBoardPl1(player1BattleViewController.nextButton.getScene());
+                    hideBoardPl2(player1BattleViewController.nextButton.getScene());
+                    insertBoardAi1Ship(player1BattleViewController.nextButton.getScene());
+                    insertBoardAi2Shoot(player1BattleViewController.nextButton.getScene());
+                    super.stop();
+                    aiVsAiStartGame();
+                }
+            }
+        };
+
+        AnimationTimer timerAi = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                // zmienić 1 na 1_000_000_000
+                if(l - 500_000_000 > time){
+                    ai = new AI(ai2Level, ai1Board);
+                    ai1Board = ai.moveAI();
+                    if(ai1Board.endGame()){
+                        System.out.println("Wygrało AI 2");
+                        hideBoardPl1(player1BattleViewController.nextButton.getScene());
+                        hideBoardPl2(player1BattleViewController.nextButton.getScene());
+                        player1BattleViewController.playerNumberLabel.setText("Wygrało AI 2");
+                        player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
+                        player1BattleViewController.setContinueButtonEnable();
+                        super.stop();
+                        return;
+                    }
+                    hideBoardPl2(player1BattleViewController.nextButton.getScene());
+                    insertBoardAi1Shoot(player1BattleViewController.nextButton.getScene());
+
+                    super.stop();
+
+                    if(ai1Board.isPreviousShotTelling()){
+                        ai2ShootInAi1();
+                    }else{
+                        changeView2.start();
+                    }
+                }
+            }
+        };
+        timerAi.start();
+
+    }
+
+    public void aiShootInPlayer1(){
+        long time = System.nanoTime();
+        AnimationTimer timerAi = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                // zmienić 1 na 1_000_000_000
+                if(l - 1_000_000_000 > time){
+                    ai = new AI(ai1Level, player1Board);
+                    player1Board = ai.moveAI();
+                    if(player1Board.endGame()){
+                        System.out.println("Wygrało AI");
+                        hideBoardPl1(player1BattleViewController.nextButton.getScene());
+                        hideBoardPl2(player1BattleViewController.nextButton.getScene());
+                        player1BattleViewController.playerNumberLabel.setText("Wygrało AI");
+                        player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
+                        player1BattleViewController.setContinueButtonEnable();
+                        super.stop();
+                        return;
+                    }
+                    hideBoardPl1(player1BattleViewController.nextButton.getScene());
+                    insertBoardPl1Ship(player1BattleViewController.nextButton.getScene());
+                    player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
+                    super.stop();
+                    if(player1Board.isPreviousShotTelling()){
+                        aiShootInPlayer1();
+                    }else {
+                        aiSootWithPlayer1Now = false;
+                    }
+                }
+            }
+        };
+        timerAi.start();
+    }
 
     public void aiVsAiStartGame(){
         //ustawiono staki 1 i strzelanie2
+        long constTime = 1_000_000_000;
 
         player1BattleViewController.playerNumberLabel.setText("Tura AI 1");
 
@@ -577,7 +693,7 @@ public class Controller {
             long time = System.nanoTime();
             @Override
             public void handle(long l) {
-                if(l - 2_000 > time){
+                if(l - 2_000_000_000 > time){
                     hideBoardPl1(player1BattleViewController.nextButton.getScene());
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
                     insertBoardAi1Ship(player1BattleViewController.nextButton.getScene());
@@ -591,9 +707,14 @@ public class Controller {
         AnimationTimer timerAi2Shoot = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                if(l - 1_500 > time){
+                if(l - 1_500_000_000 > time){
                     ai = new AI(ai2Level, ai1Board);
                     ai1Board = ai.moveAI();
+                    if (ai1Board.isPreviousShotTelling()){
+                      super.stop();
+                      ai2ShootInAi1();
+                      return;
+                    }
                     if(ai1Board.endGame()){
                         System.out.println("Wygrało AI 2");
                         hideBoardPl1(player1BattleViewController.nextButton.getScene());
@@ -616,7 +737,7 @@ public class Controller {
             long time = System.nanoTime();
             @Override
             public void handle(long l) {
-                if(l - 1_000 > time){
+                if(l - 1_000_000_000 > time){
                     player1BattleViewController.playerNumberLabel.setText("Tura AI 2");
                     hideBoardPl1(player1BattleViewController.nextButton.getScene());
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
@@ -633,9 +754,15 @@ public class Controller {
         AnimationTimer timerAi1Shoot = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                if(l - 500 > time){
+                if(l - 500_000_000 > time){
                     ai = new AI(ai1Level, ai2Board);
                     ai2Board = ai.moveAI();
+                    if(ai2Board.isPreviousShotTelling()) {
+                        super.stop();
+                        aiVsAiStartGame();
+                        return;
+                    }
+
                     if(ai2Board.endGame()){
                         System.out.println("Wygrało AI 1");
                         hideBoardPl1(player1BattleViewController.nextButton.getScene());
@@ -654,6 +781,9 @@ public class Controller {
                 }
             }
         };
+
+
+
             timerAi1Shoot.start();
 
 
