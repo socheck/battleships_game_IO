@@ -53,89 +53,189 @@ public class AI {
     }
 
 
-    public void moveAI(){
+    public BoardController moveAI(){
         switch (getGameMode()) {
-            case 0 -> easyMode();
-//            case 1 -> mediumMode();//trzeba przesłać zmienne
+            case 0:
+                return easyMode(false);
+//            case 1 -> mediumMode(false);//trzeba przesłać zmienne
 //            case 2 -> hardMode();
-            default -> System.out.println("Nie wybrano żadnego trybu!");
+            default:
+                System.out.println("Nie wybrano żadnego trybu!");
+                return null;
         }
     }
 
-    public BoardController easyMode(){
+    public BoardController easyMode(boolean isUsedByOtherMode){
 
         while (enemyTurn) {
             int x = random.nextInt(10);
             int y = random.nextInt(10);
 
             Cell cell = board.getCell(x, y);
+
             if (cell.get_isWasShot())
                 continue;
 
             enemyTurn = cell.shoot();
             board.render();
-        }
-        enemyTurn = true;
-        return board;
 
-    }
 
-    public BoardController mediumMode(Cell trafiona, boolean isUsedByOtherMode){
-        System.out.println("MediumMode");
-
-//        if(czy_był_zatopiony w poprzednim_kroku && !isUsedByOtherMode){
-//            this.potentialShoots.clear();
-//
-//        }
-
-        if(trafiona == null && this.earlierShot == null){ //szukamy na razie statku
-            return easyMode();
-        }
-        if(trafiona !=null && this.earlierShot == null){ //pierwsze trafienie
-            this.earlierShot = trafiona;
-            //dodajemy te 4
-            this.potentialShoots.add(new Cell(trafiona.get_x()+1, trafiona.get_y(), trafiona.getBoardController()));
-            this.potentialShoots.add(new Cell(trafiona.get_x()-1, trafiona.get_y(), trafiona.getBoardController()));
-            this.potentialShoots.add(new Cell(trafiona.get_x(), trafiona.get_y()+1, trafiona.getBoardController()));
-            this.potentialShoots.add(new Cell(trafiona.get_x(), trafiona.get_y()-1, trafiona.getBoardController()));
-        }
-
-        while (enemyTurn) {
-            if(!this.potentialShoots.isEmpty()){
-//            Cell actualCell = this.potentialShoots.get(0);//bierzemy następną
-//            this.potentialShoots.remove(0);  //usuwamy tą co wzieliśmy
-//          ...
-
-                Cell actualCell = this.potentialShoots.get(0);//bierzemy następną
-                this.potentialShoots.remove(0);  //usuwamy tą co wzieliśmy
-
-                Cell cell = board.getCell(actualCell.get_x(), actualCell.get_y());
-                if (cell.get_isWasShot()){
-                    continue;
-                }else{
-                    enemyTurn = cell.shoot();
-                    return this.board;
+            if(isUsedByOtherMode){
+                if(cell.getShip().isAlive()){ // sprawdzenie czy statek jest zatopiony
+                    enemyTurn = false;//było true
+                    return board;
                 }
-//              do usunięcia jak działa
-////                System.out.println("czegoś nie przewidziałem jeszce");
-//
-////                return null;
 
-            }else{
-                return easyMode();
+//                if( cell.getShip() != null){
+//                    board.addChange(cell);// trafiliśmy w statek --> dodanie ostatnio trafionej Cell
+//                    this.potentialShoots.add(new Cell(trafiona.get_x()+1, trafiona.get_y(), trafiona.getBoardController()));
+//                    this.potentialShoots.add(new Cell(trafiona.get_x()-1, trafiona.get_y(), trafiona.getBoardController()));
+//                    this.potentialShoots.add(new Cell(trafiona.get_x(), trafiona.get_y()+1, trafiona.getBoardController()));
+//                    this.potentialShoots.add(new Cell(trafiona.get_x(), trafiona.get_y()-1, trafiona.getBoardController()));
+//                }
             }
 
         }
 
 
+        enemyTurn = false;//było true
+        return board;
 
-
-//        dodatkowo jeżeli trafi to strzela wokół aż nie zatopi kolejnego
-//        strzzał --> zapisujemy ostatni strzał jeśli jest trafiony --> potencjaly strzał 4 (pion, poziom) --> próba pion (góra lub dół) --> 1. trafiony --> usuwamy potencjalne strzały z boków(mają inną jedną z x lub y) i dodajemy ten moniżej nowego --> 2. pudło --> idziemy do następnego z potencjalnych --> jak zatopiony to wywalamy z potencjalnych
-
-        System.out.println("czegoś nie przewidziałem jeszce");
-        return null;
     }
+
+//    public BoardController mediumMode(Cell trafiona, boolean isUsedByOtherMode){
+//        System.out.println("MediumMode");
+//
+////        if(czy_był_zatopiony w poprzednim_kroku && !isUsedByOtherMode){
+////            this.potentialShoots.clear();
+////
+////        }
+//
+//        if(trafiona == null && this.earlierShot == null){ //szukamy na razie statku
+//            return easyMode();
+//        }
+//        if(trafiona !=null && this.earlierShot == null){ //pierwsze trafienie
+//            this.earlierShot = trafiona;
+//            //dodajemy te 4
+//            this.potentialShoots.add(new Cell(trafiona.get_x()+1, trafiona.get_y(), trafiona.getBoardController()));
+//            this.potentialShoots.add(new Cell(trafiona.get_x()-1, trafiona.get_y(), trafiona.getBoardController()));
+//            this.potentialShoots.add(new Cell(trafiona.get_x(), trafiona.get_y()+1, trafiona.getBoardController()));
+//            this.potentialShoots.add(new Cell(trafiona.get_x(), trafiona.get_y()-1, trafiona.getBoardController()));
+//        }
+//
+//        while (enemyTurn) {
+//            if(!this.potentialShoots.isEmpty()){
+////            Cell actualCell = this.potentialShoots.get(0);//bierzemy następną
+////            this.potentialShoots.remove(0);  //usuwamy tą co wzieliśmy
+////          ...
+//
+//                Cell actualCell = this.potentialShoots.get(0);//bierzemy następną
+//                this.potentialShoots.remove(0);  //usuwamy tą co wzieliśmy
+//
+//                Cell cell = board.getCell(actualCell.get_x(), actualCell.get_y());
+//                if (cell.get_isWasShot()){
+//                    continue;
+//                }else{
+//                    enemyTurn = cell.shoot();
+//                    return this.board;
+//                }
+////              do usunięcia jak działa
+//////                System.out.println("czegoś nie przewidziałem jeszce");
+////
+//////                return null;
+//
+//            }else{
+//                return easyMode();
+//            }
+//
+//        }
+//
+//
+//
+//
+////        dodatkowo jeżeli trafi to strzela wokół aż nie zatopi kolejnego
+////        strzzał --> zapisujemy ostatni strzał jeśli jest trafiony --> potencjaly strzał 4 (pion, poziom) --> próba pion (góra lub dół) --> 1. trafiony --> usuwamy potencjalne strzały z boków(mają inną jedną z x lub y) i dodajemy ten moniżej nowego --> 2. pudło --> idziemy do następnego z potencjalnych --> jak zatopiony to wywalamy z potencjalnych
+//
+//        System.out.println("czegoś nie przewidziałem jeszce");
+//        return null;
+//    }
+
+
+
+
+
+
+//    private BoardController mediumMode(boolean isUsedByOtherMode){
+//        System.out.println("MediumMode");
+//
+//
+//        if(this.board.getLatestShot() == null) { //szukamy na razie statku
+//            return easyMode();
+//        }
+//
+//
+//
+//        if(trafiona !=null && this.earlierShot == null){ //pierwsze trafienie
+//            this.earlierShot = trafiona;
+//            //dodajemy te 4
+//            this.potentialShoots.add(new Cell(trafiona.get_x()+1, trafiona.get_y(), trafiona.getBoardController()));
+//            this.potentialShoots.add(new Cell(trafiona.get_x()-1, trafiona.get_y(), trafiona.getBoardController()));
+//            this.potentialShoots.add(new Cell(trafiona.get_x(), trafiona.get_y()+1, trafiona.getBoardController()));
+//            this.potentialShoots.add(new Cell(trafiona.get_x(), trafiona.get_y()-1, trafiona.getBoardController()));
+//        }
+//
+//        while (enemyTurn) {
+//            if(!this.potentialShoots.isEmpty()){
+////            Cell actualCell = this.potentialShoots.get(0);//bierzemy następną
+////            this.potentialShoots.remove(0);  //usuwamy tą co wzieliśmy
+////          ...
+//
+//                Cell actualCell = this.potentialShoots.get(0);//bierzemy następną
+//                this.potentialShoots.remove(0);  //usuwamy tą co wzieliśmy
+//
+//                Cell cell = board.getCell(actualCell.get_x(), actualCell.get_y());
+//                if (cell.get_isWasShot()){
+//                    continue;
+//                }else{
+//                    enemyTurn = cell.shoot();
+//                    return this.board;
+//                }
+////              do usunięcia jak działa
+//////                System.out.println("czegoś nie przewidziałem jeszce");
+////
+//////                return null;
+//
+//            }else{
+//                return easyMode();
+//            }
+//
+//        }
+//
+//
+//
+//
+////        dodatkowo jeżeli trafi to strzela wokół aż nie zatopi kolejnego
+////        strzzał --> zapisujemy ostatni strzał jeśli jest trafiony --> potencjaly strzał 4 (pion, poziom) --> próba pion (góra lub dół) --> 1. trafiony --> usuwamy potencjalne strzały z boków(mają inną jedną z x lub y) i dodajemy ten moniżej nowego --> 2. pudło --> idziemy do następnego z potencjalnych --> jak zatopiony to wywalamy z potencjalnych
+//
+//        System.out.println("czegoś nie przewidziałem jeszce");
+//        return null;
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void hardMode(){
         System.out.println("HardMode");
