@@ -16,7 +16,7 @@ public class Player2ViewController {
     private Button startGameButton;
     @FXML
     private Button randomButton;
-    Controller controller;
+    private Controller controller;
     @FXML
     public void BufforToP1View() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/bufforToP1View.fxml"));
