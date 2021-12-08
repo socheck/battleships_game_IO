@@ -17,9 +17,28 @@ public class BoardController extends Parent {
     private boolean enableShot = false;  // false widzimy nasze statki//
     private boolean boardIsAi = false;      //false planasza jest gracza
     public int ships = 10;
+    private Cell latestShot;
+    private ArrayList<Cell> changes;
+
+    public Cell getLatestShot() {
+        return latestShot;
+    }
+
+    public ArrayList<Cell> getChanges() {
+        return changes;
+    }
+    public void addChange(Cell lastest){
+        this.latestShot = lastest;
+        this.changes.add(lastest);
+    }
+
 
     public BoardController(boolean boardIsAi, EventHandler<? super MouseEvent> handler) {
         this.boardIsAi = boardIsAi;
+
+        this.latestShot = null;
+        this.changes = new ArrayList<Cell>();
+
         for (int y = 0; y < 10; y++) {
             HBox row = new HBox();
             for (int x = 0; x < 10; x++) {
