@@ -82,21 +82,47 @@ public class AI {
 
 
             if(isUsedByOtherMode){
-                if(!cell.getShip().isAlive()){ // sprawdzenie czy statek jest zatopiony
-                    enemyTurn = true;//było true
-//                    board.addChange(null);
-                    this.earlierShot = null;
-                    return board;
-                }
+
 
                 if( cell.getShip() != null){ // czy jest trafiony
+
+                    if(!cell.getShip().isAlive() ){ // sprawdzenie czy statek jest zatopiony
+                        enemyTurn = true;//było true
+//                    board.addChange(null);
+                        this.earlierShot = null;
+                        return board;
+                    }
+
                     this.earlierShot = cell;
 //                    board.addChange(cell);// trafiliśmy w statek --> dodanie ostatnio trafionej Cell
-                    this.potentialShoots.add(new Cell(cell.get_x()+1, cell.get_y(), cell.getBoardController()));
-                    this.potentialShoots.add(new Cell(cell.get_x()-1, cell.get_y(), cell.getBoardController()));
-                    this.potentialShoots.add(new Cell(cell.get_x(), cell.get_y()+1, cell.getBoardController()));
-                    this.potentialShoots.add(new Cell(cell.get_x(), cell.get_y()-1, cell.getBoardController()));
-                    System.out.println(this.potentialShoots);
+                    if(0<cell.get_x()+1 && cell.get_x()+1<10){
+                        this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
+                    }
+                    if(-1<cell.get_x()-1 && cell.get_x()-1<9){
+                        this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
+                    }
+                    if(0<cell.get_y()+1 && cell.get_y()+1<10){
+                        this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()+1));
+                    }
+                    if(-1<cell.get_y()-1 && cell.get_y()-1<9){
+                        this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()-1));
+                    }
+//                    this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
+//                    this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
+//                    this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()+1));
+//                    this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()-1));
+
+
+//                    this.potentialShoots.add(new Cell(cell.get_x()+1, cell.get_y(), cell.getBoardController()));
+//                    this.potentialShoots.add(new Cell(cell.get_x()-1, cell.get_y(), cell.getBoardController()));
+//                    this.potentialShoots.add(new Cell(cell.get_x(), cell.get_y()+1, cell.getBoardController()));
+//                    this.potentialShoots.add(new Cell(cell.get_x(), cell.get_y()-1, cell.getBoardController()));
+                    System.out.println("potencjalne: " + this.potentialShoots);
+
+
+
+//                    dopisane
+                    mediumMode(false);
                 }
             }
 
@@ -171,26 +197,86 @@ public class AI {
 
 
 
+//    private BoardController mediumMode(boolean isUsedByOtherMode){
+//        System.out.println("MediumMode");
+//
+//
+//
+//        if(this.board.getLatestShot() == null && this.potentialShoots.isEmpty()) { //szukamy na razie statku
+//            return easyMode(true);
+//        }else{
+//            while (true) {
+//
+//                    Cell actualCell = this.potentialShoots.get(0);//bierzemy następną
+//                    this.potentialShoots.remove(0);  //usuwamy tą co wzieliśmy
+//
+//                    Cell cell = board.getCell(actualCell.get_x(), actualCell.get_y());
+//                    if (cell.get_isWasShot()){
+//                        continue;
+//                    }
+//
+//                    enemyTurn = cell.shoot();
+//                    board.render();
+//
+//                    if(!cell.getShip().isAlive()){ // sprawdzenie czy statek jest zatopiony
+//                        enemyTurn = true;
+//                        this.earlierShot = null;
+//                        this.potentialShoots.clear();//czyścimy
+//                        return board;
+//                    }
+//
+//                    if( cell.getShip() != null){ // wcześniej trafiony ale teraz nie//ustalamy czy pionowy czy poziomy
+////                        usuwamy wszystkie (może ich tam już nie być) Cell z tablicy które mają niepasujące koordynaty
+//                        if(this.earlierShot.get_x() == cell.get_x()){ //te same x więc usuwamy te co mają inny x
+//                            this.potentialShoots.removeIf(c -> cell.get_x() != c.get_x());
+//                        }
+//                        if(this.earlierShot.get_y() == cell.get_y()){ //te same y więc usuwamy te co mają inny y
+//                            this.potentialShoots.removeIf(c -> cell.get_y() != c.get_y());
+//                        }
+//
+//                        System.out.println(this.potentialShoots);
+//
+//                    }
+//
+//                    System.out.println("czegoś nie przewidziałem jeszce");
+//                    return this.board;
+//
+//            }
+//
+//        }
+////        dodatkowo jeżeli trafi to strzela wokół aż nie zatopi kolejnego
+////        strzzał --> zapisujemy ostatni strzał jeśli jest trafiony --> potencjaly strzał 4 (pion, poziom) --> próba pion (góra lub dół) --> 1. trafiony --> usuwamy potencjalne strzały z boków(mają inną jedną z x lub y) i dodajemy ten moniżej nowego --> 2. pudło --> idziemy do następnego z potencjalnych --> jak zatopiony to wywalamy z potencjalnych
+//
+//
+//    }
+
+
+
     private BoardController mediumMode(boolean isUsedByOtherMode){
         System.out.println("MediumMode");
+
 
 
         if(this.board.getLatestShot() == null && this.potentialShoots.isEmpty()) { //szukamy na razie statku
             return easyMode(true);
         }else{
-            while (true) {
+            while (!this.potentialShoots.isEmpty()) {
 
-                    Cell actualCell = this.potentialShoots.get(0);//bierzemy następną
-                    this.potentialShoots.remove(0);  //usuwamy tą co wzieliśmy
+                Cell actualCell = this.potentialShoots.get(0);//bierzemy następną
+                this.potentialShoots.remove(0);  //usuwamy tą co wzieliśmy
 
-                    Cell cell = board.getCell(actualCell.get_x(), actualCell.get_y());
-                    if (cell.get_isWasShot()){
-                        continue;
-                    }
+                Cell cell = board.getCell(actualCell.get_x(), actualCell.get_y());
+                if (cell.get_isWasShot()){
+                    continue;
+                }
 
-                    enemyTurn = cell.shoot();
-                    board.render();
+                enemyTurn = cell.shoot();
+                board.render();
+//TUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
 
+
+                if( cell.getShip() != null){ // wcześniej trafiony ale teraz nie//ustalamy czy pionowy czy poziomy
+//                        usuwamy wszystkie (może ich tam już nie być) Cell z tablicy które mają niepasujące koordynaty
                     if(!cell.getShip().isAlive()){ // sprawdzenie czy statek jest zatopiony
                         enemyTurn = true;
                         this.earlierShot = null;
@@ -198,23 +284,39 @@ public class AI {
                         return board;
                     }
 
-                    if( cell.getShip() != null){ // wcześniej trafiony ale teraz nie//ustalamy czy pionowy czy poziomy
-//                        usuwamy wszystkie (może ich tam już nie być) Cell z tablicy które mają niepasujące koordynaty
-                        if(this.earlierShot.get_x() == cell.get_x()){ //te same x więc usuwamy te co mają inny x
-                            this.potentialShoots.removeIf(c -> cell.get_x() != c.get_x());
+                    if(this.earlierShot.get_x() == cell.get_x()){ //te same x więc usuwamy te co mają inny x
+                        this.potentialShoots.removeIf(c -> cell.get_x() != c.get_x());
+                        if(this.earlierShot.get_y() == cell.get_y()-1 && cell.get_y()+1 < 10){//ta kolejna komórka jest pod nią
+                            this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()+1));
+                            System.out.println("dodaje"+ this.board.getCell(cell.get_x(), cell.get_y()+1));
                         }
-                        if(this.earlierShot.get_y() == cell.get_y()){ //te same y więc usuwamy te co mają inny y
-                            this.potentialShoots.removeIf(c -> cell.get_y() != c.get_y());
+                        if(this.earlierShot.get_y() == cell.get_y()+1 && cell.get_y()-1 > -1){//ta kolejna komórka jes nad pierwszą
+                            this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()-1));
+                            System.out.println("dodaje"+ this.board.getCell(cell.get_x(), cell.get_y()-1));
                         }
+                    }
+                    if(this.earlierShot.get_y() == cell.get_y()){ //te same y więc usuwamy te co mają inny y
+                        this.potentialShoots.removeIf(c -> cell.get_y() != c.get_y());
 
-                        System.out.println(this.potentialShoots);
-
+                        if(this.earlierShot.get_x() == cell.get_x()-1 && cell.get_x()+1 < 10){//ta kolejna komórka jest z prawej
+                            this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
+                            System.out.println("dodaje"+ this.board.getCell(cell.get_x()+1, cell.get_y()));
+                        }
+                        if(this.earlierShot.get_x() == cell.get_x()+1 && cell.get_x()-1 > -1){//ta kolejna komórka jest z lewej
+                            this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
+                            System.out.println("dodaje"+ this.board.getCell(cell.get_x()-1, cell.get_y()));
+                        }
                     }
 
-                    System.out.println("czegoś nie przewidziałem jeszce");
-                    return this.board;
+                    System.out.println(this.potentialShoots);
+
+                }
+
+//                System.out.println("czegoś nie przewidziałem jeszce");
+//                return this.board;
 
             }
+            return this.board;
 
         }
 //        dodatkowo jeżeli trafi to strzela wokół aż nie zatopi kolejnego
@@ -222,7 +324,6 @@ public class AI {
 
 
     }
-
 
 
 
