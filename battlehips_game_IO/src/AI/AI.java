@@ -512,6 +512,8 @@ public class AI {
             }
 
             enemyTurn = true;//było true
+
+            board.setLatestShot(cell);
             return board;
         }
 

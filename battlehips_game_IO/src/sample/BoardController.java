@@ -33,6 +33,10 @@ public class BoardController extends Parent {
         return latestShot;
     }
 
+    public void setLatestShot(Cell latestShot) {
+        this.latestShot = latestShot;
+    }
+
     public ArrayList<Cell> getChanges() {
         return changes;
     }
