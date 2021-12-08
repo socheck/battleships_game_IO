@@ -231,8 +231,6 @@ public class Controller {
         } catch (Exception e) {
 
         }
-
-
     }
     public void hideBoardPl2(Scene scene){
         Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
@@ -311,6 +309,28 @@ public class Controller {
         pane.getChildren().add(ai2Board);
     }
 
+    public void clearShipOnBoardPl1(Scene scene){
+        Pane pane = (Pane) (scene.lookup("#pl1Pane #boarderpl1"));
+        pane.getChildren().remove(player1Board);
+        player1Board.clearShip();
+        player1Board.render();
+        if (list_of_ships1.size() != 10) {
+            list_of_ships1.clear();
+            createBoardPl1();
+        }
+        insertBoardPl1(scene);
+    }
+    public void clearShipOnBoardPl2(Scene scene){
+        Pane pane = (Pane) (scene.lookup("#pl2Pane #boarderpl2"));
+        pane.getChildren().remove(player2Board);
+        player2Board.clearShip();
+        player2Board.render();
+        if (list_of_ships2.size() != 10) {
+            list_of_ships2.clear();
+            createBoardPl2();
+        }
+        insertBoardPl2(scene);
+    }
 
 
 
@@ -557,7 +577,7 @@ public class Controller {
             long time = System.nanoTime();
             @Override
             public void handle(long l) {
-                if(l - 2_000_000 > time){
+                if(l - 2_000 > time){
                     hideBoardPl1(player1BattleViewController.nextButton.getScene());
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
                     insertBoardAi1Ship(player1BattleViewController.nextButton.getScene());
@@ -571,7 +591,7 @@ public class Controller {
         AnimationTimer timerAi2Shoot = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                if(l - 1_500_000 > time){
+                if(l - 1_500 > time){
                     ai = new AI(ai2Level, ai1Board);
                     ai1Board = ai.moveAI();
                     if(ai1Board.endGame()){
@@ -596,7 +616,7 @@ public class Controller {
             long time = System.nanoTime();
             @Override
             public void handle(long l) {
-                if(l - 1_000_000 > time){
+                if(l - 1_000 > time){
                     player1BattleViewController.playerNumberLabel.setText("Tura AI 2");
                     hideBoardPl1(player1BattleViewController.nextButton.getScene());
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
@@ -613,7 +633,7 @@ public class Controller {
         AnimationTimer timerAi1Shoot = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                if(l - 500_000 > time){
+                if(l - 500 > time){
                     ai = new AI(ai1Level, ai2Board);
                     ai2Board = ai.moveAI();
                     if(ai2Board.endGame()){

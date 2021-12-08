@@ -7,8 +7,9 @@
 <Pane id="pl2Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player2ViewController">
    <children>
       <Pane id="boarderpl2" fx:id="boarderpl2_fxml" layoutX="266.0" layoutY="63.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: RED;" />
-      <Button fx:id="startGameButton" layoutX="117.0" layoutY="255.0" mnemonicParsing="false" onAction="#BufforToP1View" text="Start Game" />
-      <Label layoutX="117.0" layoutY="223.0" text="Place all Ships First" />
-      <Button fx:id="randomButton" layoutX="124.0" layoutY="310.0" mnemonicParsing="false" onAction="#randomAction" text="Random" />
+      <Button fx:id="startGameButton" layoutX="95.0" layoutY="188.0" mnemonicParsing="false" onAction="#BufforToP1View" text="Start Game" />
+      <Label layoutX="92.0" layoutY="145.0" text="Place all Ships First" />
+      <Button fx:id="randomButton" layoutX="103.0" layoutY="307.0" mnemonicParsing="false" onAction="#randomAction" text="Random" />
+      <Button fx:id="clearBoardButton" layoutX="95.0" layoutY="248.0" mnemonicParsing="false" onAction="#clearBoardAction" text="Clear board" />
    </children>
 </Pane>

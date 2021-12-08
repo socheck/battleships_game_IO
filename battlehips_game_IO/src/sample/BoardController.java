@@ -252,6 +252,14 @@ public class BoardController extends Parent {
         }
         return false;
     }
+    public void clearShip(){
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                Cell c = getCell(x,y);
+                c.ship = null;
+            }
+        }
+    }
 
 
 }
