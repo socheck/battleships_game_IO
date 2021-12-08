@@ -56,17 +56,17 @@ public class AI {
     public BoardController moveAI(){
         switch (getGameMode()) {
             case 0:
-                return easyMode(false);
+                return easyMode(0);
 
-            case 1: return mediumMode(false);
-//            case 2 -> hardMode();
+            case 1: return mediumMode(1);
+            case 2: return hardMode(2);
             default:
                 System.out.println("Nie wybrano żadnego trybu!");
                 return null;
         }
     }
 
-    public BoardController easyMode(boolean isUsedByOtherMode){
+    public BoardController easyMode(int useByOtherMode){
 
         while (enemyTurn) {
             int x = random.nextInt(10);
@@ -74,19 +74,30 @@ public class AI {
 
             Cell cell = board.getCell(x, y);
 
-            if (cell.get_isWasShot())
+            if (cell.get_isWasShot() || (useByOtherMode == 2 && this.forbiddenShoots.contains(cell)) ) {
                 continue;
-
+            }
             enemyTurn = cell.shoot();
             board.render();
 
 
-            if(isUsedByOtherMode){
+            if(useByOtherMode >= 1){
 
 
                 if( cell.getShip() != null){ // czy jest trafiony
 
-                    if(!cell.getShip().isAlive() ){ // sprawdzenie czy statek jest zatopiony
+                    if(!cell.getShip().isAlive() && useByOtherMode == 1 ){ // sprawdzenie czy statek jest zatopiony
+                        enemyTurn = true;//było true
+//                    board.addChange(null);
+                        this.earlierShot = null;
+                        return board;
+
+
+                    }else if(!cell.getShip().isAlive() && useByOtherMode == 2){//hard
+                        for (Cell c :
+                                this.board.getNeighbors(cell.get_x(), cell.get_y())) {
+                            this.forbiddenShoots.add(c);
+                        }
                         enemyTurn = true;//było true
 //                    board.addChange(null);
                         this.earlierShot = null;
@@ -96,16 +107,37 @@ public class AI {
                     this.earlierShot = cell;
 //                    board.addChange(cell);// trafiliśmy w statek --> dodanie ostatnio trafionej Cell
                     if(0<cell.get_x()+1 && cell.get_x()+1<10){
-                        this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
+                        if((useByOtherMode == 2 && !this.forbiddenShoots.contains(cell))){
+
+                            this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
+                        }else if(useByOtherMode != 2){
+
+                            this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
+                        }
                     }
                     if(-1<cell.get_x()-1 && cell.get_x()-1<9){
-                        this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
+                        if((useByOtherMode == 2 && !this.forbiddenShoots.contains(cell))){
+                            this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
+                        }else if(useByOtherMode !=2){
+
+                            this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
+                        }
                     }
                     if(0<cell.get_y()+1 && cell.get_y()+1<10){
-                        this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()+1));
+                        if((useByOtherMode == 2 && !this.forbiddenShoots.contains(cell))){
+                            this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()+1));
+                        }else if (useByOtherMode != 2){
+
+                            this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()+1));
+                        }
                     }
                     if(-1<cell.get_y()-1 && cell.get_y()-1<9){
-                        this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()-1));
+                        if((useByOtherMode == 2 && !this.forbiddenShoots.contains(cell))){
+                            this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()-1));
+                        }else if(useByOtherMode != 2){
+
+                            this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()-1));
+                        }
                     }
 //                    this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
 //                    this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
@@ -122,7 +154,7 @@ public class AI {
 
 
 //                    dopisane
-                    mediumMode(false);
+                    mediumMode(useByOtherMode);
                 }
             }
 
@@ -252,13 +284,13 @@ public class AI {
 
 
 
-    private BoardController mediumMode(boolean isUsedByOtherMode){
+    private BoardController mediumMode(int useByOtherMode){
         System.out.println("MediumMode");
 
 
 
         if(this.board.getLatestShot() == null && this.potentialShoots.isEmpty()) { //szukamy na razie statku
-            return easyMode(true);
+            return easyMode(useByOtherMode);
         }else{
             while (!this.potentialShoots.isEmpty()) {
 
@@ -272,39 +304,75 @@ public class AI {
 
                 enemyTurn = cell.shoot();
                 board.render();
-//TUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
 
 
                 if( cell.getShip() != null){ // wcześniej trafiony ale teraz nie//ustalamy czy pionowy czy poziomy
 //                        usuwamy wszystkie (może ich tam już nie być) Cell z tablicy które mają niepasujące koordynaty
-                    if(!cell.getShip().isAlive()){ // sprawdzenie czy statek jest zatopiony
-                        enemyTurn = true;
+//                    if(!cell.getShip().isAlive()){ // sprawdzenie czy statek jest zatopiony
+//                        enemyTurn = true;
+//                        this.earlierShot = null;
+//                        this.potentialShoots.clear();//czyścimy
+//                        return board;
+//                    }
+                    if(!cell.getShip().isAlive() && useByOtherMode == 1 ){ // sprawdzenie czy statek jest zatopiony
+                        enemyTurn = true;//było true
+//                    board.addChange(null);
                         this.earlierShot = null;
-                        this.potentialShoots.clear();//czyścimy
+                        return board;
+
+
+                    }else if(!cell.getShip().isAlive() && useByOtherMode == 2){//hard
+                        for (Cell c :
+                                this.board.getNeighbors(cell.get_x(), cell.get_y())) {
+                            this.forbiddenShoots.add(c);
+                        }
+                        enemyTurn = true;//było true
+//                    board.addChange(null);
+                        this.earlierShot = null;
                         return board;
                     }
 
                     if(this.earlierShot.get_x() == cell.get_x()){ //te same x więc usuwamy te co mają inny x
                         this.potentialShoots.removeIf(c -> cell.get_x() != c.get_x());
                         if(this.earlierShot.get_y() == cell.get_y()-1 && cell.get_y()+1 < 10){//ta kolejna komórka jest pod nią
-                            this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()+1));
-                            System.out.println("dodaje"+ this.board.getCell(cell.get_x(), cell.get_y()+1));
+                            if((useByOtherMode == 2 && !this.forbiddenShoots.contains(cell))){
+                                this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()+1));
+                            }else if(useByOtherMode == 1){
+
+                                this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()+1));
+                                System.out.println("dodaje"+ this.board.getCell(cell.get_x(), cell.get_y()+1));
+                            }
                         }
                         if(this.earlierShot.get_y() == cell.get_y()+1 && cell.get_y()-1 > -1){//ta kolejna komórka jes nad pierwszą
-                            this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()-1));
-                            System.out.println("dodaje"+ this.board.getCell(cell.get_x(), cell.get_y()-1));
+                            if((useByOtherMode == 2 && !this.forbiddenShoots.contains(cell))){
+                                this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()-1));
+                            }else if(useByOtherMode== 1){
+
+                                this.potentialShoots.add(this.board.getCell(cell.get_x(), cell.get_y()-1));
+                                System.out.println("dodaje"+ this.board.getCell(cell.get_x(), cell.get_y()-1));
+                            }
                         }
                     }
                     if(this.earlierShot.get_y() == cell.get_y()){ //te same y więc usuwamy te co mają inny y
                         this.potentialShoots.removeIf(c -> cell.get_y() != c.get_y());
 
                         if(this.earlierShot.get_x() == cell.get_x()-1 && cell.get_x()+1 < 10){//ta kolejna komórka jest z prawej
-                            this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
-                            System.out.println("dodaje"+ this.board.getCell(cell.get_x()+1, cell.get_y()));
+                            if((useByOtherMode == 2 && !this.forbiddenShoots.contains(cell))){
+                                this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
+                            }else if(useByOtherMode == 1){
+
+                                this.potentialShoots.add(this.board.getCell(cell.get_x()+1, cell.get_y()));
+                                System.out.println("dodaje"+ this.board.getCell(cell.get_x()+1, cell.get_y()));
+                            }
                         }
                         if(this.earlierShot.get_x() == cell.get_x()+1 && cell.get_x()-1 > -1){//ta kolejna komórka jest z lewej
-                            this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
-                            System.out.println("dodaje"+ this.board.getCell(cell.get_x()-1, cell.get_y()));
+                            if((useByOtherMode == 2 && !this.forbiddenShoots.contains(cell))){
+                                this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
+                            }else if(useByOtherMode == 1){
+
+                                this.potentialShoots.add(this.board.getCell(cell.get_x()-1, cell.get_y()));
+                                System.out.println("dodaje"+ this.board.getCell(cell.get_x()-1, cell.get_y()));
+                            }
                         }
                     }
 
@@ -340,15 +408,12 @@ public class AI {
 
 
 
-    public void hardMode(){
+    public BoardController hardMode(int useByOtherMode){
         System.out.println("HardMode");
+        return mediumMode(useByOtherMode);
 //        to samo co medium tylko mamy jeszcze zakazane pola jak zatopiony to dodajemy pola obwódki do zakazanych i sprawdzamy czy w nie nie strzeeliliśmy wpętli i dopiero oddajemy strzał w jakiś dozwolony
 
 
-//        if(czy_był_zatopiony w poprzednim_kroku){
-//            //dodajemy wszystktie Cell statku oraz obwódki jeżeli jest
-//            this.forbiddenShoots.add()
-//        }
     }
 
 

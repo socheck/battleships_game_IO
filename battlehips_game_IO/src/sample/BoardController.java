@@ -136,7 +136,7 @@ public class BoardController extends Parent {
         return (Cell)((HBox)rows.getChildren().get(y)).getChildren().get(x);
     }
 
-    private Cell[] getNeighbors(int x, int y) {
+    public Cell[] getNeighbors(int x, int y) {
         Point2D[] points = new Point2D[] {
                 new Point2D(x - 1, y),
                 new Point2D(x + 1, y),
