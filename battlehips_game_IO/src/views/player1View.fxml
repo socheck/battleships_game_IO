@@ -11,5 +11,7 @@
       <Label layoutX="108.0" layoutY="118.0" text="Place all Ships First" />
       <Button fx:id="randomButton" layoutX="127.0" layoutY="223.0" mnemonicParsing="false" onAction="#randomAction" text="Random" />
       <Button fx:id="startGameAiButton" layoutX="112.0" layoutY="310.0" mnemonicParsing="false" onAction="#startGameAiAction" text="Start Game AI" />
+      <Button fx:id="clearBoardButton" layoutX="118.0" layoutY="271.0" mnemonicParsing="false" onAction="#clearBoardAction" text="Clear board" />
+      <Pane id="im" layoutX="62.0" layoutY="14.0" prefHeight="90.0" prefWidth="100.0" />
    </children>
 </Pane>

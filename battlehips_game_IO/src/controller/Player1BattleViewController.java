@@ -1,10 +1,15 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import sample.Controller;
+
+import java.io.IOException;
 
 public class Player1BattleViewController {
 
@@ -20,6 +25,8 @@ public class Player1BattleViewController {
     public Label  player1Label;
     @FXML
     public Label  player2Label;
+    @FXML
+    public Button backToMenuButton;
 
     Controller controller;
     private boolean ifPlayer1 = true; //true oznacza gracza 1
@@ -65,6 +72,17 @@ public class Player1BattleViewController {
     }
     public void setNextButtonEnable(){
         nextButton.setDisable(false);
+    }
+    @FXML
+    public void  backToMenuAction() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
+        Parent pane =(Parent) fxmlLoader.load();
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("MENU");
+        primaryStage.setScene(new Scene(pane));
+        primaryStage.show();
+        ((Stage) backToMenuButton.getScene().getWindow()).close();
+
     }
 
 

@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,11 +25,19 @@ public class MenuController {
     public void newGameAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/newGameScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("New Game");
-        primaryStage.setScene(new Scene(pane));
-        primaryStage.show();
-        ((Stage) newGameButton.getScene().getWindow()).close();
+        Scene scene = new Scene(pane);
+//        Stage primaryStage = new Stage();
+//        primaryStage.setTitle("New Game");
+//        primaryStage.setScene(new Scene(pane));
+//        primaryStage.show();
+//        ((Stage) newGameButton.getScene().getWindow()).close();
+
+        Stage stage = (Stage) ((Node)newGameButton).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.setTitle("New Game");
+        stage.show();
+
 
     }
     @FXML

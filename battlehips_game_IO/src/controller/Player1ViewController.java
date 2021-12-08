@@ -2,13 +2,17 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sample.Controller;
 
-import java.io.IOException;
+import java.io.*;
 
 public class Player1ViewController {
 
@@ -18,6 +22,8 @@ public class Player1ViewController {
     private Button randomButton;
     @FXML
     public Button startGameAiButton;
+    @FXML
+    public Button clearBoardButton;
 
     private boolean nextGameWithAi = false; // true następna gra jest z botem
     private Controller controller;
@@ -32,17 +38,24 @@ public class Player1ViewController {
         Parent root2 = (Parent) fxmlLoader.load();
         SignInP2Controller signInP2Controller = (SignInP2Controller) fxmlLoader.getController();
         signInP2Controller.setController(controller);
-        Stage stage = new Stage();
+
         scene = new Scene(root2);
+//        Stage stage = new Stage();
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.setTitle("signInP2.fxml");
+//        stage.show();
+//        ((Stage) switchToP2Button.getScene().getWindow()).close();
+
+        Stage stage = (Stage) ((Node)switchToP2Button).getScene().getWindow();
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("signInP2.fxml");
         stage.show();
-        ((Stage) switchToP2Button.getScene().getWindow()).close();
     }
 
 
-    public void randomAction(){
+    public void randomAction() throws FileNotFoundException {
         controller.randomPositionShipPlayer1(randomButton.getScene());
     }
     @FXML
@@ -110,6 +123,12 @@ public class Player1ViewController {
 
     public Button getStartGameAiButton() {
         return startGameAiButton;
+    }
+
+    @FXML
+    public void clearBoardAction(){
+        controller.clearShipOnBoardPl1(clearBoardButton.getScene());
+        switchToP2Button.setDisable(true);
     }
 }
 
