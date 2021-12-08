@@ -8,6 +8,17 @@ import sample.BoardController;
 public class Cell extends Rectangle {
     private int x;
     private int y;
+
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "x=" + x +
+                ", y=" + y +
+                ", ship=" + ship +
+                ", isWasShot=" + isWasShot +
+                '}';
+    }
+
     //zmienić na privet
     public Ship ship = null; // Is part of any ship?
     private boolean isWasShot = false;

@@ -18,7 +18,16 @@ public class BoardController extends Parent {
     private boolean boardIsAi = false;      //false planasza jest gracza
     public int ships = 10;
     private Cell latestShot;
+    private ArrayList<Cell> forbiddenShoots;
     private ArrayList<Cell> changes;
+
+    public ArrayList<Cell> getForbiddenShoots() {
+        return forbiddenShoots;
+    }
+
+    public boolean isPreviousShotTelling(){
+        return this.getLatestShot().isWasShot();
+    }
 
     public Cell getLatestShot() {
         return latestShot;
@@ -38,6 +47,7 @@ public class BoardController extends Parent {
 
         this.latestShot = null;
         this.changes = new ArrayList<Cell>();
+        this.forbiddenShoots = new ArrayList<Cell>();
 
         for (int y = 0; y < 10; y++) {
             HBox row = new HBox();
@@ -134,6 +144,33 @@ public class BoardController extends Parent {
 
     public Cell getCell(int x, int y) {
         return (Cell)((HBox)rows.getChildren().get(y)).getChildren().get(x);
+    }
+
+    public Cell[] getShipNeighbors(Cell cell){
+
+        List<Cell> neighborList = new ArrayList<Cell>();
+        List<Cell> shipCells = new ArrayList<Cell>();
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                Cell c = this.getCell(x,y);
+
+                if(cell.getShip() == c.getShip()){
+
+                    shipCells.add(c);
+                }
+            }
+        }
+
+        for (Cell shipCell :
+                shipCells) {
+            for (Cell neighborCell :
+                 this.getNeighbors(shipCell.get_x(), shipCell.get_y())) {
+                neighborList.add(neighborCell);
+
+            }
+        }
+        System.out.println("metoda neighborShip "+ neighborList);
+        return neighborList.toArray(new Cell[0]);
     }
 
     public Cell[] getNeighbors(int x, int y) {
