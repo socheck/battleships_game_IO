@@ -1,0 +1,21 @@
+{
+    //można też dać żeby zaspisać tego co ztartuje a potem ruchy w tablicy
+    "0": {
+        "player": 1,
+        "shot": "01",
+        "down": true,
+        "sunken": false
+    },
+    "1": {
+        "player": 2,
+        "shot": "99",
+        "down": false,
+        "sunken": false
+    },
+    "3": {
+        "player": 1,
+        "shot": "09",
+        "down": true,
+        "sunken": true
+    }
+}
