@@ -13,12 +13,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class BoardController extends Parent {
+
     private VBox rows = new VBox();
     private boolean enableShot = false;  // false widzimy nasze statki//
     private boolean boardIsAi = false;      //false planasza jest gracza
     public int ships = 10;
-    private Cell latestShot;
+    public Cell earlierShot;
+    public Cell firstShipCell;
     private ArrayList<Cell> forbiddenShoots;
+    public ArrayList<Cell> potentialShoots;
     private ArrayList<Cell> changes;
 
     public ArrayList<Cell> getForbiddenShoots() {
@@ -26,25 +29,26 @@ public class BoardController extends Parent {
     }
 
     public boolean isPreviousShotTelling(){ //true jeżeli ostatni strzał byl trafiony
-        if(getLatestShot().isWasShot() && getLatestShot().getShip() != null){
+        if(getEarlierShot().isWasShot() && getEarlierShot().getShip() != null){
             return true;
         }
         return false;
     }
 
-    public Cell getLatestShot() {
-        return latestShot;
+    public Cell getEarlierShot() {
+        return earlierShot;
     }
 
-    public void setLatestShot(Cell latestShot) {
-        this.latestShot = latestShot;
+    public ArrayList<Cell> getPotentialShoots() {
+        return potentialShoots;
     }
+
 
     public ArrayList<Cell> getChanges() {
         return changes;
     }
     public void addChange(Cell lastest){
-        this.latestShot = lastest;
+        this.earlierShot = lastest;
         this.changes.add(lastest);
     }
 
@@ -52,9 +56,10 @@ public class BoardController extends Parent {
     public BoardController(boolean boardIsAi, EventHandler<? super MouseEvent> handler) {
         this.boardIsAi = boardIsAi;
 
-        this.latestShot = null;
+        this.earlierShot = null;
         this.changes = new ArrayList<Cell>();
         this.forbiddenShoots = new ArrayList<Cell>();
+        this.potentialShoots = new ArrayList<Cell>();
 
         for (int y = 0; y < 10; y++) {
             HBox row = new HBox();
