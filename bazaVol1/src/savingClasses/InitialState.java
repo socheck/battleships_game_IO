@@ -9,6 +9,12 @@ public class InitialState {
     private int player2;
     private List<PlayerPlacing> initial_state;
 
+//    public InitialState(int player1, int player2, List<PlayerPlacing> initial_state) {
+//        this.player1 = player1;
+//        this.player2 = player2;
+//        this.initial_state = initial_state;
+//    }
+
     @Override
     public String toString() {
         return "InitialState{" +

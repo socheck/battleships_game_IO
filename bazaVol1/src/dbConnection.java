@@ -127,6 +127,36 @@ public class dbConnection {
     }
 
 
+    public void setGame(String initialState, String changes){
+        Connection connection = null;
+        try {
+            connection = getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        PreparedStatement preparedStatement= null;
+        ResultSet resultSet = null;
+
+        String komendaSQL = "INSERT INTO games VALUES(NULL,?,?,0, 0, 0, NULL);";
+
+        try {
+            preparedStatement = connection.prepareStatement(komendaSQL);
+            preparedStatement.setString(1, initialState);
+            preparedStatement.setString(2, changes);
+
+            preparedStatement.execute();
+            System.out.println("setGae insert");
+
+
+        } catch (SQLException throwables) {
+            System.out.println("szukam exeption");
+            throwables.printStackTrace();
+        }
+
+    }
+
+
 
 
 }

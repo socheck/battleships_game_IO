@@ -18,6 +18,13 @@ public class PlayerPlacing {
     private List<String> ship13;
     private List<String> ship14;
 
+//    public PlayerPlacing(int player, List<String> ship21, List<String> ship22, List<String> ship11) {
+//        this.player = player;
+//        this.ship21 = ship21;
+//        this.ship22 = ship22;
+//        this.ship11 = ship11;
+//    }
+
     @Override
     public String toString() {
         return "PlayerPlacing{" +
