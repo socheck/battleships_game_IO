@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class myJsonTest {
+class MyJsonTest {
     private String jsonSource = "{  \"title\": \"to jest mój tytuł\",  \"author\":  \"Paweł Gasz\"}";
 
     private String authorScenario = "{\n" +
@@ -33,7 +33,7 @@ class myJsonTest {
     void parse() throws IOException {
 
 
-            JsonNode node = myJson.parse(jsonSource);
+            JsonNode node = MyJson.parse(jsonSource);
             System.out.println(node.get("title").asText());
             assertEquals(node.get("title").asText(), "to jest mój tytuł");
 
@@ -43,8 +43,8 @@ class myJsonTest {
     void fromJson() throws IOException {
 
 
-        JsonNode node = myJson.parse(jsonSource);
-        SimpleTestCaseJsonPOJO pojo = myJson.fromJson(node, SimpleTestCaseJsonPOJO.class);
+        JsonNode node = MyJson.parse(jsonSource);
+        SimpleTestCaseJsonPOJO pojo = MyJson.fromJson(node, SimpleTestCaseJsonPOJO.class);
         System.out.println("title from object: " + pojo.getTitle());
         assertEquals(pojo.getTitle(), "to jest mój tytuł");
 
@@ -55,7 +55,7 @@ class myJsonTest {
         SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
         pojo.setTitle("testowy tytuł");
         pojo.setAuthor("ktoś");
-        JsonNode node = myJson.toJson(pojo);
+        JsonNode node = MyJson.toJson(pojo);
         System.out.println("tutaj"+node.toString()); // --> JSON całości
         System.out.println(node.get("title"));
 
@@ -68,8 +68,8 @@ class myJsonTest {
 
         SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
         pojo.setTitle("testowy tytuł2");
-        JsonNode node = myJson.toJson(pojo);
-        System.out.println(myJson.strigify(node));
+        JsonNode node = MyJson.toJson(pojo);
+        System.out.println(MyJson.strigify(node));
 
 
 //        assertEquals(node.get("title").asText(), "testowy tytuł");
@@ -81,7 +81,7 @@ class myJsonTest {
 
         SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
         pojo.setTitle("moja funkcja stringify");
-        System.out.println(myJson.strigifyMy(pojo));
+        System.out.println(MyJson.strigifyMy(pojo));
 
     }
     @org.junit.jupiter.api.Test
@@ -89,8 +89,8 @@ class myJsonTest {
 
         SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
         pojo.setTitle("testowy tytuł2");
-        JsonNode node = myJson.toJson(pojo);
-        System.out.println(myJson.prettyPrint(node));
+        JsonNode node = MyJson.toJson(pojo);
+        System.out.println(MyJson.prettyPrint(node));
 
     }
     @org.junit.jupiter.api.Test
@@ -98,20 +98,20 @@ class myJsonTest {
 
         SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
         pojo.setTitle("testowy tytuł2");
-        System.out.println(myJson.prettyPrintMy(pojo));
+        System.out.println(MyJson.prettyPrintMy(pojo));
     }
 
     @org.junit.jupiter.api.Test
     void authorScenarioMy() throws IOException {
-        AuthorPOJO author1 = myJson.fromJsonMy(authorScenario, AuthorPOJO.class);
+        AuthorPOJO author1 = MyJson.fromJsonMy(authorScenario, AuthorPOJO.class);
 
         System.out.println(author1.toString());
     }
 
     @org.junit.jupiter.api.Test
     void authorScenario() throws IOException {
-        JsonNode node = myJson.parse(authorScenario);
-        AuthorPOJO pojo = myJson.fromJson(node, AuthorPOJO.class);
+        JsonNode node = MyJson.parse(authorScenario);
+        AuthorPOJO pojo = MyJson.fromJson(node, AuthorPOJO.class);
 
         System.out.println("Author:  " + pojo.getAuthorName());
         for (BookPOJO bP: pojo.getBooks()){
