@@ -56,6 +56,7 @@ public class LoginPlayerLevelAiController {
         player1ViewController.setSwitchToP2ButtonDisabel();
         player1ViewController.startGameAiButton.setDisable(true);
         player1ViewController.setNextGameWithAi(true);  // następna gra z botem
+        player1ViewController.switchToP2Button.setVisible(false);
 
         ((Stage) startGameButton.getScene().getWindow()).close();
 
@@ -77,12 +78,6 @@ public class LoginPlayerLevelAiController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         Scene scene = new Scene(pane);
-//        Stage primaryStage = new Stage();
-//        primaryStage.setTitle("MENU");
-//        primaryStage.setScene(new Scene(pane));
-//        primaryStage.show();
-//        ((Stage) backToMenuButton.getScene().getWindow()).close();
-
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(true);

@@ -66,21 +66,21 @@ public class JsonTestMail {
 //        InitialState myInitialState = new InitialState(2,1, p1);
 //
 //        System.out.println("obiekt" + myInitialState);
-//
+
 //        System.out.println("===============================================");
 //
 //        try {
-//            db.setGame(myJson.strigifyMy(myInitialState), "{ jakaś gra }");
+//            db.setGame(myJson.strigifyMy(myInitialState), "{ jakaś gra }"); /// linijka do zapisu gry po zakończeniu
 //        } catch (JsonProcessingException e) {
 //            e.printStackTrace();
 //        }
-
-
-    }
+//
+//
+//    }
 //        public boolean isDatabeseConnected(){
 //
 //            return connection !=null;
-//        }
+       }
 
 
 }

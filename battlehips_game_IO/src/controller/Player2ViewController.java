@@ -69,12 +69,14 @@ public class Player2ViewController {
         startGameButton.setDisable(false);
     }
     public void randomAction(){
+        controller.randomPositionShipAi(controller.getList_of_ships2(), controller.player2Board);
 
-        controller.randomPositionShipPlayer2(randomButton.getScene());
+
+        setStartGameEnable();
     }
     @FXML
     public void clearBoardAction(){
-        controller.clearShipOnBoardPl2(clearBoardButton.getScene());
+        controller.clearShipOnBoardPL(controller.getList_of_ships2(), controller.player2Board);
         startGameButton.setDisable(true);
     }
 }

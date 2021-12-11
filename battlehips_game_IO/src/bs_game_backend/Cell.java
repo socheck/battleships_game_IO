@@ -4,6 +4,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import sample.BoardController;
 
+import javax.sound.sampled.*;
+import java.io.*;
+
 
 public class Cell extends Rectangle {
     private int x;
@@ -49,10 +52,12 @@ public class Cell extends Rectangle {
     public boolean shoot(){
         isWasShot = true;
         setFill(Color.BLACK);
+        boardController.render();
 
         if(ship != null) {
             ship.hit();
             setFill(Color.RED);
+            boardController.render();
             if (!ship.isAlive()){
                 boardController.ships--;
             }

@@ -31,17 +31,12 @@ public class NewGameController {
         Parent pane =(Parent) fxmlLoader.load();
         Scene scene = new Scene(pane);
 
-//        Stage primaryStage = new Stage();
-//        primaryStage.setTitle("Players login");
-//        primaryStage.setScene(new Scene(pane));
-//        primaryStage.show();
-//        ((Stage) backToMenuButton.getScene().getWindow()).close();
-
         Stage stage = (Stage) ((Node)playerVsPlayerButton).getScene().getWindow();
+        stage.setResizable(false);
         stage.setScene(scene);
-        stage.setResizable(true);
         stage.setTitle("Players login");
         stage.show();
+
     }
     @FXML
     public void playerVsAiAction() throws IOException {
@@ -49,16 +44,13 @@ public class NewGameController {
         Parent pane =(Parent) fxmlLoader.load();
         LoginPlayerLevelAiController loginPlayerLevelAiController = (LoginPlayerLevelAiController) fxmlLoader.getController();
         Scene scene = new Scene(pane);
-//        Stage primaryStage = new Stage();
-//        primaryStage.setTitle("Player VS AI");
-//        primaryStage.setScene(new Scene(pane));
-//        primaryStage.show();
-//        ((Stage) backToMenuButton.getScene().getWindow()).close();
+
         loginPlayerLevelAiController.setStartGameButtonDisable();
 
         Stage stage = (Stage) ((Node)playerVsAiButton).getScene().getWindow();
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
+
         stage.setTitle("Player VS AI");
         stage.show();
 
@@ -69,16 +61,12 @@ public class NewGameController {
         Parent pane =(Parent) fxmlLoader.load();
         LevelAiLevelAiController levelAiLevelAiController = (LevelAiLevelAiController) fxmlLoader.getController();
         Scene scene = new Scene(pane);
-//        Stage primaryStage = new Stage();
-//        primaryStage.setTitle("AI Vs AI");
-//        primaryStage.setScene(new Scene(pane));
-//        primaryStage.show();
-//        ((Stage) aiVsAiButton.getScene().getWindow()).close();
+
         levelAiLevelAiController.setStartGameButtonDisable();
 
         Stage stage = (Stage) ((Node)aiVsAiButton).getScene().getWindow();
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.setTitle("AI Vs AI");
         stage.show();
 
@@ -98,15 +86,9 @@ public class NewGameController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         Scene scene = new Scene(pane);
-//        Stage primaryStage = new Stage();
-//        primaryStage.setTitle("MENU");
-//        primaryStage.setScene(new Scene(pane));
-//        primaryStage.show();
-//        ((Stage) backToMenuButton.getScene().getWindow()).close();
-
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.setTitle("MENU");
         stage.show();
 

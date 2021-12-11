@@ -33,16 +33,10 @@ public class LoginPlayer1Player2Controller {
         player1ViewController.setController(controller);
 
         Scene scene = new Scene(root2);
-//
-//        Stage stage = new Stage();
-//        stage.setScene(scene);
-//        stage.setResizable(true);
-//        stage.setTitle("player1View.fxml");
-//        stage.show();
 
         Stage stage = (Stage) ((Node)startGameButton).getScene().getWindow();
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.setTitle("player1View.fxml");
         stage.show();
 
@@ -54,22 +48,17 @@ public class LoginPlayer1Player2Controller {
 
         player1ViewController.setSwitchToP2ButtonDisabel();
         player1ViewController.startGameAiButton.setDisable(true);
-//        ((Stage) startGameButton.getScene().getWindow()).close();
+        player1ViewController.startGameAiButton.setVisible(false);
+
 
     }
     public void  backToMenuAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         Scene scene = new Scene(pane);
-//        Stage primaryStage = new Stage();
-//        primaryStage.setTitle("MENU");
-//        primaryStage.setScene(new Scene(pane));
-//        primaryStage.show();
-//        ((Stage) backToMenuButton.getScene().getWindow()).close();
-
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.setTitle("MENU");
         stage.show();
 
@@ -79,10 +68,11 @@ public class LoginPlayer1Player2Controller {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/loginPlayerScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         LoginPlayerController loginPlayerController = (LoginPlayerController) fxmlLoader.getController();
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("Log in");
-        primaryStage.setScene(new Scene(pane));
-        primaryStage.show();
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setTitle("Log in");
+        stage.setScene(new Scene(pane));
+        stage.show();
         loginPlayerController.playerLoginLabel.setText("Player 1 Login");
     }
     @FXML
@@ -90,10 +80,10 @@ public class LoginPlayer1Player2Controller {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/loginPlayerScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         LoginPlayerController loginPlayerController = (LoginPlayerController) fxmlLoader.getController();
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("Log in");
-        primaryStage.setScene(new Scene(pane));
-        primaryStage.show();
+        Stage stage = new Stage();
+        stage.setTitle("Log in");
+        stage.setScene(new Scene(pane));
+        stage.show();
         loginPlayerController.playerLoginLabel.setText("Player 2 Login");
 
     }

@@ -17,7 +17,7 @@ import java.io.*;
 public class Player1ViewController {
 
     @FXML
-    private Button switchToP2Button;
+    public Button switchToP2Button;
     @FXML
     private Button randomButton;
     @FXML
@@ -56,7 +56,14 @@ public class Player1ViewController {
 
 
     public void randomAction() throws FileNotFoundException {
-        controller.randomPositionShipPlayer1(randomButton.getScene());
+        controller.randomPositionShipAi(controller.getList_of_ships1(), controller.player1Board);
+
+        if (!isNextGameWithAi()) {
+            setSwitchToP2ButtonEnable();
+        }
+        if (isNextGameWithAi()) {
+            setStartGameAiButtonEnable();
+        }
     }
     @FXML
     public void startGameAiAction() throws IOException {
@@ -71,7 +78,7 @@ public class Player1ViewController {
         stage.setResizable(false);
         controller.setPlayer1BattleViewController(player1BattleViewController);
         controller.insertBoardPl1Ready(scene);
-        controller.insertBoardAi1Shoot(scene);
+        controller.insertBoardShoot(scene,controller.ai1Board);
 
         stage.show();
         try{
@@ -110,24 +117,19 @@ public class Player1ViewController {
     public void setStartGameAiButtonEnable(){
         startGameAiButton.setDisable(false);
     }
-
-
     public boolean isNextGameWithAi() {
         return nextGameWithAi;
     }
-
     public void setNextGameWithAi(boolean nextGameWithAi) {
         this.nextGameWithAi = nextGameWithAi;
     }
-
-
     public Button getStartGameAiButton() {
         return startGameAiButton;
     }
 
     @FXML
     public void clearBoardAction(){
-        controller.clearShipOnBoardPl1(clearBoardButton.getScene());
+        controller.clearShipOnBoardPL(controller.getList_of_ships1(), controller.player1Board);
         switchToP2Button.setDisable(true);
     }
 }
