@@ -5,7 +5,7 @@ import savingClasses.InitialState;
 import java.io.IOException;
 import java.sql.*;
 
-public class dbConnection {
+public class DbConnection {
 
     private static final String USERNAME = "dbuser";
     private static final String PASSWORD ="dbpassword";
@@ -107,7 +107,7 @@ public class dbConnection {
 //                        resultSet.getInt("wins") + "\t" +
 //                        resultSet.getInt("battles") + "\t" +
 //                        resultSet.getDouble("aim_ratio"));
-                return  myJson.fromJsonMy(resultSet.getString("initial_state"), InitialState.class);
+                return  MyJson.fromJsonMy(resultSet.getString("initial_state"), InitialState.class);
             }
 
         } catch (SQLException | IOException throwables) {

@@ -5,20 +5,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.sql.*;
 
 import savingClasses.InitialState;
-import savingClasses.PlayerPlacing;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-public class JsonTestMail {
+public class JsonTestMain {
     public  static void main(String[] arg){
         String jsonSource = "{\n" +
                 "  \"title\": \"to jest mój tytuł\"\n" +
                 "}";
         try {
-            JsonNode node = myJson.parse(jsonSource);
+            JsonNode node = MyJson.parse(jsonSource);
 //            System.out.println(node.get("title").asText());
         } catch (IOException e) {
             e.printStackTrace();
@@ -27,7 +23,7 @@ public class JsonTestMail {
 
         Connection connection = null;
         try {
-            connection=dbConnection.getConnection();
+            connection= DbConnection.getConnection();
             System.out.println(connection);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -36,7 +32,7 @@ public class JsonTestMail {
         if(connection == null){
             System.exit(1);
         }
-        dbConnection db = new dbConnection();
+        DbConnection db = new DbConnection();
         db.getUser_list();
 
 //        ===========================================odczyt --> konstruktory trzeba zakomentować===================================
@@ -44,7 +40,7 @@ public class JsonTestMail {
 
         System.out.println(initaiState);
         try {
-            System.out.println(myJson.prettyPrintMy(initaiState));
+            System.out.println(MyJson.prettyPrintMy(initaiState));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
