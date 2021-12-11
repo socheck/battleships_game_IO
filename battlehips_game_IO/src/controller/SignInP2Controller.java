@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,19 +24,17 @@ public class SignInP2Controller {
         Parent root2 = (Parent) fxmlLoader.load();
         Player2ViewController player2ViewController = (Player2ViewController) fxmlLoader.getController();
         player2ViewController.setController(controller);
-        Stage stage = new Stage();
         Scene scene = new Scene(root2);
+        Stage stage = (Stage) ((Node)login_pl_2).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(true);
         stage.setTitle("player2View.fxml");
-//        controller.insertBoardPl2();
         stage.show();
 
         controller.createBoardPl2();
         controller.insertBoardPl2(scene);
         controller.setPlayer2ViewController(player2ViewController);
         player2ViewController.setStartGameButtonDisable();
-        ((Stage) login_pl_2.getScene().getWindow()).close();
 
     }
 

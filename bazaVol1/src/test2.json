@@ -1,0 +1,15 @@
+{
+  "authorName": "Paweł",
+  "books": [
+    {
+      "title": "title1",
+      "inPrint": true,
+      "saleAmount": 100
+    },
+    {
+      "title": "title2",
+      "inPrint": false,
+      "saleAmount": 2000
+    }
+  ]
+}

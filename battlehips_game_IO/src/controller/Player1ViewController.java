@@ -2,22 +2,28 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sample.Controller;
 
-import java.io.IOException;
+import java.io.*;
 
 public class Player1ViewController {
 
     @FXML
-    private Button switchToP2Button;
+    public Button switchToP2Button;
     @FXML
     private Button randomButton;
     @FXML
     public Button startGameAiButton;
+    @FXML
+    public Button clearBoardButton;
 
     private boolean nextGameWithAi = false; // true następna gra jest z botem
     private Controller controller;
@@ -32,18 +38,32 @@ public class Player1ViewController {
         Parent root2 = (Parent) fxmlLoader.load();
         SignInP2Controller signInP2Controller = (SignInP2Controller) fxmlLoader.getController();
         signInP2Controller.setController(controller);
-        Stage stage = new Stage();
+
         scene = new Scene(root2);
+//        Stage stage = new Stage();
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.setTitle("signInP2.fxml");
+//        stage.show();
+//        ((Stage) switchToP2Button.getScene().getWindow()).close();
+
+        Stage stage = (Stage) ((Node)switchToP2Button).getScene().getWindow();
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("signInP2.fxml");
         stage.show();
-        ((Stage) switchToP2Button.getScene().getWindow()).close();
     }
 
 
-    public void randomAction(){
-        controller.randomPositionShipPlayer1(randomButton.getScene());
+    public void randomAction() throws FileNotFoundException {
+        controller.randomPositionShipAi(controller.getList_of_ships1(), controller.player1Board);
+
+        if (!isNextGameWithAi()) {
+            setSwitchToP2ButtonEnable();
+        }
+        if (isNextGameWithAi()) {
+            setStartGameAiButtonEnable();
+        }
     }
     @FXML
     public void startGameAiAction() throws IOException {
@@ -58,7 +78,7 @@ public class Player1ViewController {
         stage.setResizable(false);
         controller.setPlayer1BattleViewController(player1BattleViewController);
         controller.insertBoardPl1Ready(scene);
-        controller.insertBoardAi1Shoot(scene);
+        controller.insertBoardShoot(scene,controller.ai1Board);
 
         stage.show();
         try{
@@ -97,19 +117,20 @@ public class Player1ViewController {
     public void setStartGameAiButtonEnable(){
         startGameAiButton.setDisable(false);
     }
-
-
     public boolean isNextGameWithAi() {
         return nextGameWithAi;
     }
-
     public void setNextGameWithAi(boolean nextGameWithAi) {
         this.nextGameWithAi = nextGameWithAi;
     }
-
-
     public Button getStartGameAiButton() {
         return startGameAiButton;
+    }
+
+    @FXML
+    public void clearBoardAction(){
+        controller.clearShipOnBoardPL(controller.getList_of_ships1(), controller.player1Board);
+        switchToP2Button.setDisable(true);
     }
 }
 

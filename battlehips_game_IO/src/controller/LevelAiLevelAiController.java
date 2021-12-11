@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -62,11 +63,15 @@ public class LevelAiLevelAiController {
         controller.setAi2Is(true);
         controller.setAi1Level(ai1Level);
         controller.setAi2Level(ai2Level);
+
+        controller.aiVsAiStartGame();
+
+
         controller.createBoardAi1();
         controller.createBoardAi2();
-        controller.insertBoardAi1Ship(scene);
-        controller.insertBoardAi2Shoot(scene);
-
+        controller.insertBoardShip(scene, controller.ai1Board);
+        controller.insertBoardShoot(scene,controller.ai2Board);
+        //ustawiono staki 1 i strzelanie 2
         ((Stage) startGameButton.getScene().getWindow()).close();
 
     }
@@ -124,14 +129,21 @@ public class LevelAiLevelAiController {
     }
 
     @FXML
-    public void backToMenuAction() throws IOException {
+    public void  backToMenuAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("MENU");
-        primaryStage.setScene(new Scene(pane));
-        primaryStage.show();
-        ((Stage) backToMenuButton.getScene().getWindow()).close();
+        Scene scene = new Scene(pane);
+//        Stage primaryStage = new Stage();
+//        primaryStage.setTitle("MENU");
+//        primaryStage.setScene(new Scene(pane));
+//        primaryStage.show();
+//        ((Stage) backToMenuButton.getScene().getWindow()).close();
+
+        Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.setTitle("MENU");
+        stage.show();
 
     }
     public void setStartGameButtonEnable(){

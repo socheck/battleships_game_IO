@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -55,6 +56,7 @@ public class LoginPlayerLevelAiController {
         player1ViewController.setSwitchToP2ButtonDisabel();
         player1ViewController.startGameAiButton.setDisable(true);
         player1ViewController.setNextGameWithAi(true);  // następna gra z botem
+        player1ViewController.switchToP2Button.setVisible(false);
 
         ((Stage) startGameButton.getScene().getWindow()).close();
 
@@ -72,14 +74,15 @@ public class LoginPlayerLevelAiController {
     }
 
     @FXML
-    public void backToMenuAction() throws IOException {
+    public void  backToMenuAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("MENU");
-        primaryStage.setScene(new Scene(pane));
-        primaryStage.show();
-        ((Stage) backToMenuButton.getScene().getWindow()).close();
+        Scene scene = new Scene(pane);
+        Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.setTitle("MENU");
+        stage.show();
 
     }
     @FXML
