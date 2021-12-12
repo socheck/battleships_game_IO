@@ -66,21 +66,26 @@ public class JsonTestMain {
 //        InitialState myInitialState = new InitialState(2,1, p1);
 //
 //        System.out.println("obiekt" + myInitialState);
-//
+
 //        System.out.println("===============================================");
 //
 //        try {
-//            db.setGame(myJson.strigifyMy(myInitialState), "{ jakaś gra }");
+//            db.setGame(myJson.strigifyMy(myInitialState), "{ jakaś gra }"); /// linijka do zapisu gry po zakończeniu
 //        } catch (JsonProcessingException e) {
 //            e.printStackTrace();
 //        }
+<<<<<<< HEAD
 
 
+=======
+//
+//
+>>>>>>> 7d58ceacc2826f537eb2cd1c592b29d6f7807749
 //    }
 //        public boolean isDatabeseConnected(){
 //
 //            return connection !=null;
-//        }
+       }
 
 
 //    TEST ZDOLNOŚCI METOD ZAMIENIAJĄCYCH KLASY NA STRINGI I NA ODWRÓT

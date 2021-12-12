@@ -6,23 +6,16 @@ import bs_game_backend.Ship;
 import controller.Player1BattleViewController;
 import controller.Player1ViewController;
 import controller.Player2ViewController;
+import db.dbConnection;
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -69,20 +62,28 @@ public class Controller {
     private boolean Ai2Is = false;
     private int ai1Level = 0;
     private int ai2Level = 0;
+    private boolean shipIsVertical = true;
+
+    private int iter; //usunąc
 
     private boolean aiSootWithPlayer1Now = false; // true ai grajace z graczem 1 strzela teraz
-
-
     private AI ai;
-
 
     private boolean player2AllShipSet = false , player1AllShipSet = false;
     private boolean player1ShotNow = true, player2ShotNow = true;
 
+    private long  timeOfAiCahnge = 1_000;   // do testó ustawiona mała wartość wrócić do 1_000_000_000
+
+
+
+
+
+
+
+
     public boolean isPlayer1Is() {
         return Player1Is;
     }
-
     public void setPlayer1Is(boolean player1Is) {
         Player1Is = player1Is;
     }
@@ -144,57 +145,43 @@ public class Controller {
         this.ai2Level = ai2Level;
     }
 
-    @FXML
-    void player2BattleView(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/player2BattleView.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
-        Controller controller = fxmlLoader.getController();
-        controller.setController(controller);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root2));
-        stage.setResizable(false);
-        stage.show();
-        try{
-            ((Stage) goP2Turn.getScene().getWindow()).close();
-        }catch (Exception e){
-
-        }
+    public Pane getBoarderpl1_fxml() {
+        return boarderpl1_fxml;
     }
 
-    @FXML
-    void BufforToP2View(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/bufforToP2View.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
-        Stage stage =  (Stage) ((Node)event.getSource()).getScene().getWindow();
-        Controller controller = fxmlLoader.getController();
-        controller.setController(controller);
-        stage.setScene(new Scene(root2));
-        stage.setResizable(false);
-        stage.show();
-        try{
-            ((Stage) napieprzajbutton.getScene().getWindow()).close();
-        }catch (Exception e){
-
-        }
+    public List<Integer> getList_of_ships1() {
+        return list_of_ships1;
     }
+
+    public List<Integer> getList_of_ships2() {
+        return list_of_ships2;
+    }
+
+    public List<Integer> getList_of_ships3() {
+        return list_of_ships3;
+    }
+
+    public List<Integer> getList_of_ships4() {
+        return list_of_ships4;
+    }
+
     public void createBoardPl1(){
-        this.player1Board = createContentPl1();
-
+        this.player1Board = createBoardController(false, list_of_ships1, eventHandlerPl1, eventHandlerShipViewEnteredPl1, eventHandlerShipViewExit);
     }
     public void createBoardPl2(){
-        this.player2Board = createContentPl2();
+        this.player2Board = createBoardController(false, list_of_ships2, eventHandlerPl2, eventHandlerShipViewEnteredPl2, eventHandlerShipViewExit);
     }
     public void createBoardAi1(){
-      this.ai1Board = createContentAi1();
-      randomPositionShipAi1();
+      this.ai1Board = createBoardController(true, list_of_ships3, eventHandlerAi);
+      randomPositionShipAi(list_of_ships3, ai1Board);
     }
-
     public void createBoardAi2(){
-        this.ai2Board = createContentAi2();
-        randomPositionShipAi2();
+        this.ai2Board = createBoardController(true, list_of_ships4, eventHandlerAi);
+        randomPositionShipAi(list_of_ships4, ai2Board);
     }
 
     public void insertBoardPl1(Scene scene){
+
         Pane pane = (Pane) (scene.lookup("#pl1Pane #boarderpl1"));
         pane.getChildren().add(player1Board);
     }
@@ -212,6 +199,7 @@ public class Controller {
         Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
         pane.getChildren().add(player2Board);
     }
+
     public void hideBoardPl1(Scene scene){
         Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
         try {
@@ -257,164 +245,139 @@ public class Controller {
 
         }
     }
-    public void insertBoardPl2Ship(Scene scene){ // pokazywanie planszy gracza 2 ze statkami, tura gracza 2
-        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
-        player2Board.setEnableShot(false);
-        player2Board.render();
-        pane.getChildren().add(player2Board);
-        player2ShotNow = true;
-    }
-    public void insertBoardPl1Shoot(Scene scene){
-        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
-        player1Board.setEnableShot(true);
-        player1Board.render();
-        pane.getChildren().add(player1Board);
 
-    }
-    public void insertBoardPl1Ship(Scene scene){ // pokazywanie planszy gracza 2 ze statkami, tura gracza 1
-        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
-        player1Board.setEnableShot(false);
-        player1Board.render();
-        pane.getChildren().add(player1Board);
-        player1ShotNow = true;
-    }
-    public void insertBoardPl2Shoot(Scene scene){
-        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
-        player2Board.setEnableShot(true);
-        player2Board.render();
-        pane.getChildren().add(player2Board);
 
-    }
-    public void insertBoardAi1Ship(Scene scene){ // pokazywanie planszy gracza 2 ze statkami, tura gracza 1
+    public void insertBoardShip(Scene scene, BoardController board){
         Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
-        ai1Board.setEnableShot(false);
-        ai1Board.render();
-        pane.getChildren().add(ai1Board);
-    }
-
-    public void insertBoardAi1Shoot(Scene scene){
-        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
-        ai1Board.setEnableShot(true);
-        ai1Board.render();
-        pane.getChildren().add(ai1Board);
-    }
-    public void insertBoardAi2Ship(Scene scene){ // pokazywanie planszy gracza 2 ze statkami, tura gracza 1
-        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #myBoardP1Battle"));
-        ai2Board.setEnableShot(false);
-        ai2Board.render();
-        pane.getChildren().add(ai2Board);
-    }
-    public void insertBoardAi2Shoot(Scene scene){
-        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
-        ai2Board.setEnableShot(true);
-        ai2Board.render();
-        pane.getChildren().add(ai2Board);
-    }
-
-    public void clearShipOnBoardPl1(Scene scene){
-        Pane pane = (Pane) (scene.lookup("#pl1Pane #boarderpl1"));
-        pane.getChildren().remove(player1Board);
-        player1Board.clearShip();
-        player1Board.render();
-        if (list_of_ships1.size() != 10) {
-            list_of_ships1.clear();
-            createBoardPl1();
+        board.setEnableShot(false);
+        board.render();
+        pane.getChildren().add(board);
+        if(board == player1Board){
+            player1ShotNow = true;
         }
-        insertBoardPl1(scene);
-    }
-    public void clearShipOnBoardPl2(Scene scene){
-        Pane pane = (Pane) (scene.lookup("#pl2Pane #boarderpl2"));
-        pane.getChildren().remove(player2Board);
-        player2Board.clearShip();
-        player2Board.render();
-        if (list_of_ships2.size() != 10) {
-            list_of_ships2.clear();
-            createBoardPl2();
+        if(board == player2Board){
+            player2ShotNow = true;
         }
-        insertBoardPl2(scene);
+
     }
 
+    public void insertBoardShoot(Scene scene, BoardController board){
+        Pane pane = (Pane) (scene.lookup("#mainPaneP1Battle #enemyBoardP1Battle"));
+        board.setEnableShot(true);
+        board.render();
+        pane.getChildren().add(board);
+
+    }
+    public void clearShipOnBoardPL(List<Integer> list, BoardController board){
+        board.clearShip();
+        list.clear();
+        makeListOfShips(list);
+        if(list == list_of_ships1){
+            player1AllShipSet = false;
+        }
+        if(list == list_of_ships2){
+            player2AllShipSet = false;
+        }
+
+
+
+    }
+
+//    public void clearShipOnBoardPl1(){
+//        player1Board.clearShip();
+//        list_of_ships1.clear();
+//        makeListOfShips(list_of_ships1);
+//        player1AllShipSet = false;
+//
+//    }
+//    public void clearShipOnBoardPl2( ){
+//        player2Board.clearShip();
+//        list_of_ships2.clear();
+//        makeListOfShips(list_of_ships2);
+//        player2AllShipSet = false;
+//    }
 
 
 
     EventHandler<MouseEvent> eventHandlerPl1 = new EventHandler<MouseEvent>() {
         @Override
-
         public void handle(MouseEvent event) {
-            boolean end_s = false;
-
-            player1ViewController.setSwitchToP2ButtonDisabel();
-            Cell cell = (Cell) event.getSource();
-            if(list_of_ships1.isEmpty()){
-                player1AllShipSet = true;
-                if (!player1ViewController.isNextGameWithAi()) {
-                    player1ViewController.setSwitchToP2ButtonEnable();
+            if (event.getButton() == MouseButton.PRIMARY) {
+                player1ViewController.setSwitchToP2ButtonDisabel();
+                Cell cell = (Cell) event.getSource();
+                if(list_of_ships1.isEmpty()){
+                    player1AllShipSet = true;
+                    if (!player1ViewController.isNextGameWithAi()) {
+                        player1ViewController.setSwitchToP2ButtonEnable();
+                    }
+                    if (player1ViewController.isNextGameWithAi()) {
+                        player1ViewController.setStartGameAiButtonEnable();
+                    }
                 }
-                if (player1ViewController.isNextGameWithAi()) {
-                    player1ViewController.setStartGameAiButtonEnable();
-                }
-            }
+                if (!player1AllShipSet) {
+                    if(!list_of_ships1.isEmpty()) {
+                        if (player1Board.placeShip(new Ship(list_of_ships1.get(0), shipIsVertical), cell.get_x(), cell.get_y())) {
 
-            if (!player1AllShipSet) {
-                if(!list_of_ships1.isEmpty()) {
-                    if (player1Board.placeShip(new Ship(list_of_ships1.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
+                            try {
+                                list_of_ships1.remove(0);
+                            } catch (IndexOutOfBoundsException e) {
+                            }
+                            if(list_of_ships1.isEmpty()){
+                                System.out.println("Juz postawiono wszystkie statki");
+                                if (!player1ViewController.isNextGameWithAi()) {
+                                    player1ViewController.setSwitchToP2ButtonEnable();
+                                }
+                                if (player1ViewController.isNextGameWithAi()) {
+                                    player1ViewController.setStartGameAiButtonEnable();
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        System.out.println("Juz postawiono wszystkie statki");
                         try {
-                            System.out.println(list_of_ships1.get(0));
-                            list_of_ships1.remove(0);
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.println("Juz postawiono wszystkie statki");
                             if (!player1ViewController.isNextGameWithAi()) {
                                 player1ViewController.setSwitchToP2ButtonEnable();
                             }
                             if (player1ViewController.isNextGameWithAi()) {
                                 player1ViewController.setStartGameAiButtonEnable();
                             }
-                        }
-                    }
-                }
-                else{
-                    System.out.println("Juz postawiono wszystkie statki");
-                    try {
-                        if (!player1ViewController.isNextGameWithAi()) {
-                            player1ViewController.setSwitchToP2ButtonEnable();
-                        }
-                        if (player1ViewController.isNextGameWithAi()) {
-                            player1ViewController.setStartGameAiButtonEnable();
-                        }
-                    } catch (Exception e) {
-                   }
-                    player1AllShipSet = true;
-                    end_s = true;
-                }
-            } else {
-                if (player2ShotNow) {
-                    if (player1Board.isEnableShot()) {
-
-                        if (cell.get_isWasShot()) {
-                            return;
-                        } else {
-                            cell.shoot();
-
-                            if(player1Board.endGame()){
-                                System.out.println("Wygrał gracz Nr 2");
-                                hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                                hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                                player1BattleViewController.playerNumberLabel.setText("Wygrał gracz Nr 2");
-                                player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                                player1BattleViewController.setContinueButtonEnable();
-                            }
-                            if (cell.getShip() == null) {
-                                player2ShotNow = false;
-                                player1BattleViewController.setNextButtonEnable();
-                            }
-                        }
-
+                        } catch (Exception e) {
+                       }
+                        player1AllShipSet = true;
                     }
                 } else {
+                    if (player2ShotNow) {
+                        if (player1Board.isEnableShot()) {
+
+                            if (cell.get_isWasShot()) {
+                                return;
+                            } else {
+                                cell.shoot();
+                                if(player1Board.endGame()){
+                                    winner("Player 2 is the winner");
+                                    dbConnection db = new dbConnection();
+    //                                try {
+    //                                    db.setGame(myJson.strigifyMy(player1Board),myJson.strigifyMy(player1Board) ); /// linijka do zapisu gry po zakończeniu
+    //                                } catch (JsonProcessingException e) {
+    //                                    e.printStackTrace();
+    //                                }
+                                }
+                                if (cell.getShip() == null) {
+                                    player2ShotNow = false;
+                                    player1BattleViewController.setNextButtonEnable();
+                                }
+                            }
+
+                        }
+                    } else {
+                    }
+
+
+
                 }
-
-
-
+            }else {
+                shipIsVertical = !shipIsVertical;
             }
 
 
@@ -425,58 +388,54 @@ public class Controller {
     EventHandler<MouseEvent> eventHandlerPl2 = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            boolean end_s = false;
             Cell cell = (Cell) event.getSource();
-
-            if(list_of_ships2.isEmpty()){
-                player2AllShipSet = true;
-                player2ViewController.setStartGameButtonEnable();
-            }
-            if (!player2AllShipSet) {
-
-                if(!list_of_ships2.isEmpty()) {
-                    if (player2Board.placeShip(new Ship(list_of_ships2.get(0), event.getButton() == MouseButton.PRIMARY), cell.get_x(), cell.get_y())) {
-                        try {
-
-                            list_of_ships2.remove(0);
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.println("Juz postawiono wszystkie statki");
-                        }
-                    }
-                }
-                else{
-                    System.out.println("Juz postawiono wszystkie statki");
-                    try {
-                        player2ViewController.setStartGameButtonEnable();
-                    } catch (Exception e) {
-                    }
+            if(event.getButton() != MouseButton.PRIMARY){
+                shipIsVertical = !shipIsVertical;
+            }else{
+                if(list_of_ships2.isEmpty()){
                     player2AllShipSet = true;
-                    end_s = true;
+                    player2ViewController.setStartGameButtonEnable();
                 }
-            }else {
-
-                if (player1ShotNow) {
-                    if (player2Board.isEnableShot()) {
-                        if (cell.get_isWasShot()) {
-                            return;
-                        } else {
-                            cell.shoot();
-                            if(player2Board.endGame()){
-                                System.out.println("Wygrał gracz Nr 1");
-                                hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                                hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                                player1BattleViewController.playerNumberLabel.setText("Wygrał gracz Nr 1");
-                                player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                                player1BattleViewController.setContinueButtonEnable();
+                if (!player2AllShipSet) {
+                    if(!list_of_ships2.isEmpty()) {
+                        if (player2Board.placeShip(new Ship(list_of_ships2.get(0), shipIsVertical), cell.get_x(), cell.get_y())) {
+                            try {
+                                list_of_ships2.remove(0);
+                            } catch (IndexOutOfBoundsException e) {
                             }
-                            if (cell.getShip() == null) {
-                                player1ShotNow = false;
-                                player1BattleViewController.setNextButtonEnable();
+                            if(list_of_ships2.isEmpty()){
+                                player2AllShipSet = true;
+                                player2ViewController.setStartGameButtonEnable();
                             }
                         }
-
                     }
-                } else {
+                    else {
+                        System.out.println("Juz postawiono wszystkie statki");
+                        try {
+                            player2ViewController.setStartGameButtonEnable();
+                        } catch (Exception e) {
+                        }
+                        player2AllShipSet = true;
+                    }
+                }else {
+                    if (player1ShotNow) {
+                        if (player2Board.isEnableShot()) {
+                            if (cell.get_isWasShot()) {
+                                return;
+                            } else {
+                                cell.shoot();
+                                if(player2Board.endGame()){
+                                  winner("Player 1 is the winner");
+                                }
+                                if (cell.getShip() == null) {
+                                    player1ShotNow = false;
+                                    player1BattleViewController.setNextButtonEnable();
+                                }
+                            }
+
+                        }
+                    } else {
+                    }
                 }
             }
         }
@@ -492,62 +451,16 @@ public class Controller {
                         } else {
                             cell.shoot();
                             if(ai1Board.endGame()){
-                                System.out.println("Wygrał gracz Nr 1");
-                                hideBoardPl1(player1BattleViewController.nextButton.getScene());    // ukrywanie planszy po wygranej
-                                hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                                player1BattleViewController.playerNumberLabel.setText("Wygrał gracz Nr 1");
-                                player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                                player1BattleViewController.setContinueButtonEnable();
+                               winner("Player 1 is the winner");
                             }
                             if (cell.getShip() == null) {
                                 player1ShotNow = false;
                                // strzelanie bota
                                 player1BattleViewController.playerNumberLabel.setText("Strzela Komputer");
-
-                                /// do wyjebania przydatbne w testach
-//                                ai = new AI(ai1Level, player1Board);
-//                                player1Board = ai.moveAI();
-////                                System.out.println("dupa1");
-////                                System.out.println(player1Board.getLatestShot());
-////                                while (player1Board.isPreviousShotTelling()){
-////                                    long time = System.nanoTime();
-////                                    AnimationTimer timerAi1Shoot = new AnimationTimer() {
-////                                        @Override
-////                                        public void handle(long l) {
-////                                            if(l - 500_000 > time){
-////                                                ai = new AI(ai1Level, player1Board);
-////                                                player1Board = ai.moveAI();
-////                                                super.stop();
-////                                            }
-////                                        }
-////                                    };
-////                                    timerAi1Shoot.start();
-////                                }
-//
-//
-//                                if(player1Board.endGame()){
-//                                    System.out.println("Wygrało AI");
-//                                    hideBoardPl1(player1BattleViewController.nextButton.getScene());
-//                                    hideBoardPl2(player1BattleViewController.nextButton.getScene());
-//                                    player1BattleViewController.playerNumberLabel.setText("Wygrało AI");
-//                                    player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-//                                    player1BattleViewController.setContinueButtonEnable();
-//                                    return;
-//                                }
-//                                hideBoardPl1(player1BattleViewController.nextButton.getScene());
-//                                insertBoardPl1Ship(player1BattleViewController.nextButton.getScene());
-//                                player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
-                                ///
-                                //to zostawić
                                 aiSootWithPlayer1Now = true;
                                 aiShootInPlayer1();
                                 if(ai1Board.endGame()){
-                                    System.out.println("Wygrał gracz Nr 1");
-                                    hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                                    hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                                    player1BattleViewController.playerNumberLabel.setText("Wygrał gracz Nr 1");
-                                    player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                                    player1BattleViewController.setContinueButtonEnable();
+                                    winner("Player 1 is the winner");
                                 }
                             }
                         }
@@ -559,73 +472,104 @@ public class Controller {
             }
 
     };
-
-    public void aiShootInPlayer1(){
-        long time = System.nanoTime();
-        AnimationTimer timerAi = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                // zmienić 1 na 1_000_000_000
-                if(l - 1_000_000_000 > time){
-                    ai = new AI(ai1Level, player1Board);
-                    player1Board = ai.moveAI();
-                    if(player1Board.endGame()){
-                        System.out.println("Wygrało AI");
-                        hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                        hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                        player1BattleViewController.playerNumberLabel.setText("Wygrało AI");
-                        player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                        player1BattleViewController.setContinueButtonEnable();
-                        super.stop();
-                        return;
-                    }
-                    hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                    insertBoardPl1Ship(player1BattleViewController.nextButton.getScene());
-                    player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
-                    super.stop();
-                    if(player1Board.isPreviousShotTelling()){
-                        aiShootInPlayer1();
-                    }else {
-                        aiSootWithPlayer1Now = false;
-                    }
-                }
+    EventHandler<MouseEvent> eventHandlerShipViewEnteredPl1 = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            try {
+                Cell cell = (Cell) event.getSource();
+                player1Board.placeShipView(new Ship(list_of_ships1.get(0), shipIsVertical), cell.get_x(), cell.get_y());
+            } catch (Exception e) {
             }
-        };
-        timerAi.start();
+        }
+
+    };
+    EventHandler<MouseEvent> eventHandlerShipViewEnteredPl2 = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            try {
+                Cell cell = (Cell) event.getSource();
+                player2Board.placeShipView(new Ship(list_of_ships2.get(0), shipIsVertical), cell.get_x(), cell.get_y());
+            } catch (Exception e) {
+            }
+        }
+
+    };
+    EventHandler<MouseEvent> eventHandlerShipViewExit = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            try {
+                Cell cell = (Cell) event.getSource();
+                cell.getBoardController().render();
+            } catch (Exception e) {
+            }
+        }
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void winner(String string){ // 1 - winner PL1 , 2 - winner PL2 , 3 - winner AI1 , 4 - winner AI2 ,
+
+        System.out.println(string);
+      //  hideBoardPl1(player1BattleViewController.nextButton.getScene());
+      //  hideBoardPl2(player1BattleViewController.nextButton.getScene());
+        player1BattleViewController.playerNumberLabel.setText(string);
+        player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
+        player1BattleViewController.setContinueButtonEnable();
     }
 
-    public void ai1ShootInAi2(){
-        long time = System.nanoTime();
-        AnimationTimer timerAi = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                // zmienić 1 na 1_000_000_000
-                if(l - 1_000_000_000> time){
-                    ai = new AI(ai1Level, ai2Board);
-                    ai2Board = ai.moveAI();
-
-                    if(ai2Board.endGame()){
-                        System.out.println("Wygrało AI 1");
-                        hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                        hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                        player1BattleViewController.playerNumberLabel.setText("Wygrało AI 1");
-                        player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                        player1BattleViewController.setContinueButtonEnable();
-                        super.stop();
-                        return;
-                    }
-                    hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi2Shoot(player1BattleViewController.nextButton.getScene());
+public void aiShootInPlayer1(){
+    long time = System.nanoTime();
+    AnimationTimer timerAi = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            // zmienić 1 na 1_000_000_000
+            if(l - timeOfAiCahnge > time){
+                ai = new AI(ai1Level, player1Board);
+                player1Board = ai.moveAI();
+                if(player1Board.endGame()){
+                  winner("AI is the winner");
                     super.stop();
-
-                    if(ai2Board.isPreviousShotTelling()){
-                        ai1ShootInAi2();
-                    }
+                    return;
+                }
+                hideBoardPl1(player1BattleViewController.nextButton.getScene());
+                insertBoardShip(player1BattleViewController.nextButton.getScene(),player1Board);
+                player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
+                super.stop();
+                if(player1Board.isPreviousShotTelling()){
+                    aiShootInPlayer1();
+                }else {
+                    aiSootWithPlayer1Now = false;
                 }
             }
-        };
-        timerAi.start();
-    }
+        }
+    };
+    timerAi.start();
+}
     public void ai2ShootInAi1(){
 
         long time = System.nanoTime();
@@ -633,11 +577,11 @@ public class Controller {
             long time = System.nanoTime();
             @Override
             public void handle(long l) {
-                if(l - 1_000_000_000 > time){
+                if(l - timeOfAiCahnge > time){
                     hideBoardPl1(player1BattleViewController.nextButton.getScene());
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi1Ship(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi2Shoot(player1BattleViewController.nextButton.getScene());
+                    insertBoardShip(player1BattleViewController.nextButton.getScene(),ai1Board);
+                    insertBoardShoot(player1BattleViewController.nextButton.getScene(),ai2Board);
                     super.stop();
                     aiVsAiStartGame();
                 }
@@ -648,21 +592,16 @@ public class Controller {
             @Override
             public void handle(long l) {
                 // zmienić 1 na 1_000_000_000
-                if(l - 500_000_000 > time){
+                if(l - (timeOfAiCahnge/2) > time){
                     ai = new AI(ai2Level, ai1Board);
                     ai1Board = ai.moveAI();
                     if(ai1Board.endGame()){
-                        System.out.println("Wygrało AI 2");
-                        hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                        hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                        player1BattleViewController.playerNumberLabel.setText("Wygrało AI 2");
-                        player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                        player1BattleViewController.setContinueButtonEnable();
+                        winner("AI 2 is the winner");
                         super.stop();
                         return;
                     }
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi1Shoot(player1BattleViewController.nextButton.getScene());
+                    insertBoardShoot(player1BattleViewController.nextButton.getScene(),ai1Board);
 
                     super.stop();
 
@@ -682,7 +621,7 @@ public class Controller {
 
     public void aiVsAiStartGame(){
         //ustawiono staki 1 i strzelanie2
-        long constTime = 1_000_000_000;
+
 
         player1BattleViewController.playerNumberLabel.setText("Tura AI 1");
 
@@ -692,11 +631,11 @@ public class Controller {
             long time = System.nanoTime();
             @Override
             public void handle(long l) {
-                if(l - 2_000_000_000 > time){
+                if(l - (timeOfAiCahnge*2) > time){
                     hideBoardPl1(player1BattleViewController.nextButton.getScene());
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi1Ship(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi2Shoot(player1BattleViewController.nextButton.getScene());
+                    insertBoardShip(player1BattleViewController.nextButton.getScene(),ai1Board);
+                    insertBoardShoot(player1BattleViewController.nextButton.getScene(),ai2Board);
                     super.stop();
                     aiVsAiStartGame();
                 }
@@ -706,7 +645,7 @@ public class Controller {
         AnimationTimer timerAi2Shoot = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                if(l - 1_500_000_000 > time){
+                if(l - (timeOfAiCahnge+timeOfAiCahnge/2) > time){
                     ai = new AI(ai2Level, ai1Board);
                     ai1Board = ai.moveAI();
                     if (ai1Board.isPreviousShotTelling()){
@@ -715,17 +654,12 @@ public class Controller {
                       return;
                     }
                     if(ai1Board.endGame()){
-                        System.out.println("Wygrało AI 2");
-                        hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                        hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                        player1BattleViewController.playerNumberLabel.setText("Wygrało AI 2");
-                        player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                        player1BattleViewController.setContinueButtonEnable();
+                        winner("AI 2 is the winner");
                         super.stop();
                         return;
                     }
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi1Shoot(player1BattleViewController.nextButton.getScene());
+                    insertBoardShoot(player1BattleViewController.nextButton.getScene(),ai1Board);
                     super.stop();
                     changeView2.start();
 
@@ -736,12 +670,12 @@ public class Controller {
             long time = System.nanoTime();
             @Override
             public void handle(long l) {
-                if(l - 1_000_000_000 > time){
+                if(l - timeOfAiCahnge > time){
                     player1BattleViewController.playerNumberLabel.setText("Tura AI 2");
                     hideBoardPl1(player1BattleViewController.nextButton.getScene());
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi2Ship(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi1Shoot(player1BattleViewController.nextButton.getScene());
+                    insertBoardShip(player1BattleViewController.nextButton.getScene(), ai2Board);
+                    insertBoardShoot(player1BattleViewController.nextButton.getScene(),ai1Board);
                     super.stop();
                     timerAi2Shoot.start();
 
@@ -753,7 +687,7 @@ public class Controller {
         AnimationTimer timerAi1Shoot = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                if(l - 500_000_000 > time){
+                if(l - (timeOfAiCahnge/2) > time){
                     ai = new AI(ai1Level, ai2Board);
                     ai2Board = ai.moveAI();
                     if(ai2Board.isPreviousShotTelling()) {
@@ -763,175 +697,63 @@ public class Controller {
                     }
 
                     if(ai2Board.endGame()){
-                        System.out.println("Wygrało AI 1");
-                        hideBoardPl1(player1BattleViewController.nextButton.getScene());
-                        hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                        player1BattleViewController.playerNumberLabel.setText("Wygrało AI 1");
-                        player1BattleViewController.playerNumberLabel.setTextFill(Color.RED);
-                        player1BattleViewController.setContinueButtonEnable();
+                        winner("AI 1 is the winner");
                         super.stop();
                         return;
                     }
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
-                    insertBoardAi2Shoot(player1BattleViewController.nextButton.getScene());
+                    insertBoardShoot(player1BattleViewController.nextButton.getScene(),ai2Board);
                     super.stop();
                     changeView.start();
 
                 }
             }
         };
-
-
-
             timerAi1Shoot.start();
-
-
-
     }
 
 
 
+public BoardController createBoardController(boolean isAi, List<Integer> listOfShips, EventHandler<? super MouseEvent> handler ){
+    makeListOfShips(listOfShips);
+    return new BoardController(isAi, handler);
+    }
 
+    public BoardController createBoardController(boolean isAi, List<Integer> listOfShips, EventHandler<? super MouseEvent> handler,EventHandler<? super MouseEvent> handlerSetShipEntered, EventHandler<? super MouseEvent> handlerSetShipExit){
+        makeListOfShips(listOfShips);
+        return new BoardController(isAi, handler,handlerSetShipEntered,handlerSetShipExit);
+    }
 
-
-    public BoardController createContentPl1() {
-        list_of_ships1.add(4);
-        list_of_ships1.add(3);
-        list_of_ships1.add(3);
-        list_of_ships1.add(2);
-        list_of_ships1.add(2);
-        list_of_ships1.add(2);
-        list_of_ships1.add(1);
-        list_of_ships1.add(1);
-        list_of_ships1.add(1);
-        list_of_ships1.add(1);
-        return new BoardController(false, eventHandlerPl1);
+    public void makeListOfShips(List<Integer> listOfShips){
+        listOfShips.add(4);
+        listOfShips.add(3);
+        listOfShips.add(3);
+        listOfShips.add(2);
+        listOfShips.add(2);
+        listOfShips.add(2);
+        listOfShips.add(1);
+        listOfShips.add(1);
+        listOfShips.add(1);
+        listOfShips.add(1);
     }
 
 
-    public BoardController createContentPl2() {
-        list_of_ships2.add(4);
-        list_of_ships2.add(3);
-        list_of_ships2.add(3);
-        list_of_ships2.add(2);
-        list_of_ships2.add(2);
-        list_of_ships2.add(2);
-        list_of_ships2.add(1);
-        list_of_ships2.add(1);
-        list_of_ships2.add(1);
-        list_of_ships2.add(1);
-
-        return new BoardController(false, eventHandlerPl2);
-    }
-    public BoardController createContentAi1() {
-        list_of_ships3.add(4);
-        list_of_ships3.add(3);
-        list_of_ships3.add(3);
-        list_of_ships3.add(2);
-        list_of_ships3.add(2);
-        list_of_ships3.add(2);
-        list_of_ships3.add(1);
-        list_of_ships3.add(1);
-        list_of_ships3.add(1);
-        list_of_ships3.add(1);
-
-        return new BoardController(true, eventHandlerAi);
-    }
-    public BoardController createContentAi2() {
-        list_of_ships4.add(4);
-        list_of_ships4.add(3);
-        list_of_ships4.add(3);
-        list_of_ships4.add(2);
-        list_of_ships4.add(2);
-        list_of_ships4.add(2);
-        list_of_ships4.add(1);
-        list_of_ships4.add(1);
-        list_of_ships4.add(1);
-        list_of_ships4.add(1);
-
-        return new BoardController(true, eventHandlerAi);
-    }
-
-    public void randomPositionShipPlayer1(Scene scene){        //randowmowe ustawianie staktów dla player 1
-        int type = list_of_ships1.size();
+    public void randomPositionShipAi(List<Integer> list_of_ships, BoardController boardController){        //randowmowe ustawianie staktów dla player 1
+        int type = list_of_ships.size();
         if(type == 0){
-            createBoardPl1();
-            type = list_of_ships1.size();
-            insertBoardPl1(scene);
-        }
-
-        while(type > 0) {
-            int x = this.random.nextInt(10);
-            int y = this.random.nextInt(10);
-
-            if (player1Board.placeShip(new Ship(list_of_ships1.get(0), Math.random() < 0.5D), x, y)) {
-                --type;
-                list_of_ships1.remove(0);
-            }
-        }
-        if (!player1ViewController.isNextGameWithAi()) {
-            player1ViewController.setSwitchToP2ButtonEnable();
-        }
-        if (player1ViewController.isNextGameWithAi()) {
-            player1ViewController.setStartGameAiButtonEnable();
-        }
-    }
-    public void randomPositionShipPlayer2(Scene scene){        //randowmowe ustawianie staktów dla player 2
-        int type = list_of_ships2.size();
-        if(type == 0){
-            createBoardPl2();
-            type = list_of_ships2.size();
-            insertBoardPl2(scene);
-        }
-
-        while(type > 0) {
-            int x = this.random.nextInt(10);
-            int y = this.random.nextInt(10);
-
-            if (player2Board.placeShip(new Ship(list_of_ships2.get(0), Math.random() < 0.5D), x, y)) {
-                --type;
-                list_of_ships2.remove(0);
-            }
-        }
-        player2ViewController.setStartGameEnable();
-
-    }
-    public void randomPositionShipAi1(){        //randowmowe ustawianie staktów dla player 1
-        int type = list_of_ships3.size();
-        if(type == 0){
-            createBoardAi1();
-            type = list_of_ships3.size();
+            boardController.clearShip();
+            makeListOfShips(list_of_ships);
+            type = list_of_ships.size();
         }
         while(type > 0) {
             int x = this.random.nextInt(10);
             int y = this.random.nextInt(10);
 
-            if (ai1Board.placeShip(new Ship(list_of_ships3.get(0), Math.random() < 0.5D), x, y)) {
+            if (boardController.placeShip(new Ship(list_of_ships.get(0), Math.random() < 0.5D), x, y)) {
                 --type;
-                list_of_ships3.remove(0);
+                list_of_ships.remove(0);
             }
         }
 
     }
-    public void randomPositionShipAi2(){        //randowmowe ustawianie staktów dla player 1
-        int type = list_of_ships4.size();
-        if(type == 0){
-            createBoardAi1();
-            type = list_of_ships4.size();
-        }
-        while(type > 0) {
-            int x = this.random.nextInt(10);
-            int y = this.random.nextInt(10);
-
-            if (ai2Board.placeShip(new Ship(list_of_ships4.get(0), Math.random() < 0.5D), x, y)) {
-                --type;
-                list_of_ships4.remove(0);
-            }
-        }
-
-    }
-
-
-
-
 }

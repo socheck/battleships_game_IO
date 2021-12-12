@@ -7,10 +7,12 @@ import bs_game_backend.Ship;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 
 public class BoardController extends Parent {
 
@@ -23,6 +25,7 @@ public class BoardController extends Parent {
     private ArrayList<Cell> forbiddenShoots;
     public ArrayList<Cell> potentialShoots;
     private ArrayList<Cell> changes;
+    private int iter = 0;
 
     public ArrayList<Cell> getForbiddenShoots() {
         return forbiddenShoots;
@@ -68,11 +71,34 @@ public class BoardController extends Parent {
                 c.setOnMouseClicked(handler);
                 row.getChildren().add(c);
             }
-
             rows.getChildren().add(row);
         }
 
         getChildren().add(rows);
+        render();
+    }
+    public BoardController(boolean boardIsAi, EventHandler<? super MouseEvent> handler,EventHandler<? super MouseEvent> handlerSetShipEntered,EventHandler<? super MouseEvent> handlerSetShipExit) {
+        this.boardIsAi = boardIsAi;
+
+        this.earlierShot = null;
+        this.changes = new ArrayList<Cell>();
+        this.forbiddenShoots = new ArrayList<Cell>();
+        this.potentialShoots = new ArrayList<Cell>();
+
+        for (int y = 0; y < 10; y++) {
+            HBox row = new HBox();
+            for (int x = 0; x < 10; x++) {
+                Cell c = new Cell(x, y, this);
+                c.setOnMouseClicked(handler);
+                c.setOnMouseEntered(handlerSetShipEntered);
+                c.setOnMouseExited(handlerSetShipExit);
+                row.getChildren().add(c);
+            }
+            rows.getChildren().add(row);
+        }
+
+        getChildren().add(rows);
+        render();
     }
 
     @Override
@@ -84,34 +110,64 @@ public class BoardController extends Parent {
                 '}';
     }
     public void render(){
+
+        Image water = new Image("/img/water.gif");
+        Image myBoard_shipHit = new Image("/img/myBoard_shipHit.jpg");
+        Image myBoard_shipNoHit = new Image("/img/myBoard_shipNoHit.jpg");
+        Image myBoard_shipSunk = new Image("/img/myBoard_shipSunk.jpg");
+        Image myBoard_shotNoHit = new Image("/img/myBoard_shotNoHit.jpg");
+        Image shooting_shot = new Image("/img/shooting_shot.jpg");
+        Image shooting_shotHit = new Image("/img/shooting_shotHit.jpg");
+        Image shooting_shotSunk = new Image("/img/shooting_shotSunk.jpg");
+
+
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
                 Cell cell = getCell(x, y);
-                if(enableShot){
-                    cell.setFill(Color.LIGHTGREY);
+
+                // enableshoot - false widzimy nasze statki
+
+                if(enableShot){  // widok do strzelania
+                    cell.setFill(Color.LIGHTGREY);  // nie strzelone
                     cell.setStroke(Color.BLACK);
+                    cell.setFill(new ImagePattern(water));
                     if(cell.get_isWasShot() && cell.getShip() == null){
-                        cell.setFill(Color.BLACK);
+                        cell.setFill(Color.BLACK);   //sztrzelone nie trafione
+                        cell.setFill(new ImagePattern(shooting_shot));
                     }
                     if(cell.get_isWasShot() && cell.getShip() != null){
-                        cell.setFill(Color.RED);
+                        cell.setFill(Color.RED); //strzelone trafione
+                        cell.setFill(new ImagePattern(shooting_shotHit));
+                        if(!cell.ship.isAlive()){
+                        //trafiony zatopiony zatopiony
+                            cell.setFill(new ImagePattern(shooting_shotSunk));
+                        }
                     }
+
 
                 }
                 if(!enableShot){
-                    cell.setFill(Color.LIGHTGREY);
+                    cell.setFill(Color.LIGHTGREY);  // nie strzelone
                     cell.setStroke(Color.BLACK);
-                    if(cell.ship != null){
+                    cell.setFill(new ImagePattern(water));
+                    if(cell.ship != null){  // statek
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
+                        cell.setFill(new ImagePattern(myBoard_shipNoHit));
                     }
-                    if(cell.get_isWasShot() && cell.getShip() != null){
+                    if(cell.get_isWasShot() && cell.getShip() != null){ // trafienie statku
                         cell.setFill(Color.BLUE);
                         cell.setStroke(Color.GRAY);
+                        cell.setFill(new ImagePattern(myBoard_shipHit));
+                        if(!cell.ship.isAlive()){ //trafiony zatopiony
+                            cell.setFill(new ImagePattern(myBoard_shipSunk));
+
+                        }
                     }
-                    if(cell.get_isWasShot() && cell.getShip() == null){
+                    if(cell.get_isWasShot() && cell.getShip() == null){ // strzał bez statku
                         cell.setFill(Color.MAROON);
                         cell.setStroke(Color.GRAY);
+                        cell.setFill(new ImagePattern(myBoard_shotNoHit));
                     }
 
 
@@ -134,6 +190,7 @@ public class BoardController extends Parent {
                     if (!enableShot) {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
+                        render();
                     }
                 }
             }
@@ -144,6 +201,7 @@ public class BoardController extends Parent {
                     if (!enableShot) {
                         cell.setFill(Color.WHITE);
                         cell.setStroke(Color.GREEN);
+                        render();
                     }
                 }
             }
@@ -152,6 +210,64 @@ public class BoardController extends Parent {
         }
 
         return false;
+    }
+
+    public void placeShipView(Ship ship, int x, int y) {
+        System.out.println("dupa1");
+        if (canPlaceShip(ship, x, y)) {
+            int length = ship.getType();
+            System.out.println("dupa2");
+            if (ship.isVertical()) {
+                for (int i = y; i < y + length; i++) {
+                    System.out.println("dupa3");
+                    Cell cell = getCell(x, i);
+
+                        cell.setFill(Color.WHITE);
+                        cell.setStroke(Color.GREEN);
+
+
+                }
+            }
+            else {
+                for (int i = x; i < x + length; i++) {
+                    Cell cell = getCell(i, y);
+
+                        cell.setFill(Color.WHITE);
+                        cell.setStroke(Color.GREEN);
+
+
+                }
+            }
+        }else{
+            try {
+                int length = ship.getType();
+                if (ship.isVertical()) {
+                    for (int i = y; i < y + length; i++) {
+
+                        Cell cell = getCell(x, i);
+
+                        cell.setFill(Color.WHITE);
+                        cell.setStroke(Color.RED);
+
+
+                    }
+                }
+                else {
+                    for (int i = x; i < x + length; i++) {
+                        Cell cell = getCell(i, y);
+
+                        cell.setFill(Color.WHITE);
+                        cell.setStroke(Color.RED);
+
+
+
+                    }
+                }
+            } catch (Exception e) {
+
+            }
+
+        }
     }
 
     public Cell getCell(int x, int y) {
@@ -308,6 +424,7 @@ public class BoardController extends Parent {
                 c.ship = null;
             }
         }
+        render();
     }
 
 

@@ -43,14 +43,14 @@ public class Player1BattleViewController {
     }
     public void player2ReadyAction() {
         if (ifPlayer1) { // skonczyła się tura gracza 1 i przłączamy na gracza 2
-            controller.insertBoardPl2Ship(nextPlayerReadyButton.getScene());
-            controller.insertBoardPl1Shoot(nextPlayerReadyButton.getScene());
+            controller.insertBoardShip(nextPlayerReadyButton.getScene(), controller.player2Board);
+            controller.insertBoardShoot(nextPlayerReadyButton.getScene(), controller.player1Board);
             nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = false;
             playerNumberLabel.setText("Tura Gracza Nr 2");
         }else { // przełączamy ba gracza 1
-            controller.insertBoardPl1Ship(nextPlayerReadyButton.getScene());
-            controller.insertBoardPl2Shoot(nextPlayerReadyButton.getScene());
+            controller.insertBoardShip(nextPlayerReadyButton.getScene(), controller.player1Board);
+            controller.insertBoardShoot(nextPlayerReadyButton.getScene(), controller.player2Board);
             nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = true;
             playerNumberLabel.setText("Tura Gracza Nr 1");
@@ -81,7 +81,9 @@ public class Player1BattleViewController {
         primaryStage.setTitle("MENU");
         primaryStage.setScene(new Scene(pane));
         primaryStage.show();
+
         ((Stage) backToMenuButton.getScene().getWindow()).close();
+        return;
 
     }
 
