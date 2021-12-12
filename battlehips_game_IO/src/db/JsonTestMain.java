@@ -82,6 +82,7 @@ public class JsonTestMain {
 //
 >>>>>>> 7d58ceacc2826f537eb2cd1c592b29d6f7807749
 //    }
+
 //        public boolean isDatabeseConnected(){
 //
 //            return connection !=null;

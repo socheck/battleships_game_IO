@@ -131,6 +131,7 @@ public class Player1ViewController {
     public void clearBoardAction(){
         controller.clearShipOnBoardPL(controller.getList_of_ships1(), controller.player1Board);
         switchToP2Button.setDisable(true);
+        startGameAiButton.setDisable(true);
     }
 }
 
