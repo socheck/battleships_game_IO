@@ -1,15 +1,18 @@
 package db;
 
+import bs_game_backend.Cell;
+import bs_game_backend.Ship;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.sql.*;
 
+import przykladoweKlasy.*;
 import savingClasses.InitialState;
 
 import java.io.IOException;
 
 public class JsonTestMain {
-    public  static void main(String[] arg){
+    public  static void main(String[] arg) {
         String jsonSource = "{\n" +
                 "  \"title\": \"to jest mój tytuł\"\n" +
                 "}";
@@ -23,13 +26,13 @@ public class JsonTestMain {
 
         Connection connection = null;
         try {
-            connection= DbConnection.getConnection();
+            connection = DbConnection.getConnection();
             System.out.println(connection);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        if(connection == null){
+        if (connection == null) {
             System.exit(1);
         }
         DbConnection db = new DbConnection();
@@ -47,6 +50,7 @@ public class JsonTestMain {
 //        System.out.println(initaiState.getInitial_state().get(0).getShip4().get(3));
 
         System.out.println("===============================================");
+        System.out.println();
 
 //        ===========================================wpisywanie --> potrzebne konstruktowy===================================
 //        List<String> s1 = Arrays.asList("01", "02");
@@ -70,8 +74,13 @@ public class JsonTestMain {
 //        } catch (JsonProcessingException e) {
 //            e.printStackTrace();
 //        }
+<<<<<<< HEAD
+
+
+=======
 //
 //
+>>>>>>> 7d58ceacc2826f537eb2cd1c592b29d6f7807749
 //    }
 //        public boolean isDatabeseConnected(){
 //
@@ -79,4 +88,22 @@ public class JsonTestMain {
        }
 
 
+//    TEST ZDOLNOŚCI METOD ZAMIENIAJĄCYCH KLASY NA STRINGI I NA ODWRÓT
+//    BoardController //NIE PRZEJDZIE BO MA MouseEvent
+//    Cell cellTest = new Cell(); //NIE PRZEJDZIE BO BOARD, extend Rectangle i pewnie cos jeszcze
+        TestShip shipT = new TestShip(4, true);//to już może
+        //typ to jest ilość pól, czyli długość statku
+        TestCell cellT = new TestCell(1, 1, shipT, true);//to już tak
+
+        Test t = new Test(shipT, 5);//to już może
+        Test2 t2 = new Test2(shipT, 8, "jakiś tekst");//to już tak --> można dziedziczyć z klas POJO
+
+        TestBoardController boardT = new TestBoardController(true);//to już może
+        try {
+            System.out.println(MyJson.strigifyMy(t2));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
