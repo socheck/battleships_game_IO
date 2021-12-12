@@ -6,7 +6,7 @@ import bs_game_backend.Ship;
 import controller.Player1BattleViewController;
 import controller.Player1ViewController;
 import controller.Player2ViewController;
-import db.dbConnection;
+//import db.dbConnection;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -356,7 +356,7 @@ public class Controller {
                                 cell.shoot();
                                 if(player1Board.endGame()){
                                     winner("Player 2 is the winner");
-                                    dbConnection db = new dbConnection();
+                                    //dbConnection db = new dbConnection();
     //                                try {
     //                                    db.setGame(myJson.strigifyMy(player1Board),myJson.strigifyMy(player1Board) ); /// linijka do zapisu gry po zakończeniu
     //                                } catch (JsonProcessingException e) {
@@ -378,6 +378,13 @@ public class Controller {
                 }
             }else {
                 shipIsVertical = !shipIsVertical;
+                try {
+                    Cell cell = (Cell) event.getSource();
+                    player1Board.render();
+                    player1Board.placeShipView(new Ship(list_of_ships1.get(0), shipIsVertical), cell.get_x(), cell.get_y());
+
+                } catch (Exception e) {
+                }
             }
 
 
@@ -391,6 +398,12 @@ public class Controller {
             Cell cell = (Cell) event.getSource();
             if(event.getButton() != MouseButton.PRIMARY){
                 shipIsVertical = !shipIsVertical;
+                try {
+                    player2Board.render();
+                    player2Board.placeShipView(new Ship(list_of_ships2.get(0), shipIsVertical), cell.get_x(), cell.get_y());
+
+                } catch (Exception e) {
+                }
             }else{
                 if(list_of_ships2.isEmpty()){
                     player2AllShipSet = true;
