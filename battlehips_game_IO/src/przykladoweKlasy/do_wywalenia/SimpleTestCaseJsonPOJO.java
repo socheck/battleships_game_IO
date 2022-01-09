@@ -1,4 +1,4 @@
-package przykladoweKlasy;
+package przykladoweKlasy.do_wywalenia;
 
 public class SimpleTestCaseJsonPOJO {
     private String title;

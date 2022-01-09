@@ -2,9 +2,9 @@ package db;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import przykladoweKlasy.AuthorPOJO;
-import przykladoweKlasy.BookPOJO;
-import przykladoweKlasy.SimpleTestCaseJsonPOJO;
+import przykladoweKlasy.do_wywalenia.AuthorPOJO;
+import przykladoweKlasy.do_wywalenia.BookPOJO;
+import przykladoweKlasy.do_wywalenia.SimpleTestCaseJsonPOJO;
 
 import java.io.IOException;
 

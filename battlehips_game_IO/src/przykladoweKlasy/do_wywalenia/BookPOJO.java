@@ -1,4 +1,4 @@
-package przykladoweKlasy;
+package przykladoweKlasy.do_wywalenia;
 
 public class BookPOJO {
     private String title;

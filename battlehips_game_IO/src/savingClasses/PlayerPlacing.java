@@ -1,7 +1,5 @@
 package savingClasses;
 
-import przykladoweKlasy.BookPOJO;
-
 import java.util.List;
 
 public class PlayerPlacing {

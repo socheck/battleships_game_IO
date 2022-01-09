@@ -1,4 +1,4 @@
-package przykladoweKlasy;
+package przykladoweKlasy.do_wywalenia;
 
 import java.util.List;
 
