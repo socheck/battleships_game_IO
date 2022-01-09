@@ -1,7 +1,8 @@
-package db;
+package przykladoweKlasy.do_wywalenia;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import db.MyJson;
 import przykladoweKlasy.do_wywalenia.AuthorPOJO;
 import przykladoweKlasy.do_wywalenia.BookPOJO;
 import przykladoweKlasy.do_wywalenia.SimpleTestCaseJsonPOJO;

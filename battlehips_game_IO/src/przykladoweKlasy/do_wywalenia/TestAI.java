@@ -1,4 +1,4 @@
-package AI;
+package przykladoweKlasy.do_wywalenia;
 
 public class TestAI {
     public static void main(String[] args) {

@@ -7,9 +7,6 @@ public class TestCell {
 
         private int x;
         private int y;
-
-
-        //zmienić na privet
         private TestShip ship = null; // Is part of any ship?
         private boolean isWasShot = false;
 

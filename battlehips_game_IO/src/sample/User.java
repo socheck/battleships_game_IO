@@ -9,6 +9,19 @@ public class User {
     private int battles;
     private double aim_ratio;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", avatar_path='" + avatar_path + '\'' +
+                ", wins=" + wins +
+                ", battles=" + battles +
+                ", aim_ratio=" + aim_ratio +
+                '}';
+    }
+
     public User(int id, String username, String password, String avatar_path, int wins, int battles, double aim_ratio) {
         this.id = id;
         this.username = username;
