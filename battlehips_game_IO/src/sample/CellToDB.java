@@ -51,7 +51,7 @@ public class CellToDB {
 
     @Override
     public String toString() {
-        return "CellToDB{" +
+        return
                 "x=" + x +
                 ", y=" + y +
                 ", ship=" + ship +

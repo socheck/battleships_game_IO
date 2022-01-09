@@ -712,6 +712,8 @@ public void aiShootInPlayer1(){
                     if(ai2Board.endGame()){
                         winner("AI 1 is the winner");
                         super.stop();
+
+                        ai2Board.makeForbidenShootToDB();
                         return;
                     }
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
