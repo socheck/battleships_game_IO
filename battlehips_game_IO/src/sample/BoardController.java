@@ -25,8 +25,12 @@ public class BoardController extends Parent {
     private ArrayList<Cell> forbiddenShoots;
     public ArrayList<Cell> potentialShoots;
     private ArrayList<Cell> changes;
-    private ArrayList<CellToDB> forbiddenShootsToDB;
+    private ArrayList<CellToDB> changesToDB;
     private int iter = 0;
+
+    public ArrayList<CellToDB> getChangesToDB() {
+        return changesToDB;
+    }
 
     public ArrayList<Cell> getForbiddenShoots() {
         return forbiddenShoots;
@@ -433,18 +437,30 @@ public class BoardController extends Parent {
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
                 Cell c = boardController.getCell(x,y);
-                cellToDBArrayList.add(new CellToDB(c.get_x(),c.get_y(),c.getShip(),false));
+                if(c.getShip()== null){
+                    cellToDBArrayList.add(new CellToDB(c.get_x(),c.get_y(),null,false));
+                }else{
+                    ShipToDB newShip = new ShipToDB(c.getShip().getType(), c.getShip().isVertical());
+                    cellToDBArrayList.add(new CellToDB(c.get_x(),c.get_y(),newShip,false));
+                }
+
             }
         }
         return cellToDBArrayList;
     }
-    public void makeForbidenShootToDB(){
-        forbiddenShootsToDB = new ArrayList<CellToDB>();
+    public void makeChangesShootToDB(){
+        changesToDB = new ArrayList<CellToDB>();
         for (Cell c:
              changes) {
-            forbiddenShootsToDB.add(new CellToDB(c.get_x(), c.get_y(), c.getShip(), c.isWasShot()));
+
+            if(c.getShip()== null){
+                changesToDB.add(new CellToDB(c.get_x(), c.get_y(),  null, c.isWasShot()));
+            }else{
+                ShipToDB newShip = new ShipToDB(c.getShip().getType(), c.getShip().isVertical());
+                changesToDB.add(new CellToDB(c.get_x(), c.get_y(),  newShip, c.isWasShot()));
+            }
         }
-        System.out.println(forbiddenShootsToDB);
+        System.out.println(changesToDB);
         System.out.println("============================================");
         System.out.println(changes);
     }

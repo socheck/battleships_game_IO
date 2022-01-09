@@ -7,10 +7,10 @@ public class CellToDB {
 
     private int x;
     private int y;
-    private Ship ship = null; // Is part of any ship?
+    private ShipToDB ship = null; // Is part of any ship?
     private boolean isWasShot = false;
 
-    public CellToDB(int x, int y, Ship ship, boolean isWasShot) {
+    public CellToDB(int x, int y, ShipToDB ship, boolean isWasShot) {
         this.x = x;
         this.y = y;
         this.ship = ship;
@@ -33,11 +33,11 @@ public class CellToDB {
         this.y = y;
     }
 
-    public Ship getShip() {
+    public ShipToDB getShip() {
         return ship;
     }
 
-    public void setShip(Ship ship) {
+    public void setShip(ShipToDB ship) {
         this.ship = ship;
     }
 

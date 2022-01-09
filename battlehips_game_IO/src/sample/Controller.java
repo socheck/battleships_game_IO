@@ -7,6 +7,7 @@ import controller.Player1BattleViewController;
 import controller.Player1ViewController;
 import controller.Player2ViewController;
 //import db.dbConnection;
+import db.DbConnection;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -712,8 +713,12 @@ public void aiShootInPlayer1(){
                     if(ai2Board.endGame()){
                         winner("AI 1 is the winner");
                         super.stop();
+                        DbConnection dbConnection = new DbConnection();
+                        ai2Board.makeChangesShootToDB();
+                        ai1Board.makeChangesShootToDB();
+                        System.out.println(dbConnection.setGame(ai1Board.getInitilaState(ai1Board), ai2Board.getInitilaState(ai2Board), ai1Board.getChangesToDB(), ai2Board.getChangesToDB(), 1,2,1));
 
-                        ai2Board.makeForbidenShootToDB();
+
                         return;
                     }
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());

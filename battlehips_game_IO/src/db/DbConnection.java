@@ -1,8 +1,11 @@
 package db;
 
 import bs_game_backend.Cell;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import db.game_Classes.Changes;
+import sample.CellToDB;
 import sample.User;
-import savingClasses.InitialState;
+import db.game_Classes.InitialState;
 
 import java.io.IOException;
 import java.sql.*;
@@ -217,7 +220,7 @@ public class DbConnection {
 
 //  games TABLE
 
-    public boolean setGame(String username, String password, String avatar_path){
+    public boolean setGame(ArrayList<CellToDB> p1initial, ArrayList<CellToDB> p2initial, ArrayList<CellToDB> p1changes, ArrayList<CellToDB> p2changes, int p1, int p2, int winner){
         Connection connection = null;
         try {
             connection = getConnection();
@@ -228,17 +231,30 @@ public class DbConnection {
         PreparedStatement preparedStatement= null;
 
 
-        String komendaSQL = "INSERT INTO users_list VALUES (NULL, ?, ?, ?, 0, 0, 0);";
+        String komendaSQL = "INSERT INTO games VALUES (NULL, ?, ?, ?, ?, ?, NULL);";
+
+        Changes changesObj = new Changes(p1changes, p2changes);
+        InitialState initialStateObj = new InitialState(p1initial, p2initial);
 
         try {
             preparedStatement = connection.prepareStatement(komendaSQL);
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            preparedStatement.setString(3, avatar_path);
+            try {
+                preparedStatement.setString(1, MyJson.strigifyMy(initialStateObj));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            try {
+                preparedStatement.setString(2, MyJson.strigifyMy(changesObj));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            preparedStatement.setInt(3, p1);
+            preparedStatement.setInt(4, p2);
+            preparedStatement.setInt(5, winner);
             preparedStatement.execute();
             return true;
         } catch (SQLException throwables) {
-            System.out.println("Dodawanie Usera nie powiodło się");
+            System.out.println("Dodawanie Gry nie powiodło się");
             throwables.printStackTrace();
             return false;
         }finally {
