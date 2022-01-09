@@ -64,6 +64,11 @@ public class Player1ViewController {
         if (isNextGameWithAi()) {
             setStartGameAiButtonEnable();
         }
+
+        //System.out.println(controller.player1Board.getInitilaState(controller.player1Board));
+
+
+
     }
     @FXML
     public void startGameAiAction() throws IOException {

@@ -25,6 +25,7 @@ public class BoardController extends Parent {
     private ArrayList<Cell> forbiddenShoots;
     public ArrayList<Cell> potentialShoots;
     private ArrayList<Cell> changes;
+    private ArrayList<CellToDB> forbiddenShootsToDB;
     private int iter = 0;
 
     public ArrayList<Cell> getForbiddenShoots() {
@@ -425,6 +426,27 @@ public class BoardController extends Parent {
             }
         }
         render();
+    }
+
+    public ArrayList<CellToDB> getInitilaState(BoardController boardController){
+        ArrayList<CellToDB> cellToDBArrayList = new ArrayList<CellToDB>();
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                Cell c = boardController.getCell(x,y);
+                cellToDBArrayList.add(new CellToDB(c.get_x(),c.get_y(),c.getShip(),false));
+            }
+        }
+        return cellToDBArrayList;
+    }
+    public void makeForbidenShootToDB(){
+        forbiddenShootsToDB = new ArrayList<CellToDB>();
+        for (Cell c:
+             changes) {
+            forbiddenShootsToDB.add(new CellToDB(c.get_x(), c.get_y(), c.getShip(), c.isWasShot()));
+        }
+        System.out.println(forbiddenShootsToDB);
+        System.out.println("============================================");
+        System.out.println(changes);
     }
 
 
