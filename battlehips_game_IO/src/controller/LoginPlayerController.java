@@ -25,7 +25,7 @@ public class LoginPlayerController {
 
     public void initialize(){
         dbConnection = new DbConnection();
-        
+
     }
 
     @FXML

@@ -427,5 +427,16 @@ public class BoardController extends Parent {
         render();
     }
 
+    public ArrayList<CellToDB> getInitilaState(BoardController boardController){
+        ArrayList<CellToDB> cellToDBArrayList = new ArrayList<CellToDB>();
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                Cell c = boardController.getCell(x,y);
+                cellToDBArrayList.add(new CellToDB(c.get_x(),c.get_y(),c.getShip(),false));
+            }
+        }
+        return cellToDBArrayList;
+    }
+
 
 }
