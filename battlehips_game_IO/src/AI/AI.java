@@ -187,7 +187,7 @@ public class AI {
             return this.board;
         }
 
-
+//        tu to jest w razie jakby co przy developmencie
         return board;
 
     }
@@ -228,9 +228,9 @@ public class AI {
 //                    board.addChange(null);
                         this.earlierShot = null;
                         this.board.firstShipCell = null;
-                        this.board.addChange(cell);
                         this.board.potentialShoots.clear();
 
+                        this.board.addChange(cell);
                         return this.board;
 
 
