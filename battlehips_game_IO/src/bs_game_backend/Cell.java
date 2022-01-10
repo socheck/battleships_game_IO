@@ -14,7 +14,7 @@ public class Cell extends Rectangle {
 
     @Override
     public String toString() {
-        return 
+        return
                 "x=" + x +
                 ", y=" + y +
                 ", ship=" + ship +
