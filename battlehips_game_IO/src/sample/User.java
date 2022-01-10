@@ -34,20 +34,21 @@ public class User {
                 ", hits_amount=" + hits_amount +
                 '}';
     }
-
-    public User(int id, String username, String password, String avatar_path, int wins, int battles, double aim_ratio) {
+    public User(int id, String username, String password, String avatar_path, int wins, int battles, int shots_amount, int hits_amount) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.avatar_path = avatar_path;
         this.wins = wins;
         this.battles = battles;
-        this.aim_ratio = aim_ratio;
+        this.shots_amount = shots_amount;
+        this.hits_amount = hits_amount;
         ImageView photo = new ImageView(avatar_path);
 
         this.photo = photo;
 
     }
+
 
 
     public int getId() {
