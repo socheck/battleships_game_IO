@@ -214,13 +214,12 @@ public class BoardController extends Parent {
     }
 
     public void placeShipView(Ship ship, int x, int y) {
-        System.out.println("dupa1");
+
         if (canPlaceShip(ship, x, y)) {
             int length = ship.getType();
-            System.out.println("dupa2");
+
             if (ship.isVertical()) {
                 for (int i = y; i < y + length; i++) {
-                    System.out.println("dupa3");
                     Cell cell = getCell(x, i);
 
                         cell.setFill(Color.WHITE);
