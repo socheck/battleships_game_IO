@@ -12,6 +12,7 @@ public class InitialState {
         this.p1InitialArray = p1InitialArray;
         this.p2InitialArray = p2InitialArray;
     }
+    public InitialState(){}
 
     public ArrayList<CellToDB> getP2InitialArray() {
         return p2InitialArray;

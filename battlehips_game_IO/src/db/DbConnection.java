@@ -361,7 +361,7 @@ public class DbConnection {
 
                 InitialState initialState = null;
                 try {
-                    System.out.println(resultSet.getString("initial_state"));
+
                     initialState = MyJson.fromJsonMy(resultSet.getString("initial_state"), InitialState.class);
                 } catch (IOException e) {
                     System.out.println("initialState error");

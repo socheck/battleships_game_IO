@@ -22,6 +22,8 @@ public class Changes {
         this.p2ChangesArray = p2ChangesArray;
     }
 
+    public Changes(){}
+
     public ArrayList<CellToDB> getP1ChangesArray() {
         return p1ChangesArray;
     }

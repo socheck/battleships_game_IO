@@ -1,6 +1,7 @@
 package sample;
 
 import db.DbConnection;
+import db.game_Classes.GameDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +20,7 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.setScene(new Scene(pane));
         stage.show();
+
         DbConnection dbConnection = new DbConnection();
         ArrayList<User> a = dbConnection.getUser_list();
         System.out.println("=============================================================== a");
@@ -43,8 +45,11 @@ public class Main extends Application {
         System.out.println("wypisywanie gier danego użytkownika");
         System.out.println(dbConnection.getGamesArray(2));
         System.out.println("wypisywanie konkretnej gry");
-//        System.out.println(dbConnection.getSpecyficGame(7));
+        GameDB g = dbConnection.getSpecyficGame(9);
+        System.out.println(g);
 
+        System.out.println(g.getInitialStateArray(1));
+        System.out.println(g.getChangesArray(1));
 
 
 

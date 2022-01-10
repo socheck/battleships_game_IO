@@ -1,18 +1,24 @@
 package sample;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ShipToDB {
 
 
         private int type;
-        private boolean vertical = true;
+//        private boolean vertical = true;
+        private boolean vertical;
         private int health;
 
         public ShipToDB(int type, boolean vertical){
             this.type = type;
             this.vertical = vertical;
             this.health = type;
+        }
+
+        public ShipToDB(){
+
         }
 
         public void hit(){

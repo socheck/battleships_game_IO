@@ -7,8 +7,10 @@ public class CellToDB {
 
     private int x;
     private int y;
-    private ShipToDB ship = null; // Is part of any ship?
-    private boolean isWasShot = false;
+//    private ShipToDB ship = null; // Is part of any ship?
+//    private boolean isWasShot = false;
+    private ShipToDB ship ;
+    private boolean isWasShot;
 
     public CellToDB(int x, int y, ShipToDB ship, boolean isWasShot) {
         this.x = x;
@@ -16,6 +18,7 @@ public class CellToDB {
         this.ship = ship;
         this.isWasShot = isWasShot;
     }
+    public CellToDB(){}
 
     public int getX() {
         return x;
