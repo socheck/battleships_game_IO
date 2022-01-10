@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StaticticProfileController">
+   <children>
+      <Button fx:id="backToMenuButton" layoutX="98.0" layoutY="300.0" mnemonicParsing="false" onAction="#backToMenuAction" text="Back to Menu" />
+      <Button fx:id="exitButton" layoutX="494.0" layoutY="300.0" mnemonicParsing="false" onAction="#exitAction" text="Exit" />
+      <TableView fx:id="statisticTableView" layoutX="38.0" layoutY="59.0" onMouseClicked="#selectProfileOnMouseClicked" prefHeight="225.0" prefWidth="525.0">
+        <columns>
+          <TableColumn fx:id="avatarTableColumn" prefWidth="100.0" text="Avatar" />
+          <TableColumn fx:id="UsarnameTableColumn" prefWidth="85.0" text="Username" />
+            <TableColumn fx:id="winsTablecolumn" prefWidth="60.0" text="Wins" />
+            <TableColumn fx:id="battlesTablecolumn" prefWidth="75.0" text="Battles" />
+            <TableColumn fx:id="hitsTablecolumn" prefWidth="50.0" text="Hits" />
+            <TableColumn fx:id="allShootsTablecolumn" prefWidth="75.0" text="All Shoots" />
+            <TableColumn fx:id="ratioTablecolumn" text="Ratio" />
+        </columns>
+      </TableView>
+      <Button fx:id="modyfiProfileButton" layoutX="263.0" layoutY="300.0" mnemonicParsing="false" onAction="#modyfiProfileAction" text="Modyfi Profile" />
+   </children>
+</Pane>

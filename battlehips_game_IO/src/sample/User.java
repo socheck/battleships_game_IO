@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.image.ImageView;
+
 public class User {
     private int id;
     private String username;
@@ -9,16 +11,14 @@ public class User {
     private int battles;
     private int shots_amount;
     private int hits_amount;
+    private ImageView photo;
 
-    public User(int id, String username, String password, String avatar_path, int wins, int battles, int shots_amount, int hits_amount) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.avatar_path = avatar_path;
-        this.wins = wins;
-        this.battles = battles;
-        this.shots_amount = shots_amount;
-        this.hits_amount = hits_amount;
+    public ImageView getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(ImageView photo) {
+        this.photo = photo;
     }
 
     @Override
@@ -33,6 +33,20 @@ public class User {
                 ", shots_amount=" + shots_amount +
                 ", hits_amount=" + hits_amount +
                 '}';
+    }
+    public User(int id, String username, String password, String avatar_path, int wins, int battles, int shots_amount, int hits_amount) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.avatar_path = avatar_path;
+        this.wins = wins;
+        this.battles = battles;
+        this.shots_amount = shots_amount;
+        this.hits_amount = hits_amount;
+        ImageView photo = new ImageView(avatar_path);
+
+        this.photo = photo;
+
     }
 
 

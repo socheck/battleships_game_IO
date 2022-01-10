@@ -6,9 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 import sample.Controller;
+import sample.User;
 
 import java.io.IOException;
 
@@ -26,9 +28,29 @@ public class LoginPlayerLevelAiController {
     public RadioButton mediumRadioButton;
     @FXML
     public RadioButton hardRadioButton;
+    @FXML
+    public Label player1Label;
 
     private Controller controller;
     private int aiLevel = 0;
+    private User player1;
+    private LoginPlayerLevelAiController loginPlayerLevelAiController;
+
+    public User getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer1(User player1) {
+        this.player1 = player1;
+    }
+
+    public LoginPlayerLevelAiController getLoginPlayerLevelAiController() {
+        return loginPlayerLevelAiController;
+    }
+
+    public void setLoginPlayerLevelAiController(LoginPlayerLevelAiController loginPlayerLevelAiController) {
+        this.loginPlayerLevelAiController = loginPlayerLevelAiController;
+    }
 
     @FXML
     public void startGameAction() throws IOException { // przełączenie na ustawianie statków gracza 1
@@ -52,6 +74,7 @@ public class LoginPlayerLevelAiController {
         controller.setPlayer1ViewController(player1ViewController);
 
         controller.createBoardAi1();
+        controller.setPlayer1(player1);
 
         player1ViewController.setSwitchToP2ButtonDisabel();
         player1ViewController.startGameAiButton.setDisable(true);
@@ -59,6 +82,8 @@ public class LoginPlayerLevelAiController {
         player1ViewController.switchToP2Button.setVisible(false);
 
         ((Stage) startGameButton.getScene().getWindow()).close();
+        System.out.println("dupa");
+        System.out.println(player1);
 
     }
     @FXML
@@ -71,6 +96,8 @@ public class LoginPlayerLevelAiController {
         primaryStage.setScene(new Scene(pane));
         primaryStage.show();
         loginPlayerController.playerLoginLabel.setText("Player 1 Login");
+        loginPlayerController.setPlyer1WithAi(true);
+        loginPlayerController.setLoginPlayerLevelAiController(loginPlayerLevelAiController);
     }
 
     @FXML

@@ -79,12 +79,16 @@ public class LevelAiLevelAiController {
 
     @FXML
     public void easyAction1(){
+
         mediumRadioButton1.setSelected(false);
         hardRadioButton1.setSelected(false);
         ai1Level = 0;
         ai1LevelSet = true;
         setStartGameButtonEnable();
 
+        easyRadioButton2.setDisable(true);
+        mediumRadioButton2.setDisable(false);
+        hardRadioButton2.setDisable(false);
     }
     @FXML
     public void mediumAction1(){
@@ -93,6 +97,10 @@ public class LevelAiLevelAiController {
         ai1Level = 1;
         ai1LevelSet = true;
         setStartGameButtonEnable();
+
+        easyRadioButton2.setDisable(false);
+        mediumRadioButton2.setDisable(true);
+        hardRadioButton2.setDisable(false);
     }
     @FXML
     public void hardAction1(){
@@ -101,6 +109,9 @@ public class LevelAiLevelAiController {
         ai1Level = 2;
         ai1LevelSet = true;
         setStartGameButtonEnable();
+        easyRadioButton2.setDisable(false);
+        mediumRadioButton2.setDisable(false);
+        hardRadioButton2.setDisable(true);
     }
     @FXML
     public void easyAction2(){
@@ -109,6 +120,9 @@ public class LevelAiLevelAiController {
         ai2Level = 0;
         ai2LevelSet = true;
         setStartGameButtonEnable();
+        easyRadioButton1.setDisable(true);
+        mediumRadioButton1.setDisable(false);
+        hardRadioButton1.setDisable(false);
     }
     @FXML
     public void mediumAction2(){
@@ -117,6 +131,9 @@ public class LevelAiLevelAiController {
         ai2Level = 1;
         ai2LevelSet = true;
         setStartGameButtonEnable();
+        easyRadioButton1.setDisable(false);
+        mediumRadioButton1.setDisable(true);
+        hardRadioButton1.setDisable(false);
     }
     @FXML
     public void hardAction2(){
@@ -125,6 +142,9 @@ public class LevelAiLevelAiController {
         ai2Level = 2;
         ai2LevelSet = true;
         setStartGameButtonEnable();
+        easyRadioButton1.setDisable(false);
+        mediumRadioButton1.setDisable(false);
+        hardRadioButton1.setDisable(true);
 
     }
 
@@ -153,6 +173,14 @@ public class LevelAiLevelAiController {
     }
     public void setStartGameButtonDisable(){
         startGameButton.setDisable(true);
+    }
+
+    public void setAi1Level(int ai1Level) {
+        this.ai1Level = ai1Level;
+    }
+
+    public void setAi2Level(int ai2Level) {
+        this.ai2Level = ai2Level;
     }
 }
 
