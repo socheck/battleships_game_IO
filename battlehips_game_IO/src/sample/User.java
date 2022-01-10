@@ -7,7 +7,19 @@ public class User {
     private String avatar_path;
     private int wins;
     private int battles;
-    private double aim_ratio;
+    private int shots_amount;
+    private int hits_amount;
+
+    public User(int id, String username, String password, String avatar_path, int wins, int battles, int shots_amount, int hits_amount) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.avatar_path = avatar_path;
+        this.wins = wins;
+        this.battles = battles;
+        this.shots_amount = shots_amount;
+        this.hits_amount = hits_amount;
+    }
 
     @Override
     public String toString() {
@@ -18,19 +30,12 @@ public class User {
                 ", avatar_path='" + avatar_path + '\'' +
                 ", wins=" + wins +
                 ", battles=" + battles +
-                ", aim_ratio=" + aim_ratio +
+                ", shots_amount=" + shots_amount +
+                ", hits_amount=" + hits_amount +
                 '}';
     }
 
-    public User(int id, String username, String password, String avatar_path, int wins, int battles, double aim_ratio) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.avatar_path = avatar_path;
-        this.wins = wins;
-        this.battles = battles;
-        this.aim_ratio = aim_ratio;
-    }
+
 
     public int getId() {
         return id;
@@ -80,11 +85,5 @@ public class User {
         this.battles = battles;
     }
 
-    public double getAim_ratio() {
-        return aim_ratio;
-    }
 
-    public void setAim_ratio(double aim_ratio) {
-        this.aim_ratio = aim_ratio;
-    }
 }

@@ -3,6 +3,7 @@ package db;
 import bs_game_backend.Cell;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import db.game_Classes.Changes;
+import db.game_Classes.GameDB;
 import sample.CellToDB;
 import sample.User;
 import db.game_Classes.InitialState;
@@ -70,13 +71,13 @@ public class DbConnection {
 //                        resultSet.getDouble("aim_ratio"));
 //                System.out.println("===========================================================");
 
-                userArrayList.add(new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getDouble("aim_ratio")));
+                userArrayList.add(new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getInt("shots_amount"), resultSet.getInt("hits_amount")));
 
             }
             return userArrayList;
 
         } catch (SQLException throwables) {
-            System.out.println("szukam");
+            System.out.println("Coś poszło nie tak getUser_list");
             throwables.printStackTrace();
         }finally {
             try {
@@ -104,7 +105,7 @@ public class DbConnection {
         PreparedStatement preparedStatement= null;
 
 
-        String komendaSQL = "INSERT INTO users_list VALUES (NULL, ?, ?, ?, 0, 0, 0);";
+        String komendaSQL = "INSERT INTO users_list VALUES (NULL, ?, ?, ?, 0, 0, 0, 0, 0);";
 
         try {
             preparedStatement = connection.prepareStatement(komendaSQL);
@@ -218,6 +219,40 @@ public class DbConnection {
         }
     }
 
+    public boolean updateUser_statistics(int shots, int hits, int id){
+        Connection connection = null;
+        try {
+            connection = getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        PreparedStatement preparedStatement= null;
+
+        String komendaSQL = "UPDATE users_list SET shots_amount = (SELECT shots_amount FROM users_list WHERE id = ?) + ?, hits_amount = (SELECT hits_amount FROM users_list WHERE id = ?) + ? WHERE id = ?;";
+
+        try {
+            preparedStatement = connection.prepareStatement(komendaSQL);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, shots);
+            preparedStatement.setInt(3, id);
+            preparedStatement.setInt(4, hits);
+            preparedStatement.setInt(5, id);
+            preparedStatement.executeUpdate();
+            return true;
+
+        } catch (SQLException throwables) {
+            System.out.println("Update statystyk nie powiódł się");
+            throwables.printStackTrace();
+            return false;
+        }finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
 //  games TABLE
 
     public boolean setGame(ArrayList<CellToDB> p1initial, ArrayList<CellToDB> p2initial, ArrayList<CellToDB> p1changes, ArrayList<CellToDB> p2changes, int p1, int p2, int winner){
@@ -231,7 +266,7 @@ public class DbConnection {
         PreparedStatement preparedStatement= null;
 
 
-        String komendaSQL = "INSERT INTO games VALUES (NULL, ?, ?, ?, ?, ?, NULL);";
+        String komendaSQL = "INSERT INTO games VALUES (NULL, ?, ?, ?, ?, ?);";
 
         Changes changesObj = new Changes(p1changes, p2changes);
         InitialState initialStateObj = new InitialState(p1initial, p2initial);
@@ -267,9 +302,8 @@ public class DbConnection {
     }
 
 
-
-
-    public InitialState getInitialState(int initialStateID){
+    public ArrayList<Integer> getGamesArray(int userID){
+        ArrayList<Integer> gamesArray = new ArrayList<>();
         Connection connection = null;
         try {
             connection = getConnection();
@@ -280,44 +314,32 @@ public class DbConnection {
         PreparedStatement preparedStatement= null;
         ResultSet resultSet = null;
 
-        String komendaSQL = "SELECT initial_state FROM games WHERE id = ?;";
+        String komendaSQL = "SELECT id FROM games WHERE player1 = ? OR player2 = ?;";
 
         try {
             preparedStatement = connection.prepareStatement(komendaSQL);
-            preparedStatement.setInt(1, initialStateID);
+            preparedStatement.setInt(1, userID);
+            preparedStatement.setInt(2, userID);
             resultSet = preparedStatement.executeQuery();
-            System.out.println("result główny"+resultSet);
             while (resultSet.next()){
-                System.out.println(resultSet.getString("initial_state"));
-//                System.out.println(resultSet.getInt("id") +  "\t" +
-//                        resultSet.getString("username") + "\t" +
-//                        resultSet.getString("password") + "\t" +
-//                        resultSet.getString("avatar_path") + "\t" +
-//                        resultSet.getInt("wins") + "\t" +
-//                        resultSet.getInt("battles") + "\t" +
-//                        resultSet.getDouble("aim_ratio"));
-                return  MyJson.fromJsonMy(resultSet.getString("initial_state"), InitialState.class);
+                gamesArray.add(resultSet.getInt("id"));
             }
-
-        } catch (SQLException | IOException throwables) {
-            System.out.println("szukam exeption");
+            return gamesArray;
+        } catch (SQLException throwables) {
+            System.out.println("getGamesArray nie powiodło się");
             throwables.printStackTrace();
+            return gamesArray;
         }finally {
             try {
                 preparedStatement.close();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            try {
-                resultSet.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
         }
-        return null;
+
     }
 
-    public void setGame(String initialState, String changes){
+    public GameDB getSpecyficGame(int gameID){
         Connection connection = null;
         try {
             connection = getConnection();
@@ -328,25 +350,44 @@ public class DbConnection {
         PreparedStatement preparedStatement= null;
         ResultSet resultSet = null;
 
-        String komendaSQL = "INSERT INTO games VALUES(NULL,?,?,0, 0, 0, NULL);";
+        String komendaSQL = "SELECT id, initial_state, changes, player1, player2, winner FROM games WHERE id=?;";
 
         try {
             preparedStatement = connection.prepareStatement(komendaSQL);
-            preparedStatement.setString(1, initialState);
-            preparedStatement.setString(2, changes);
+            preparedStatement.setInt(1, gameID);
 
-            preparedStatement.execute();
-            System.out.println("setGae insert");
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
 
+                InitialState initialState = null;
+                try {
+                    System.out.println(resultSet.getString("initial_state"));
+                    initialState = MyJson.fromJsonMy(resultSet.getString("initial_state"), InitialState.class);
+                } catch (IOException e) {
+                    System.out.println("initialState error");
+                    e.printStackTrace();
+                }
+                Changes changes = null;
+                try {
+                    changes = MyJson.fromJsonMy(resultSet.getString("changes"), Changes.class);
+                } catch (IOException e) {
+                    System.out.println("changes error");
+                    e.printStackTrace();
+                }
+                return new GameDB( resultSet.getInt("id"), initialState , changes,  resultSet.getInt("player1"), resultSet.getInt("player2"), resultSet.getInt("winner"));
+            }
 
         } catch (SQLException throwables) {
-            System.out.println("szukam exeption");
+            System.out.println("Liczenie ID Pokoju z bazy nie powiodło się");
             throwables.printStackTrace();
+
+        }finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
-
+        return null;
     }
-
-
-
-
 }
