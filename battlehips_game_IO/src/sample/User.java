@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.image.ImageView;
+
 public class User {
     private int id;
     private String username;
@@ -8,6 +10,15 @@ public class User {
     private int wins;
     private int battles;
     private double aim_ratio;
+    private ImageView photo;
+
+    public ImageView getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(ImageView photo) {
+        this.photo = photo;
+    }
 
     @Override
     public String toString() {
@@ -30,6 +41,10 @@ public class User {
         this.wins = wins;
         this.battles = battles;
         this.aim_ratio = aim_ratio;
+        ImageView photo = new ImageView(avatar_path);
+
+        this.photo = photo;
+
     }
 
     public int getId() {

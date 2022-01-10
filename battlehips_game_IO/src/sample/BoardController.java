@@ -60,6 +60,25 @@ public class BoardController extends Parent {
         this.changes.add(lastest);
     }
 
+    public BoardController() {
+
+        this.earlierShot = null;
+        this.changes = new ArrayList<Cell>();
+        this.forbiddenShoots = new ArrayList<Cell>();
+        this.potentialShoots = new ArrayList<Cell>();
+
+        for (int y = 0; y < 10; y++) {
+            HBox row = new HBox();
+            for (int x = 0; x < 10; x++) {
+                Cell c = new Cell(x, y, this);
+                row.getChildren().add(c);
+            }
+            rows.getChildren().add(row);
+        }
+
+        getChildren().add(rows);
+        render();
+    }
 
     public BoardController(boolean boardIsAi, EventHandler<? super MouseEvent> handler) {
         this.boardIsAi = boardIsAi;
@@ -459,10 +478,16 @@ public class BoardController extends Parent {
                 changesToDB.add(new CellToDB(c.get_x(), c.get_y(),  newShip, c.isWasShot()));
             }
         }
-        System.out.println(changesToDB);
-        System.out.println("============================================");
-        System.out.println(changes);
-    }
 
+    }
+    public ArrayList<CellToDB> getChangeShootToDB(){
+        makeChangesShootToDB();
+        return changesToDB;
+    }
+    public void setCell(int x, int y, int type, boolean vertical){
+
+
+        placeShip(new Ship(type, vertical), x,y);
+    }
 
 }

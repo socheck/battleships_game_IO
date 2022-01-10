@@ -19,25 +19,25 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.setScene(new Scene(pane));
         stage.show();
-        DbConnection dbConnection = new DbConnection();
-        ArrayList<User> a = dbConnection.getUser_list();
-        System.out.println("=============================================================== a");
-        System.out.println(a);
-        User testUser = a.get(0);
-        //set user
-//        System.out.println("set user");
-//        System.out.println(dbConnection.setUser("1test", testUser.getPassword(), testUser.getAvatar_path()));
-        //update password
-        System.out.println("ubdate password");
-        System.out.println("old: "+ testUser.getPassword());
-        System.out.println(dbConnection.updateUser_password("456", testUser.getId()));
-        System.out.println("new: "+ testUser.getPassword());
-        System.out.println("ubdate avatar");
-        System.out.println("old: "+ testUser.getAvatar_path());
-        System.out.println(dbConnection.updateUser_avatar("test_avatar_path", testUser.getId()));
-        System.out.println("new: "+ testUser.getAvatar_path());
-        System.out.println("delete user");
-        System.out.println(dbConnection.deleteUser(4));
+//        DbConnection dbConnection = new DbConnection();
+//        ArrayList<User> a = dbConnection.getUser_list();
+//        System.out.println("=============================================================== a");
+//        System.out.println(a);
+//        User testUser = a.get(0);
+//        //set user
+////        System.out.println("set user");
+////        System.out.println(dbConnection.setUser("1test", testUser.getPassword(), testUser.getAvatar_path()));
+//        //update password
+//        System.out.println("ubdate password");
+//        System.out.println("old: "+ testUser.getPassword());
+//        System.out.println(dbConnection.updateUser_password("456", testUser.getId()));
+//        System.out.println("new: "+ testUser.getPassword());
+//        System.out.println("ubdate avatar");
+//        System.out.println("old: "+ testUser.getAvatar_path());
+//        System.out.println(dbConnection.updateUser_avatar("test_avatar_path", testUser.getId()));
+//        System.out.println("new: "+ testUser.getAvatar_path());
+//        System.out.println("delete user");
+//        System.out.println(dbConnection.deleteUser(4));
 
 
 

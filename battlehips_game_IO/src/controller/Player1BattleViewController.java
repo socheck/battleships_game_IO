@@ -48,12 +48,17 @@ public class Player1BattleViewController {
             nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = false;
             playerNumberLabel.setText("Tura Gracza Nr 2");
+            player1Label.setText(controller.getPlayer1().getUsername());
+            player2Label.setText(controller.getPlayer2().getUsername());
+
         }else { // przełączamy ba gracza 1
             controller.insertBoardShip(nextPlayerReadyButton.getScene(), controller.player1Board);
             controller.insertBoardShoot(nextPlayerReadyButton.getScene(), controller.player2Board);
             nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = true;
             playerNumberLabel.setText("Tura Gracza Nr 1");
+            player1Label.setText(controller.getPlayer2().getUsername());
+            player2Label.setText(controller.getPlayer1().getUsername());
         }
     }
 

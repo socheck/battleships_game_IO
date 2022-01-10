@@ -30,12 +30,13 @@ public class NewGameController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/loginPlayer1Player2Screen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         Scene scene = new Scene(pane);
-
+        LoginPlayer1Player2Controller loginPlayer1Player2Controller = (LoginPlayer1Player2Controller) fxmlLoader.getController();
         Stage stage = (Stage) ((Node)playerVsPlayerButton).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Players login");
         stage.show();
+        loginPlayer1Player2Controller.setLoginPlayer1Player2Controller(loginPlayer1Player2Controller);
 
     }
     @FXML
@@ -53,6 +54,7 @@ public class NewGameController {
 
         stage.setTitle("Player VS AI");
         stage.show();
+        loginPlayerLevelAiController.setLoginPlayerLevelAiController(loginPlayerLevelAiController);
 
     }
     @FXML
@@ -72,9 +74,13 @@ public class NewGameController {
 
 
         //do wyrzucenia ułatwienie testowania
-        levelAiLevelAiController.easyRadioButton1.setSelected(true);
+        levelAiLevelAiController.hardRadioButton1.setSelected(true);
+        levelAiLevelAiController.hardRadioButton2.setDisable(true);
         levelAiLevelAiController.easyRadioButton2.setSelected(true);
+        levelAiLevelAiController.easyRadioButton1.setDisable(true);
         levelAiLevelAiController.startGameButton.setDisable(false);
+        levelAiLevelAiController.setAi1Level(2);
+
         //
     }
     @FXML
