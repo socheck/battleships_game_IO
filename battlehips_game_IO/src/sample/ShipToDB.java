@@ -12,7 +12,7 @@ public class ShipToDB {
         public ShipToDB(int type, boolean vertical){
             this.type = type;
             this.vertical = vertical;
-            health = type;
+            this.health = type;
         }
 
         public void hit(){

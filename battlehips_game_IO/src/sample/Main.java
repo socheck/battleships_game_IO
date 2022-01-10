@@ -38,6 +38,15 @@ public class Main extends Application {
 //        System.out.println("new: "+ testUser.getAvatar_path());
 //        System.out.println("delete user");
 //        System.out.println(dbConnection.deleteUser(4));
+        System.out.println("ubdate statystyki");
+        System.out.println(dbConnection.updateUser_statistics(5, 3, testUser.getId()));
+        System.out.println("wypisywanie gier danego użytkownika");
+        System.out.println(dbConnection.getGamesArray(2));
+        System.out.println("wypisywanie konkretnej gry");
+//        System.out.println(dbConnection.getSpecyficGame(7));
+
+
+
 
 
 
