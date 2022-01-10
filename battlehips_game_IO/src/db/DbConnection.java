@@ -301,9 +301,10 @@ public class DbConnection {
         }
     }
 
-
-    public ArrayList<Integer> getGamesArray(int userID){
+//    public ArrayList<Integer> getGamesArray(int userID){
+    public ArrayList<GameDB> getGamesArray(int userID){
         ArrayList<Integer> gamesArray = new ArrayList<>();
+        ArrayList<GameDB> g = new ArrayList<GameDB>();
         Connection connection = null;
         try {
             connection = getConnection();
@@ -324,11 +325,18 @@ public class DbConnection {
             while (resultSet.next()){
                 gamesArray.add(resultSet.getInt("id"));
             }
-            return gamesArray;
+//            ArrayList<GameDB> g = new ArrayList<GameDB>();
+            for (int i :
+                    gamesArray) {
+                g.add(this.getSpecyficGame(i));
+            }
+//            return gamesArray;
+            return g;
         } catch (SQLException throwables) {
             System.out.println("getGamesArray nie powiodło się");
             throwables.printStackTrace();
-            return gamesArray;
+//            return gamesArray;
+            return g;
         }finally {
             try {
                 preparedStatement.close();
