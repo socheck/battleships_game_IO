@@ -36,7 +36,7 @@ public class StaticticProfileController {
     public TableColumn<User,String> battlesTablecolumn;
 
     @FXML
-    public TableColumn<User,String> hitsTablecolumn;
+    public TableColumn<User,Integer> hitsTablecolumn;
 
     @FXML
     public TableColumn<User,String> allShootsTablecolumn;
@@ -60,9 +60,9 @@ public class StaticticProfileController {
         UsarnameTableColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         winsTablecolumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
         battlesTablecolumn.setCellValueFactory(new PropertyValueFactory<>("battles"));
-        hitsTablecolumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        allShootsTablecolumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        ratioTablecolumn.setCellValueFactory(new PropertyValueFactory<>("aim_ratio"));
+        hitsTablecolumn.setCellValueFactory(new PropertyValueFactory<>("hits_amount"));
+        allShootsTablecolumn.setCellValueFactory(new PropertyValueFactory<>("shots_amount"));
+        ratioTablecolumn.setCellValueFactory(new PropertyValueFactory<>("aimRatio"));
 
 
         for (User u :

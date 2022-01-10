@@ -125,7 +125,7 @@ public class DbConnection {
                 throwables.printStackTrace();
             }
         }
-    }
+    } // addUser kurwa dodawanie
 
     public boolean updateUser_password(String password, int id){
         Connection connection = null;

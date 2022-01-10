@@ -12,6 +12,7 @@ public class User {
     private int shots_amount;
     private int hits_amount;
     private ImageView photo;
+    private double aimRatio;
 
     public ImageView getPhoto() {
         return photo;
@@ -43,8 +44,12 @@ public class User {
         this.battles = battles;
         this.shots_amount = shots_amount;
         this.hits_amount = hits_amount;
-        ImageView photo = new ImageView(avatar_path);
+        this.aimRatio = (double) hits_amount/(double) shots_amount;
+        System.out.println("dupa");
+        System.out.println(avatar_path);
 
+        ImageView photo = new ImageView(avatar_path);
+       // ImageView photo = new ImageView("/img/avatars/avatar_2.jpg");
         this.photo = photo;
 
     }
@@ -99,5 +104,15 @@ public class User {
         this.battles = battles;
     }
 
+    public int getShots_amount() {
+        return shots_amount;
+    }
 
+    public int getHits_amount() {
+        return hits_amount;
+    }
+
+    public double getAimRatio() {
+        return aimRatio;
+    }
 }
