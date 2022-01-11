@@ -1,5 +1,6 @@
 package controller;
 
+import db.DbConnection;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -122,9 +123,13 @@ public class EditProfileController {
 
         if(avatarComboBox.getSelectionModel().getSelectedItem() == null){
             newPath = selectedUser.getAvatar_path();
+        }else {
+            newPath = ((ClassToComboBox)avatarComboBox.getSelectionModel().getSelectedItem()).getPath();
         }
         //zapisujemy do bazy
-
+        DbConnection dbConnection = new DbConnection();
+        dbConnection.updateUser_password(newPassword, selectedUser.getId());
+        dbConnection.updateUser_avatar(newPath, selectedUser.getId());
 
         oldPasswordField.setText("");
         newPasswordField.setText("");
