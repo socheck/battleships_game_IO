@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StaticticProfileController">
    <children>
-      <Button fx:id="backToMenuButton" layoutX="98.0" layoutY="300.0" mnemonicParsing="false" onAction="#backToMenuAction" text="Back to Menu" />
-      <Button fx:id="exitButton" layoutX="494.0" layoutY="300.0" mnemonicParsing="false" onAction="#exitAction" text="Exit" />
-      <TableView fx:id="statisticTableView" layoutX="38.0" layoutY="59.0" onMouseClicked="#selectProfileOnMouseClicked" prefHeight="225.0" prefWidth="525.0">
+      <Button fx:id="backToMenuButton" layoutX="88.0" layoutY="340.0" mnemonicParsing="false" onAction="#backToMenuAction" text="Back to Menu" />
+      <Button fx:id="exitButton" layoutX="496.0" layoutY="340.0" mnemonicParsing="false" onAction="#exitAction" text="Exit" />
+      <TableView fx:id="statisticTableView" layoutX="25.0" layoutY="14.0" onMouseClicked="#selectProfileOnMouseClicked" prefHeight="300.0" prefWidth="550.0">
         <columns>
           <TableColumn fx:id="avatarTableColumn" prefWidth="100.0" text="Avatar" />
           <TableColumn fx:id="UsarnameTableColumn" prefWidth="85.0" text="Username" />
@@ -18,9 +20,18 @@
             <TableColumn fx:id="battlesTablecolumn" prefWidth="75.0" text="Battles" />
             <TableColumn fx:id="hitsTablecolumn" prefWidth="50.0" text="Hits" />
             <TableColumn fx:id="allShootsTablecolumn" prefWidth="75.0" text="All Shoots" />
-            <TableColumn fx:id="ratioTablecolumn" text="Ratio" />
+            <TableColumn fx:id="ratioTablecolumn" prefWidth="105.0" text="Ratio" />
         </columns>
+         <contextMenu>
+            <ContextMenu onShowing="#menuContexMenuAction">
+              <items>
+                <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
       </TableView>
-      <Button fx:id="modyfiProfileButton" layoutX="263.0" layoutY="300.0" mnemonicParsing="false" onAction="#modyfiProfileAction" text="Modyfi Profile" />
+      <Button fx:id="modyfiProfileButton" layoutX="229.0" layoutY="340.0" mnemonicParsing="false" onAction="#modyfiProfileAction" text="Modyfi Profile" />
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="162.0" layoutY="314.0" prefHeight="17.0" prefWidth="277.0" />
+      <Button fx:id="addPlayer" layoutX="365.0" layoutY="340.0" mnemonicParsing="false" onAction="#addPlayerAction" text="Add Player" />
    </children>
 </Pane>

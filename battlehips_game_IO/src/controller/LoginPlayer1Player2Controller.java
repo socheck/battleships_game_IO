@@ -110,7 +110,14 @@ public class LoginPlayer1Player2Controller {
         loginPlayerController.setLoginPlayer1Player2Controller(loginPlayer1Player2Controller);
         loginPlayerController.setPlayer1(false);
     }
+    public void checkPlayersLogged(){
+        if(player1 != null && player2 != null){
+            startGameButton.setDisable(false);
+        }else {
+            startGameButton.setDisable(true);
+        }
 
+    }
 
 
 

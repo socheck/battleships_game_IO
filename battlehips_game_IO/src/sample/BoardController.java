@@ -36,6 +36,21 @@ public class BoardController extends Parent {
         return forbiddenShoots;
     }
 
+    public int getShotsAmount(){
+        return changes.size();
+    }
+
+    public int getHitsAmount(){
+        int amount = 0;
+        for (Cell c:changes) {
+            if(c.getShip() != null){
+                amount += 1;
+            }
+        }
+        return amount;
+    }
+
+
     public boolean isPreviousShotTelling(){ //true jeżeli ostatni strzał byl trafiony
         if(getEarlierShot().isWasShot() && getEarlierShot().getShip() != null){
             return true;

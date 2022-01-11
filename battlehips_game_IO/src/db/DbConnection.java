@@ -55,12 +55,113 @@ public class DbConnection {
         PreparedStatement preparedStatement= null;
         ResultSet resultSet = null;
 
+        String komendaSQL = "SELECT * FROM users_list WHERE id > 3;";
+
+        try {
+            preparedStatement = connection.prepareStatement(komendaSQL);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+//                System.out.println(resultSet.getInt("id") +  "\t" +
+//                        resultSet.getString("username") + "\t" +
+//                        resultSet.getString("password") + "\t" +
+//                        resultSet.getString("avatar_path") + "\t" +
+//                        resultSet.getInt("wins") + "\t" +
+//                        resultSet.getInt("battles") + "\t" +
+//                        resultSet.getDouble("aim_ratio"));
+//                System.out.println("===========================================================");
+
+                userArrayList.add(new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getInt("shots_amount"), resultSet.getInt("hits_amount")));
+
+            }
+            return userArrayList;
+
+        } catch (SQLException throwables) {
+            System.out.println("Coś poszło nie tak getUser_list");
+            throwables.printStackTrace();
+        }finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return userArrayList;
+    }
+
+    public ArrayList<User> getAI_list(){
+        ArrayList<User> userArrayList = new ArrayList<User>();
+        Connection connection = null;
+        try {
+            connection = getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        PreparedStatement preparedStatement= null;
+        ResultSet resultSet = null;
+
+        String komendaSQL = "SELECT * FROM users_list WHERE id <4 ;";
+
+        try {
+            preparedStatement = connection.prepareStatement(komendaSQL);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+//                System.out.println(resultSet.getInt("id") +  "\t" +
+//                        resultSet.getString("username") + "\t" +
+//                        resultSet.getString("password") + "\t" +
+//                        resultSet.getString("avatar_path") + "\t" +
+//                        resultSet.getInt("wins") + "\t" +
+//                        resultSet.getInt("battles") + "\t" +
+//                        resultSet.getDouble("aim_ratio"));
+//                System.out.println("===========================================================");
+
+                userArrayList.add(new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getInt("shots_amount"), resultSet.getInt("hits_amount")));
+
+            }
+            return userArrayList;
+
+        } catch (SQLException throwables) {
+            System.out.println("Coś poszło nie tak getUser_list");
+            throwables.printStackTrace();
+        }finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return userArrayList;
+    }
+
+    public ArrayList<User> getAllUser_list(){
+        ArrayList<User> userArrayList = new ArrayList<User>();
+        Connection connection = null;
+        try {
+            connection = getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        PreparedStatement preparedStatement= null;
+        ResultSet resultSet = null;
+
         String komendaSQL = "SELECT * FROM users_list;";
 
         try {
             preparedStatement = connection.prepareStatement(komendaSQL);
             resultSet = preparedStatement.executeQuery();
-            System.out.println("result główny"+resultSet);
+
             while (resultSet.next()){
 //                System.out.println(resultSet.getInt("id") +  "\t" +
 //                        resultSet.getString("username") + "\t" +
@@ -219,7 +320,11 @@ public class DbConnection {
         }
     }
 
-    public boolean updateUser_statistics(int shots, int hits, int id){
+    public boolean updateUser_statistics(int shots, int hits, int id, int winnerID){
+        int wins = 0;
+        if(id == winnerID){
+            wins = 1;
+        }
         Connection connection = null;
         try {
             connection = getConnection();
@@ -228,7 +333,7 @@ public class DbConnection {
         }
         PreparedStatement preparedStatement= null;
 
-        String komendaSQL = "UPDATE users_list SET shots_amount = (SELECT shots_amount FROM users_list WHERE id = ?) + ?, hits_amount = (SELECT hits_amount FROM users_list WHERE id = ?) + ? WHERE id = ?;";
+        String komendaSQL = "UPDATE users_list SET shots_amount = (SELECT shots_amount FROM users_list WHERE id = ?) + ?, hits_amount = (SELECT hits_amount FROM users_list WHERE id = ?) + ? ,wins = (SELECT wins FROM users_list WHERE id = ?) + ?,battles = (SELECT battles FROM users_list WHERE id = ?) + ? WHERE id = ?;";
 
         try {
             preparedStatement = connection.prepareStatement(komendaSQL);
@@ -237,6 +342,11 @@ public class DbConnection {
             preparedStatement.setInt(3, id);
             preparedStatement.setInt(4, hits);
             preparedStatement.setInt(5, id);
+            preparedStatement.setInt(6, wins);
+            preparedStatement.setInt(7, id);
+            preparedStatement.setInt(8, 1);
+            preparedStatement.setInt(9, id);
+
             preparedStatement.executeUpdate();
             return true;
 

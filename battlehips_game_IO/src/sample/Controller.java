@@ -374,6 +374,9 @@ public class Controller {
                                 player1Board.addChange(cell);
                                 if(player1Board.endGame()){
                                     winner("Player 2 is the winner");
+                                    saveGameToDB(player1Board,player2Board, player1.getId(), player2.getId(),player2.getId() );
+
+
                                     //dbConnection db = new dbConnection();
     //                                try {
     //                                    db.setGame(myJson.strigifyMy(player1Board),myJson.strigifyMy(player1Board) ); /// linijka do zapisu gry po zakończeniu
@@ -459,6 +462,8 @@ public class Controller {
 
                                 if(player2Board.endGame()){
                                   winner("Player 1 is the winner");
+                                    saveGameToDB(player1Board,player2Board, player1.getId(), player2.getId(),player1.getId() );
+
                                 }
                                 if (cell.getShip() == null) {
                                     player1ShotNow = false;
@@ -487,6 +492,9 @@ public class Controller {
 
                             if(ai1Board.endGame()){
                                winner("Player 1 is the winner");
+                                saveGameToDB(player1Board,ai1Board, player1.getId(), player2.getId(),player1.getId() );
+
+
                             }
                             if (cell.getShip() == null) {
                                 player1ShotNow = false;
@@ -496,6 +504,8 @@ public class Controller {
                                 aiShootInPlayer1();
                                 if(ai1Board.endGame()){
                                     winner("Player 1 is the winner");
+                                    saveGameToDB(player1Board,ai1Board, player1.getId(), player2.getId(),player1.getId() );
+
                                 }
                             }
                         }
@@ -560,6 +570,7 @@ public void aiShootInPlayer1(){
                 player1Board = ai.moveAI();
                 if(player1Board.endGame()){
                   winner("AI is the winner");
+                    saveGameToDB(player1Board,ai1Board, player1.getId(), player2.getId(),player2.getId() );
 
                     super.stop();
                     return;
@@ -605,6 +616,8 @@ public void aiShootInPlayer1(){
                     ai1Board = ai.moveAI();
                     if(ai1Board.endGame()){
                         winner("AI 2 is the winner");
+                        saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player2.getId() );
+
                         super.stop();
                         return;
                     }
@@ -663,6 +676,8 @@ public void aiShootInPlayer1(){
                     }
                     if(ai1Board.endGame()){
                         winner("AI 2 is the winner");
+                        saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player2.getId() );
+
                         super.stop();
                         return;
                     }
@@ -708,25 +723,30 @@ public void aiShootInPlayer1(){
 
                     if(ai2Board.endGame()){
                         winner("AI 1 is the winner");
-                        super.stop();
-                        DbConnection dbConnection = new DbConnection();
-                        ai2Board.makeChangesShootToDB();
-                        ai1Board.makeChangesShootToDB();
-                        System.out.println(dbConnection.setGame(ai1Board.getInitilaState(ai1Board), ai2Board.getInitilaState(ai2Board), ai1Board.getChangesToDB(), ai2Board.getChangesToDB(), 1,2,1));
+                        saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player1.getId() );
+                        System.out.println("dupa1");
 
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/battleReplaysScreen.fxml"));
-                        Parent pane = null;
-                        try {
-                            pane = (Parent) fxmlLoader.load();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        BattleReplaysController battleReplaysController = (BattleReplaysController) fxmlLoader.getController();
-                        Stage primaryStage = new Stage();
-                        primaryStage.setTitle("Replays");
-                        primaryStage.setScene(new Scene(pane));
-                        primaryStage.show();
-                        battleReplaysController.setToReplays(ai1Board.getInitilaState(ai1Board), ai2Board.getInitilaState(ai2Board), ai1Board.getChangeShootToDB(), ai2Board.getChangeShootToDB());
+
+                        super.stop();
+
+//                        DbConnection dbConnection = new DbConnection();
+//                        ai2Board.makeChangesShootToDB();
+//                        ai1Board.makeChangesShootToDB();
+//                        System.out.println(dbConnection.setGame(ai1Board.getInitilaState(ai1Board), ai2Board.getInitilaState(ai2Board), ai1Board.getChangesToDB(), ai2Board.getChangesToDB(), 1,2,1));
+
+//                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/battleReplaysScreen.fxml"));
+//                        Parent pane = null;
+//                        try {
+//                            pane = (Parent) fxmlLoader.load();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                        BattleReplaysController battleReplaysController = (BattleReplaysController) fxmlLoader.getController();
+//                        Stage primaryStage = new Stage();
+//                        primaryStage.setTitle("Replays");
+//                        primaryStage.setScene(new Scene(pane));
+//                        primaryStage.show();
+//                        battleReplaysController.setToReplays(ai1Board.getInitilaState(ai1Board), ai2Board.getInitilaState(ai2Board), ai1Board.getChangeShootToDB(), ai2Board.getChangeShootToDB());
 
 
 
@@ -741,6 +761,17 @@ public void aiShootInPlayer1(){
             }
         };
             timerAi1Shoot.start();
+    }
+    public void saveGameToDB(BoardController board1, BoardController board2,int player1, int player2, int winner){
+        DbConnection dbConnection = new DbConnection();
+        board2.makeChangesShootToDB();
+        board1.makeChangesShootToDB();
+        System.out.println("===================1");
+        System.out.println(dbConnection.setGame(board1.getInitilaState(board1), board2.getInitilaState(board2), board1.getChangesToDB(), board2.getChangesToDB(), player1,player2,winner));
+        System.out.println("===================2");
+        System.out.println(dbConnection.updateUser_statistics(board2.getShotsAmount(),board2.getHitsAmount() , player1,winner));
+        System.out.println("===================3");
+        System.out.println(dbConnection.updateUser_statistics(board1.getShotsAmount(),board1.getHitsAmount(), player2,winner));
     }
 
 

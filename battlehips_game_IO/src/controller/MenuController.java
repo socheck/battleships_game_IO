@@ -6,7 +6,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -14,7 +13,7 @@ public class MenuController {
     @FXML
     public Button newGameButton;
     @FXML
-    public Button replaceButton;
+    public Button replaysButton;
     @FXML
     public Button statisticProfileButton;
     @FXML
@@ -30,14 +29,21 @@ public class MenuController {
         Stage stage = (Stage) ((Node)newGameButton).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.setResizable(true);
         stage.setTitle("New Game");
         stage.show();
 
 
     }
     @FXML
-    public void replaceAction(){
+    public void replaysAction() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/replaysMenuScreen.fxml"));
+        Parent pane =(Parent) fxmlLoader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = (Stage) ((Node)newGameButton).getScene().getWindow();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("Replays");
+        stage.show();
 
     }
     @FXML
@@ -48,7 +54,6 @@ public class MenuController {
         Stage stage = (Stage) ((Node)newGameButton).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.setResizable(true);
         stage.setTitle("Statistic/Profile");
         stage.show();
 

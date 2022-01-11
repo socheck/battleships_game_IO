@@ -42,6 +42,22 @@ public class GameDB {
         this.winnerID = winnerID;
     }
 
+    public InitialState getInitialState() {
+        return initialState;
+    }
+
+    public void setInitialState(InitialState initialState) {
+        this.initialState = initialState;
+    }
+
+    public Changes getChanges() {
+        return changes;
+    }
+
+    public void setChanges(Changes changes) {
+        this.changes = changes;
+    }
+
     public ArrayList<CellToDB> getInitialStateArray(int id) {
         if (id == this.getPlayer1ID()){
             return this.initialState.getP1InitialArray();

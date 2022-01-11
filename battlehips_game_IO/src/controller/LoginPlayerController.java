@@ -2,6 +2,9 @@ package controller;
 
 import db.DbConnection;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -9,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -65,8 +69,22 @@ public class LoginPlayerController {
     public void exitAction(){
         ((Stage) exitButton.getScene().getWindow()).close();
     }
+
+    public void showSuccesScreen(User u) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/succesScreen.fxml"));
+        Parent root2 = (Parent) fxmlLoader.load();
+        SuccesController succesController = (SuccesController) fxmlLoader.getController();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root2);
+        stage.setTitle("Succes");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+        succesController.textLabel.setText("Player " + u.getUsername() + " logged.");
+        ((Stage) loginButton.getScene().getWindow()).close();
+    }
     @FXML
-    public void loginAction(){
+    public void loginAction() throws IOException {
         errorDataLabel.setText("");
         String login = loginTextField.getText();
         String password = passwordTextField.getText();
@@ -77,6 +95,9 @@ public class LoginPlayerController {
                 if(u.getPassword().equals(password) && u.getUsername().equals(login)) {
                     loginPlayerLevelAiController.setPlayer1(u);
                     loginPlayerLevelAiController.player1Label.setText(u.getUsername());
+                    showSuccesScreen(u);
+                    loginPlayerLevelAiController.setStartGameButtonEnable();
+
                     return;
                 }
             }
@@ -85,11 +106,15 @@ public class LoginPlayerController {
                 if(isPlayer1 && loginPlayer1Player2Controller.getPlayer2() == null){
                     loginPlayer1Player2Controller.setPlayer1(u);
                     loginPlayer1Player2Controller.player1Label.setText(u.getUsername());
+                    showSuccesScreen(u);
+                    loginPlayer1Player2Controller.checkPlayersLogged();
                     return;
                 }
                 if(!isPlayer1 && loginPlayer1Player2Controller.getPlayer1() == null){
                     loginPlayer1Player2Controller.setPlayer2(u);
                     loginPlayer1Player2Controller.player2Label.setText(u.getUsername());
+                    showSuccesScreen(u);
+                    loginPlayer1Player2Controller.checkPlayersLogged();
                     return;
                 }
 
@@ -100,6 +125,8 @@ public class LoginPlayerController {
                     }
                     loginPlayer1Player2Controller.setPlayer1(u);
                     loginPlayer1Player2Controller.player1Label.setText(u.getUsername());
+                    showSuccesScreen(u);
+                    loginPlayer1Player2Controller.checkPlayersLogged();
                     return;
                 }
                 if(!isPlayer1 ){
@@ -109,6 +136,8 @@ public class LoginPlayerController {
                     }
                     loginPlayer1Player2Controller.setPlayer2(u);
                     loginPlayer1Player2Controller.player2Label.setText(u.getUsername());
+                    showSuccesScreen(u);
+                    loginPlayer1Player2Controller.checkPlayersLogged();
                     return;
                 }
             }

@@ -1,5 +1,6 @@
 package controller;
 
+import db.DbConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,8 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 import sample.Controller;
+import sample.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LevelAiLevelAiController {
     @FXML
@@ -30,12 +33,21 @@ public class LevelAiLevelAiController {
     @FXML
     public Button backToMenuButton;
     private int ai1Level = 0,ai2Level = 0;
+    private User playerAI1, playerAI2;
     private boolean ai1LevelSet = false, ai2LevelSet = false;
     private Controller controller;
 
+    private ArrayList<User> aiUserList;
+
+
+    public void initialize(){
+        DbConnection dbConnection = new DbConnection();
+        aiUserList = dbConnection.getAI_list();
+    }
 
     @FXML
     public void startGameAction() throws IOException { // przełączenie na ustawianie statków gracza 1
+        setplayerAI();
         controller = new Controller();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/player1BattleView.fxml"));
         Parent root2 = (Parent) fxmlLoader.load();
@@ -71,8 +83,11 @@ public class LevelAiLevelAiController {
         controller.createBoardAi2();
         controller.insertBoardShip(scene, controller.ai1Board);
         controller.insertBoardShoot(scene,controller.ai2Board);
+        controller.setPlayer1(playerAI1);
+        controller.setPlayer2(playerAI2);
         //ustawiono staki 1 i strzelanie 2
         ((Stage) startGameButton.getScene().getWindow()).close();
+
 
     }
 
@@ -181,6 +196,22 @@ public class LevelAiLevelAiController {
 
     public void setAi2Level(int ai2Level) {
         this.ai2Level = ai2Level;
+    }
+    public void setplayerAI(){
+        for (User u :
+                aiUserList) {
+            if(ai1Level == (u.getId()-1)){
+                playerAI1 = u;
+            }
+            if(ai2Level == (u.getId()-1)){
+                playerAI2 = u;
+            }
+
+        }
+
+
+
+
     }
 }
 

@@ -1,5 +1,6 @@
 package controller;
 
+import db.DbConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,10 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
+import org.sqlite.core.DB;
 import sample.Controller;
 import sample.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LoginPlayerLevelAiController {
 
@@ -34,7 +37,19 @@ public class LoginPlayerLevelAiController {
     private Controller controller;
     private int aiLevel = 0;
     private User player1;
+    private User playerAi;
     private LoginPlayerLevelAiController loginPlayerLevelAiController;
+    private ArrayList<User> aiUserList;
+
+
+    public void initialize(){
+
+        DbConnection dbConnection = new DbConnection();
+        aiUserList = dbConnection.getAI_list();
+
+    }
+
+
 
     public User getPlayer1() {
         return player1;
@@ -75,6 +90,10 @@ public class LoginPlayerLevelAiController {
 
         controller.createBoardAi1();
         controller.setPlayer1(player1);
+        controller.setPlayer2(playerAi);
+        System.out.println("dupa");
+        System.out.println(player1);
+        System.out.println(playerAi);
 
         player1ViewController.setSwitchToP2ButtonDisabel();
         player1ViewController.startGameAiButton.setDisable(true);
@@ -82,8 +101,6 @@ public class LoginPlayerLevelAiController {
         player1ViewController.switchToP2Button.setVisible(false);
 
         ((Stage) startGameButton.getScene().getWindow()).close();
-        System.out.println("dupa");
-        System.out.println(player1);
 
     }
     @FXML
@@ -118,26 +135,45 @@ public class LoginPlayerLevelAiController {
         mediumRadioButton.setSelected(false);
         hardRadioButton.setSelected(false);
         aiLevel = 0;
-        setStartGameButtonEnable();
+        setAiUser();
     }
     @FXML
     public void mediumAction(){
         easyRadioButton.setSelected(false);
         hardRadioButton.setSelected(false);
         aiLevel = 1;
-        setStartGameButtonEnable();
+        setAiUser();
     }
     @FXML
     public void hardAction(){
         mediumRadioButton.setSelected(false);
         easyRadioButton.setSelected(false);
         aiLevel = 2;
-        setStartGameButtonEnable();
+        setAiUser();
+
     }
     public void setStartGameButtonDisable(){
         startGameButton.setDisable(true);
     }
+
     public void setStartGameButtonEnable(){
+        if(player1 == null && (aiLevel == 0 || aiLevel == 1 || aiLevel == 2)){
+            return;
+        }
         startGameButton.setDisable(false);
+    }
+
+    public void setAiLevel(int aiLevel) {
+        this.aiLevel = aiLevel;
+    }
+    public void setAiUser(){
+
+        for (User u :
+                aiUserList) {
+            if((u.getId()-1) == aiLevel){
+                playerAi = u;
+                return;
+            }
+        }
     }
 }

@@ -37,6 +37,7 @@ public class NewGameController {
         stage.setTitle("Players login");
         stage.show();
         loginPlayer1Player2Controller.setLoginPlayer1Player2Controller(loginPlayer1Player2Controller);
+        loginPlayer1Player2Controller.startGameButton.setDisable(true);
 
     }
     @FXML
@@ -55,6 +56,9 @@ public class NewGameController {
         stage.setTitle("Player VS AI");
         stage.show();
         loginPlayerLevelAiController.setLoginPlayerLevelAiController(loginPlayerLevelAiController);
+        loginPlayerLevelAiController.hardRadioButton.setSelected(true);
+        loginPlayerLevelAiController.setAiLevel(2);
+        loginPlayerLevelAiController.setAiUser();
 
     }
     @FXML
@@ -74,12 +78,12 @@ public class NewGameController {
 
 
         //do wyrzucenia ułatwienie testowania
-        levelAiLevelAiController.hardRadioButton1.setSelected(true);
-        levelAiLevelAiController.hardRadioButton2.setDisable(true);
-        levelAiLevelAiController.easyRadioButton2.setSelected(true);
-        levelAiLevelAiController.easyRadioButton1.setDisable(true);
+        levelAiLevelAiController.hardRadioButton2.setSelected(true);
+        levelAiLevelAiController.hardRadioButton1.setDisable(true);
+        levelAiLevelAiController.easyRadioButton1.setSelected(true);
+        levelAiLevelAiController.easyRadioButton2.setDisable(true);
         levelAiLevelAiController.startGameButton.setDisable(false);
-        levelAiLevelAiController.setAi1Level(2);
+        levelAiLevelAiController.setAi2Level(2);
 
         //
     }

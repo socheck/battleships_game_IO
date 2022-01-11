@@ -17,41 +17,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import sample.ClassToComboBox;
 import sample.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-class ClassToComboBox{
-    private String path;
-    private String dispayText;
-
-    public ClassToComboBox(String dispayText) {
-        this.path = "/img/avatars/"+ dispayText + ".jpg";
-        this.dispayText = dispayText;
-    }
-
-    @Override
-    public String toString() {
-        return dispayText;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getDispayText() {
-        return dispayText;
-    }
-
-    public void setDispayText(String dispayText) {
-        this.dispayText = dispayText;
-    }
-}
 public class EditProfileController {
 
     @FXML
@@ -81,7 +52,7 @@ public class EditProfileController {
         for(int k = 1; k < 11; k++ ){
             avatarsList.add(new ClassToComboBox("avatar_"+ k));
         }
-        listPropertyAvatar = new SimpleListProperty<>(); //OBSlUGA Comboboxa z listy mieszkan
+        listPropertyAvatar = new SimpleListProperty<>(); //OBSlUGA Comboboxa z listy
         avatarObservableList = FXCollections.observableArrayList(avatarsList);
         listPropertyAvatar.set(avatarObservableList);
         avatarComboBox.itemsProperty().bindBidirectional(listPropertyAvatar);

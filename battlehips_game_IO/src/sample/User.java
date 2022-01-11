@@ -24,16 +24,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", avatar_path='" + avatar_path + '\'' +
-                ", wins=" + wins +
-                ", battles=" + battles +
-                ", shots_amount=" + shots_amount +
-                ", hits_amount=" + hits_amount +
-                '}';
+        return username;
     }
     public User(int id, String username, String password, String avatar_path, int wins, int battles, int shots_amount, int hits_amount) {
         this.id = id;
@@ -44,9 +35,13 @@ public class User {
         this.battles = battles;
         this.shots_amount = shots_amount;
         this.hits_amount = hits_amount;
-        this.aimRatio = (double) hits_amount/(double) shots_amount;
-        System.out.println("dupa");
-        System.out.println(avatar_path);
+        if(shots_amount == 0){
+            this.aimRatio = 0;
+        }else {
+            this.aimRatio = (double) hits_amount/(double) shots_amount;
+        }
+
+
 
         ImageView photo = new ImageView(avatar_path);
        // ImageView photo = new ImageView("/img/avatars/avatar_2.jpg");

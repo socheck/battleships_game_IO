@@ -15,6 +15,6 @@
       <TextField fx:id="loginTextField" layoutX="90.0" layoutY="95.0" />
       <PasswordField fx:id="passwordTextField" layoutX="90.0" layoutY="146.0" />
       <Button fx:id="exitButton" layoutX="73.0" layoutY="221.0" mnemonicParsing="false" onAction="#exitAction" text="Exit" />
-      <Label fx:id="errorDataLabel" layoutX="144.0" layoutY="180.0" text="Label" />
+      <Label fx:id="errorDataLabel" alignment="CENTER" layoutX="90.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" text="Label" />
    </children>
 </Pane>
