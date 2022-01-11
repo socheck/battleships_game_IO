@@ -21,10 +21,10 @@ public class Main extends Application {
         stage.setScene(new Scene(pane));
         stage.show();
 
-        DbConnection dbConnection = new DbConnection();
-        ArrayList<User> a = dbConnection.getUser_list();
-        System.out.println("=============================================================== a");
-        System.out.println(a);
+//        DbConnection dbConnection = new DbConnection();
+//        ArrayList<User> a = dbConnection.getUser_list();
+//        System.out.println("=============================================================== a");
+//        System.out.println(a);
 //        User testUser = a.get(0);
 //        //set user
 ////        System.out.println("set user");

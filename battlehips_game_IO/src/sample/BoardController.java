@@ -320,7 +320,7 @@ public class BoardController extends Parent {
 
             }
         }
-        System.out.println("metoda neighborShip "+ neighborList);
+//        System.out.println("metoda neighborShip "+ neighborList);
         return neighborList.toArray(new Cell[0]);
     }
 
