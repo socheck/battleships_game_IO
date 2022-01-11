@@ -33,6 +33,15 @@ public class GameDB {
         this.winnerID = winnerID;
     }
 
+    public GameDB(int id, int player1ID, int player2ID, int winnerID) {
+        this.id = id;
+        this.initialState = null;
+        this.changes = null;
+        this.player1ID = player1ID;
+        this.player2ID = player2ID;
+        this.winnerID = winnerID;
+    }
+
     public ArrayList<CellToDB> getInitialStateArray(int id) {
         if (id == this.getPlayer1ID()){
             return this.initialState.getP1InitialArray();

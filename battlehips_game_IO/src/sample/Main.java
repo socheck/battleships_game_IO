@@ -21,10 +21,10 @@ public class Main extends Application {
         stage.setScene(new Scene(pane));
         stage.show();
 
-//        DbConnection dbConnection = new DbConnection();
-//        ArrayList<User> a = dbConnection.getUser_list();
-//        System.out.println("=============================================================== a");
-//        System.out.println(a);
+        DbConnection dbConnection = new DbConnection();
+        ArrayList<User> a = dbConnection.getUser_list();
+        System.out.println("=============================================================== a");
+        System.out.println(a);
 //        User testUser = a.get(0);
 //        //set user
 ////        System.out.println("set user");
@@ -50,6 +50,10 @@ public class Main extends Application {
 //
 //        System.out.println(g.getInitialStateArray(1));
 //        System.out.println(g.getChangesArray(1));
+//        System.out.println("wypisywanie gier danego użytkownika");
+//        System.out.println(dbConnection.getGamesArray(2));
+//        System.out.println("wypisywanie konkretnego użytkownika");
+//        System.out.println(dbConnection.getUser(2));
 
 
 

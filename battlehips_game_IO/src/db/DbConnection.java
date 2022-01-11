@@ -105,7 +105,7 @@ public class DbConnection {
         PreparedStatement preparedStatement= null;
 
 
-        String komendaSQL = "INSERT INTO users_list VALUES (NULL, ?, ?, ?, 0, 0, 0, 0, 0);";
+        String komendaSQL = "INSERT INTO users_list VALUES (NULL, ?, ?, ?, 0, 0, 0, 0);";
 
         try {
             preparedStatement = connection.prepareStatement(komendaSQL);
@@ -253,6 +253,44 @@ public class DbConnection {
         }
     }
 
+    public User getUser(int userID){
+        Connection connection = null;
+        try {
+            connection = getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        PreparedStatement preparedStatement= null;
+        ResultSet resultSet = null;
+
+        String komendaSQL = "SELECT * FROM users_list WHERE id=?;";
+
+        try {
+            preparedStatement = connection.prepareStatement(komendaSQL);
+            preparedStatement.setInt(1, userID);
+
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                return new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getInt("shots_amount"), resultSet.getInt("hits_amount"));
+            }
+
+        } catch (SQLException throwables) {
+            System.out.println("Liczenie ID Pokoju z bazy nie powiodło się");
+            throwables.printStackTrace();
+
+        }finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
+
 //  games TABLE
 
     public boolean setGame(ArrayList<CellToDB> p1initial, ArrayList<CellToDB> p2initial, ArrayList<CellToDB> p1changes, ArrayList<CellToDB> p2changes, int p1, int p2, int winner){
@@ -301,9 +339,9 @@ public class DbConnection {
         }
     }
 
-//    public ArrayList<Integer> getGamesArray(int userID){
+
     public ArrayList<GameDB> getGamesArray(int userID){
-        ArrayList<Integer> gamesArray = new ArrayList<>();
+
         ArrayList<GameDB> g = new ArrayList<GameDB>();
         Connection connection = null;
         try {
@@ -315,7 +353,7 @@ public class DbConnection {
         PreparedStatement preparedStatement= null;
         ResultSet resultSet = null;
 
-        String komendaSQL = "SELECT id FROM games WHERE player1 = ? OR player2 = ?;";
+        String komendaSQL = "SELECT id, player1, player2, winner FROM games WHERE player1 = ? OR player2 = ?;";
 
         try {
             preparedStatement = connection.prepareStatement(komendaSQL);
@@ -323,14 +361,9 @@ public class DbConnection {
             preparedStatement.setInt(2, userID);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                gamesArray.add(resultSet.getInt("id"));
+                g.add( new GameDB(resultSet.getInt("id"), resultSet.getInt("player1"), resultSet.getInt("player2"), resultSet.getInt("winner")));
             }
-//            ArrayList<GameDB> g = new ArrayList<GameDB>();
-            for (int i :
-                    gamesArray) {
-                g.add(this.getSpecyficGame(i));
-            }
-//            return gamesArray;
+
             return g;
         } catch (SQLException throwables) {
             System.out.println("getGamesArray nie powiodło się");
@@ -399,3 +432,51 @@ public class DbConnection {
         return null;
     }
 }
+
+
+//============ BACKUP =================
+//    public ArrayList<Integer> getGamesArray(int userID){
+//public ArrayList<GameDB> getGamesArray(int userID){
+//    ArrayList<Integer> gamesArray = new ArrayList<>();
+//    ArrayList<GameDB> g = new ArrayList<GameDB>();
+//    Connection connection = null;
+//    try {
+//        connection = getConnection();
+//    } catch (SQLException throwables) {
+//        throwables.printStackTrace();
+//    }
+//
+//    PreparedStatement preparedStatement= null;
+//    ResultSet resultSet = null;
+//
+//    String komendaSQL = "SELECT id FROM games WHERE player1 = ? OR player2 = ?;";
+//
+//    try {
+//        preparedStatement = connection.prepareStatement(komendaSQL);
+//        preparedStatement.setInt(1, userID);
+//        preparedStatement.setInt(2, userID);
+//        resultSet = preparedStatement.executeQuery();
+//        while (resultSet.next()){
+//            gamesArray.add(resultSet.getInt("id"));
+//        }
+////            ArrayList<GameDB> g = new ArrayList<GameDB>();
+//        for (int i :
+//                gamesArray) {
+//            g.add(this.getSpecyficGame(i));
+//        }
+////            return gamesArray;
+//        return g;
+//    } catch (SQLException throwables) {
+//        System.out.println("getGamesArray nie powiodło się");
+//        throwables.printStackTrace();
+////            return gamesArray;
+//        return g;
+//    }finally {
+//        try {
+//            preparedStatement.close();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
+//
+//}
