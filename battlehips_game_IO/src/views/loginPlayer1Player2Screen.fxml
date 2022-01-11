@@ -17,8 +17,8 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="114.0" text="Nazwa gracza 1 " />
-      <Label layoutX="473.0" layoutY="114.0" text="Nazwa garcza 2" />
+      <Label fx:id="player1Label" layoutX="110.0" layoutY="114.0" text="Nazwa gracza 1 " />
+      <Label fx:id="player2Label" layoutX="473.0" layoutY="114.0" text="Nazwa garcza 2" />
       <Label layoutX="432.0" layoutY="114.0" text="Login:" />
       <Label layoutX="45.0" layoutY="114.0" text="Login:" />
       <Button fx:id="loginPlayer1Button" layoutX="63.0" layoutY="188.0" mnemonicParsing="false" onAction="#loginPlayer1Action" prefWidth="80.0" text="Log in" />

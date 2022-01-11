@@ -25,8 +25,12 @@ public class BoardController extends Parent {
     private ArrayList<Cell> forbiddenShoots;
     public ArrayList<Cell> potentialShoots;
     private ArrayList<Cell> changes;
-    private ArrayList<CellToDB> forbiddenShootsToDB;
+    private ArrayList<CellToDB> changesToDB;
     private int iter = 0;
+
+    public ArrayList<CellToDB> getChangesToDB() {
+        return changesToDB;
+    }
 
     public ArrayList<Cell> getForbiddenShoots() {
         return forbiddenShoots;
@@ -56,6 +60,25 @@ public class BoardController extends Parent {
         this.changes.add(lastest);
     }
 
+    public BoardController() {
+
+        this.earlierShot = null;
+        this.changes = new ArrayList<Cell>();
+        this.forbiddenShoots = new ArrayList<Cell>();
+        this.potentialShoots = new ArrayList<Cell>();
+
+        for (int y = 0; y < 10; y++) {
+            HBox row = new HBox();
+            for (int x = 0; x < 10; x++) {
+                Cell c = new Cell(x, y, this);
+                row.getChildren().add(c);
+            }
+            rows.getChildren().add(row);
+        }
+
+        getChildren().add(rows);
+        render();
+    }
 
     public BoardController(boolean boardIsAi, EventHandler<? super MouseEvent> handler) {
         this.boardIsAi = boardIsAi;
@@ -214,13 +237,12 @@ public class BoardController extends Parent {
     }
 
     public void placeShipView(Ship ship, int x, int y) {
-        System.out.println("dupa1");
+
         if (canPlaceShip(ship, x, y)) {
             int length = ship.getType();
-            System.out.println("dupa2");
+
             if (ship.isVertical()) {
                 for (int i = y; i < y + length; i++) {
-                    System.out.println("dupa3");
                     Cell cell = getCell(x, i);
 
                         cell.setFill(Color.WHITE);
@@ -298,7 +320,7 @@ public class BoardController extends Parent {
 
             }
         }
-        System.out.println("metoda neighborShip "+ neighborList);
+//        System.out.println("metoda neighborShip "+ neighborList);
         return neighborList.toArray(new Cell[0]);
     }
 
@@ -433,21 +455,39 @@ public class BoardController extends Parent {
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
                 Cell c = boardController.getCell(x,y);
-                cellToDBArrayList.add(new CellToDB(c.get_x(),c.get_y(),c.getShip(),false));
+                if(c.getShip()== null){
+                    cellToDBArrayList.add(new CellToDB(c.get_x(),c.get_y(),null,false));
+                }else{
+                    ShipToDB newShip = new ShipToDB(c.getShip().getType(), c.getShip().isVertical());
+                    cellToDBArrayList.add(new CellToDB(c.get_x(),c.get_y(),newShip,false));
+                }
+
             }
         }
         return cellToDBArrayList;
     }
-    public void makeForbidenShootToDB(){
-        forbiddenShootsToDB = new ArrayList<CellToDB>();
+    public void makeChangesShootToDB(){
+        changesToDB = new ArrayList<CellToDB>();
         for (Cell c:
              changes) {
-            forbiddenShootsToDB.add(new CellToDB(c.get_x(), c.get_y(), c.getShip(), c.isWasShot()));
-        }
-        System.out.println(forbiddenShootsToDB);
-        System.out.println("============================================");
-        System.out.println(changes);
-    }
 
+            if(c.getShip()== null){
+                changesToDB.add(new CellToDB(c.get_x(), c.get_y(),  null, c.isWasShot()));
+            }else{
+                ShipToDB newShip = new ShipToDB(c.getShip().getType(), c.getShip().isVertical());
+                changesToDB.add(new CellToDB(c.get_x(), c.get_y(),  newShip, c.isWasShot()));
+            }
+        }
+
+    }
+    public ArrayList<CellToDB> getChangeShootToDB(){
+        makeChangesShootToDB();
+        return changesToDB;
+    }
+    public void setCell(int x, int y, int type, boolean vertical){
+
+
+        placeShip(new Ship(type, vertical), x,y);
+    }
 
 }

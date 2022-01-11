@@ -41,7 +41,16 @@ public class MenuController {
 
     }
     @FXML
-    public void statisticProfileAction(){
+    public void statisticProfileAction() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/statisticProfileScreen.fxml"));
+        Parent pane =(Parent) fxmlLoader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = (Stage) ((Node)newGameButton).getScene().getWindow();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.setTitle("Statistic/Profile");
+        stage.show();
 
     }
     @FXML

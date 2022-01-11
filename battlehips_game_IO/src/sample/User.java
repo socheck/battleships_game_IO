@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.image.ImageView;
+
 public class User {
     private int id;
     private String username;
@@ -7,7 +9,18 @@ public class User {
     private String avatar_path;
     private int wins;
     private int battles;
-    private double aim_ratio;
+    private int shots_amount;
+    private int hits_amount;
+    private ImageView photo;
+    private double aimRatio;
+
+    public ImageView getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(ImageView photo) {
+        this.photo = photo;
+    }
 
     @Override
     public String toString() {
@@ -18,19 +31,30 @@ public class User {
                 ", avatar_path='" + avatar_path + '\'' +
                 ", wins=" + wins +
                 ", battles=" + battles +
-                ", aim_ratio=" + aim_ratio +
+                ", shots_amount=" + shots_amount +
+                ", hits_amount=" + hits_amount +
                 '}';
     }
-
-    public User(int id, String username, String password, String avatar_path, int wins, int battles, double aim_ratio) {
+    public User(int id, String username, String password, String avatar_path, int wins, int battles, int shots_amount, int hits_amount) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.avatar_path = avatar_path;
         this.wins = wins;
         this.battles = battles;
-        this.aim_ratio = aim_ratio;
+        this.shots_amount = shots_amount;
+        this.hits_amount = hits_amount;
+        this.aimRatio = (double) hits_amount/(double) shots_amount;
+        System.out.println("dupa");
+        System.out.println(avatar_path);
+
+        ImageView photo = new ImageView(avatar_path);
+       // ImageView photo = new ImageView("/img/avatars/avatar_2.jpg");
+        this.photo = photo;
+
     }
+
+
 
     public int getId() {
         return id;
@@ -80,11 +104,15 @@ public class User {
         this.battles = battles;
     }
 
-    public double getAim_ratio() {
-        return aim_ratio;
+    public int getShots_amount() {
+        return shots_amount;
     }
 
-    public void setAim_ratio(double aim_ratio) {
-        this.aim_ratio = aim_ratio;
+    public int getHits_amount() {
+        return hits_amount;
+    }
+
+    public double getAimRatio() {
+        return aimRatio;
     }
 }
