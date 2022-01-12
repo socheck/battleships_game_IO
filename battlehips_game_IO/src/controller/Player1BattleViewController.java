@@ -80,6 +80,7 @@ public class Player1BattleViewController {
     }
     @FXML
     public void  backToMenuAction() throws IOException {
+        controller.setExitToMenu(true);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         Stage primaryStage = new Stage();

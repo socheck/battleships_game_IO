@@ -80,7 +80,11 @@ public class Controller {
     private boolean player1ShotNow = true, player2ShotNow = true;
 
     private long  timeOfAiCahnge = 1_000;   // do testó ustawiona mała wartość wrócić do 1_000_000_000
+    private boolean exitToMenu = false;
 
+    public void setExitToMenu(boolean exitToMenu) {
+        this.exitToMenu = exitToMenu;
+    }
 
     public User getPlayer1() {
         return player1;
@@ -560,6 +564,10 @@ public class Controller {
     }
 
 public void aiShootInPlayer1(){
+        if(exitToMenu){
+            System.out.println("kurwicajegomać");
+            return;
+        }
     long time = System.nanoTime();
     AnimationTimer timerAi = new AnimationTimer() {
         @Override
@@ -590,6 +598,10 @@ public void aiShootInPlayer1(){
     timerAi.start();
 }
     public void ai2ShootInAi1(){
+        if(exitToMenu){
+            System.out.println("kurwicajegomać");
+            return;
+        }
 
         long time = System.nanoTime();
         AnimationTimer changeView2 = new AnimationTimer() {
@@ -642,7 +654,10 @@ public void aiShootInPlayer1(){
     public void aiVsAiStartGame(){
         //ustawiono staki 1 i strzelanie2
 
-
+        if(exitToMenu){
+            System.out.println("kurwicajegomać");
+            return;
+        }
         player1BattleViewController.playerNumberLabel.setText("Tura AI 1");
         player1BattleViewController.player1Label.setText("AI level " + ai1Level);
         player1BattleViewController.player2Label.setText("AI level " + ai2Level);
@@ -723,12 +738,12 @@ public void aiShootInPlayer1(){
 
                     if(ai2Board.endGame()){
                         winner("AI 1 is the winner");
-                        saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player1.getId() );
+
                         System.out.println("dupa1");
 
 
                         super.stop();
-
+                        saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player1.getId() );
 //                        DbConnection dbConnection = new DbConnection();
 //                        ai2Board.makeChangesShootToDB();
 //                        ai1Board.makeChangesShootToDB();

@@ -70,6 +70,9 @@ public class BattleReplaysController {
         ArrayList<CellToDB> p2InitialArray = gameDB.getInitialState().getP2InitialArray();
         ArrayList<CellToDB> p1ChangesArray = gameDB.getChanges().getP1ChangesArray();
         ArrayList<CellToDB> p2ChangesArray = gameDB.getChanges().getP2ChangesArray();
+        System.out.println("=============================");
+        System.out.println(p1ChangesArray);
+        System.out.println(p2ChangesArray);
 
         initialState = new InitialState(p1InitialArray,p2InitialArray);
         changes = new Changes(p1ChangesArray,p2ChangesArray);
@@ -124,6 +127,7 @@ public class BattleReplaysController {
                 // zmienić 1 na 1_000_000_000
                 if(l - (timeOfAiCahnge) > time){
                     if(player1Board.endGame()){
+                        playerNumberLabel.setText("Winner is "+ player2.getUsername());
                         super.stop();
                         backToMenuButton.setDisable(false);
                         return;
@@ -138,12 +142,17 @@ public class BattleReplaysController {
                         plyer1Hit = true;
                         countReplaysPlayer1+= 1;
                         super.stop();
+                        startReplays();
+                        return;
                     }else {
                         player1Board.render();
                         countReplaysPlayer1+= 1;
                         super.stop();
                         startReplays();
+
+                        return;
                     }
+
                 }
             }
         };
@@ -160,6 +169,12 @@ public class BattleReplaysController {
                 // zmienić 1 na 1_000_000_000
                 if(l - (timeOfAiCahnge) > time){
                     if(player2Board.endGame()){
+                        playerNumberLabel.setText("Winner is "+ player1.getUsername());
+                        super.stop();
+                        backToMenuButton.setDisable(false);
+                        return;
+                    }
+                    if(countReplaysPlayer2 == changes.getP2ChangesArray().size()){
                         super.stop();
                         backToMenuButton.setDisable(false);
                         return;
@@ -167,21 +182,16 @@ public class BattleReplaysController {
                     player2Board.getCell(changes.getP2ChangesArray().get(countReplaysPlayer2).getX(),changes.getP2ChangesArray().get(countReplaysPlayer2).getY()).shoot();
                     if(player2Board.getCell(changes.getP2ChangesArray().get(countReplaysPlayer2).getX(),changes.getP2ChangesArray().get(countReplaysPlayer2).getY()).getShip() !=null){
                         plyer1Hit = false;
-                        super.stop();
-                        startReplays();
                         player2Board.render();
                         countReplaysPlayer2 += 1;
-                        backToMenuButton.setDisable(false);
+                        super.stop();
+                        startReplays();
                         return;
 
                     }
                     player2Board.render();
                     countReplaysPlayer2 += 1;
-                    if(countReplaysPlayer2 == changes.getP2ChangesArray().size()){
-                        super.stop();
-                        backToMenuButton.setDisable(false);
-                        return;
-                    }
+
                     super.stop();
                     playerNumberLabel.setText("Now is turn player: " + player2.getUsername());
                     time = System.nanoTime();
