@@ -37,7 +37,7 @@ public class NewPlayerController {
     @FXML
     public PasswordField paswordPaswordField;
     @FXML
-    public ComboBox avatarComboBox;
+    public ComboBox<ClassToComboBox> avatarComboBox;
     @FXML
     public ImageView avatarImageView;
     @FXML
@@ -48,10 +48,9 @@ public class NewPlayerController {
 
     ArrayList<ClassToComboBox> avatarsList = new ArrayList<>();
 
-    private ObservableList<ClassToComboBox> avatarObservableList;
-    private ListProperty<ClassToComboBox> listPropertyAvatar;
-
-    public void initialize(){
+    public void initialize() {
+        ObservableList<ClassToComboBox> avatarObservableList;
+        ListProperty<ClassToComboBox> listPropertyAvatar;
         ArrayList<String> results = new ArrayList<String>();
         File[] files = new File("src/img/avatars/user").listFiles();
         for (File file : files) {
@@ -60,7 +59,7 @@ public class NewPlayerController {
             }
         }
 
-        for (String s:
+        for (String s :
                 results) {
             avatarsList.add(new ClassToComboBox(s.replaceFirst("[.][^.]+$", "")));
         }
@@ -87,11 +86,14 @@ public class NewPlayerController {
 
     }
 
-    public void  createUserAction(){
+    public void  createUserAction() {
         errorLabel.setText("");
+        if (paswordPaswordField.getText() == "") {
+            errorLabel.setText("Choose password");
+            return;
+        }
         DbConnection dbConnection = new DbConnection();
         String username = usernameTextField.getText();
-
 
 
         MessageDigest md5 = null;
