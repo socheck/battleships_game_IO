@@ -29,7 +29,7 @@ public class Cell extends Rectangle {
 
 
     public Cell(int x, int y, BoardController boardController){
-        super(30, 30);
+        super(29, 29);
         this.x = x;
         this.y = y;
         this.boardController = boardController;

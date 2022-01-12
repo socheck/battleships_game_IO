@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sample.Controller;
 
@@ -20,7 +22,10 @@ public class Player2ViewController {
     private Button randomButton;
     @FXML
     private Button clearBoardButton;
-
+    @FXML
+    public Pane player2Pane;
+    @FXML
+    public Label playerUsernameLabel;
     private Controller controller;
     @FXML
     public void BufforToP1View() throws IOException {

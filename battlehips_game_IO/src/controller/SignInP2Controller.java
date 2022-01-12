@@ -35,6 +35,8 @@ public class SignInP2Controller {
         controller.insertBoardPl2(scene);
         controller.setPlayer2ViewController(player2ViewController);
         player2ViewController.setStartGameButtonDisable();
+        player2ViewController.player2Pane.getChildren().add(controller.getPlayer2().getPhoto());
+        player2ViewController.playerUsernameLabel.setText(controller.getPlayer2().getUsername());
 
     }
 

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sample.Controller;
 import sample.User;
@@ -29,6 +30,10 @@ public class LoginPlayer1Player2Controller {
     public Label player1Label;
     @FXML
     public Label player2Label;
+    @FXML
+    public Pane player1Pane;
+    @FXML
+    public Pane player2Pane;
     private Controller controller;
     private DbConnection dbConnection;
     private ArrayList<User> userArrayList;
@@ -71,6 +76,8 @@ public class LoginPlayer1Player2Controller {
         player1ViewController.setSwitchToP2ButtonDisabel();
         player1ViewController.startGameAiButton.setDisable(true);
         player1ViewController.startGameAiButton.setVisible(false);
+        player1ViewController.player1Pane.getChildren().add(controller.getPlayer1().getPhoto());
+        player1ViewController.playerUsernameLabel.setText(controller.getPlayer1().getUsername());
     }
     public void  backToMenuAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
@@ -128,13 +135,16 @@ public class LoginPlayer1Player2Controller {
 
     public void setPlayer1(User player1) {
         this.player1 = player1;
+        player1Pane.getChildren().add(player1.getPhoto());
     }
 
     public User getPlayer2() {
         return player2;
+
     }
 
     public void setPlayer2(User player2) {
         this.player2 = player2;
+        player2Pane.getChildren().add(player2.getPhoto());
     }
 }

@@ -59,6 +59,7 @@ public class NewGameController {
         loginPlayerLevelAiController.hardRadioButton.setSelected(true);
         loginPlayerLevelAiController.setAiLevel(2);
         loginPlayerLevelAiController.setAiUser();
+//        loginPlayerLevelAiController.hardAction();
 
     }
     @FXML
@@ -78,14 +79,28 @@ public class NewGameController {
 
 
         //do wyrzucenia ułatwienie testowania
-        levelAiLevelAiController.hardRadioButton2.setSelected(true);
-        levelAiLevelAiController.hardRadioButton1.setDisable(true);
-        levelAiLevelAiController.easyRadioButton1.setSelected(true);
-        levelAiLevelAiController.easyRadioButton2.setDisable(true);
-        levelAiLevelAiController.startGameButton.setDisable(false);
-        levelAiLevelAiController.setAi2Level(2);
 
-        //
+//        levelAiLevelAiController.easyAction1();
+//        levelAiLevelAiController.hardAction2();
+
+//        levelAiLevelAiController.hardRadioButton2.setSelected(true);
+//        levelAiLevelAiController.hardRadioButton1.setDisable(true);
+//        levelAiLevelAiController.easyRadioButton1.setSelected(true);
+//        levelAiLevelAiController.easyRadioButton2.setDisable(true);
+//        levelAiLevelAiController.startGameButton.setDisable(false);
+//        levelAiLevelAiController.setAi2Level(2);
+//        levelAiLevelAiController.setAiUser1();
+//        levelAiLevelAiController.setAiUser2();
+
+        levelAiLevelAiController.hardRadioButton1.setSelected(true);
+        levelAiLevelAiController.hardRadioButton2.setDisable(true);
+        levelAiLevelAiController.easyRadioButton2.setSelected(true);
+        levelAiLevelAiController.easyRadioButton1.setDisable(true);
+        levelAiLevelAiController.startGameButton.setDisable(false);
+        levelAiLevelAiController.setAi1Level(2);
+        levelAiLevelAiController.setAiUser1();
+        levelAiLevelAiController.setAiUser2();
+
     }
     @FXML
     public void exitAction(){

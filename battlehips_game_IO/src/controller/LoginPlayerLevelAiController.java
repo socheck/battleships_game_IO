@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.sqlite.core.DB;
 import sample.Controller;
@@ -33,6 +36,10 @@ public class LoginPlayerLevelAiController {
     public RadioButton hardRadioButton;
     @FXML
     public Label player1Label;
+    @FXML
+    public Pane player1Pane;
+    @FXML
+    public Pane player2Pane;
 
     private Controller controller;
     private int aiLevel = 0;
@@ -57,6 +64,7 @@ public class LoginPlayerLevelAiController {
 
     public void setPlayer1(User player1) {
         this.player1 = player1;
+        player1Pane.getChildren().add(player1.getPhoto());
     }
 
     public LoginPlayerLevelAiController getLoginPlayerLevelAiController() {
@@ -99,6 +107,7 @@ public class LoginPlayerLevelAiController {
         player1ViewController.startGameAiButton.setDisable(true);
         player1ViewController.setNextGameWithAi(true);  // następna gra z botem
         player1ViewController.switchToP2Button.setVisible(false);
+        player1ViewController.player1Pane.getChildren().add(player1.getPhoto());
 
         ((Stage) startGameButton.getScene().getWindow()).close();
 
@@ -131,11 +140,11 @@ public class LoginPlayerLevelAiController {
     }
     @FXML
     public void easyAction(){
-
         mediumRadioButton.setSelected(false);
         hardRadioButton.setSelected(false);
         aiLevel = 0;
         setAiUser();
+
     }
     @FXML
     public void mediumAction(){
@@ -143,6 +152,7 @@ public class LoginPlayerLevelAiController {
         hardRadioButton.setSelected(false);
         aiLevel = 1;
         setAiUser();
+
     }
     @FXML
     public void hardAction(){
@@ -150,6 +160,8 @@ public class LoginPlayerLevelAiController {
         easyRadioButton.setSelected(false);
         aiLevel = 2;
         setAiUser();
+
+
 
     }
     public void setStartGameButtonDisable(){
@@ -168,12 +180,21 @@ public class LoginPlayerLevelAiController {
     }
     public void setAiUser(){
 
-        for (User u :
-                aiUserList) {
-            if((u.getId()-1) == aiLevel){
-                playerAi = u;
-                return;
+        try {
+            player2Pane.getChildren().remove(playerAi.getPhoto());
+        } catch (Exception e) {
+        }finally {
+            for (User u :
+                    aiUserList) {
+                if((u.getId()-1) == aiLevel){
+                    playerAi = u;
+                    player2Pane.getChildren().add(playerAi.getPhoto());
+                    return;
+                }
             }
+
+
         }
+
     }
 }

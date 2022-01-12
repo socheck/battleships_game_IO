@@ -151,13 +151,13 @@ public class BoardController extends Parent {
     public void render(){
 
         Image water = new Image("/img/water.gif");
-        Image myBoard_shipHit = new Image("/img/myBoard_shipHit.gif");
-        Image myBoard_shipNoHit = new Image("/img/myBoard_shipNoHit.jpg");
-        Image myBoard_shipSunk = new Image("/img/myBoard_shipSunk.gif");
-        Image myBoard_shotNoHit = new Image("/img/myBoard_shotNoHit.gif");
-        Image shooting_shot = new Image("/img/shooting_shot.gif");
-        Image shooting_shotHit = new Image("/img/shooting_shotHit.gif");
-        Image shooting_shotSunk = new Image("/img/shooting_shotSunk.gif");
+        Image myBoard_shipHit = new Image("/img/myBoardShipHit.gif");
+        Image myBoard_shipNoHit = new Image("/img/myBoardShipNoHit.jpg");
+        Image myBoard_shipSunk = new Image("/img/myBoardShipSunk.gif");
+        Image myBoard_shotNoHit = new Image("/img/myBoardShotNoHit.gif");
+        Image shooting_shot = new Image("/img/shootingShot.gif");
+        Image shooting_shotHit = new Image("/img/shootingShotHit.gif");
+        Image shooting_shotSunk = new Image("/img/shootingShotSunk.gif");
 
 
         for (int y = 0; y < 10; y++) {

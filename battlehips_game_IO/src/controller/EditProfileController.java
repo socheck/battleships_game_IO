@@ -20,7 +20,12 @@ import javafx.stage.Stage;
 import sample.ClassToComboBox;
 import sample.User;
 
+import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class EditProfileController {
@@ -49,9 +54,22 @@ public class EditProfileController {
     private ListProperty<ClassToComboBox> listPropertyAvatar;
 
     public void initialize(){
-        for(int k = 1; k < 11; k++ ){
-            avatarsList.add(new ClassToComboBox("avatar_"+ k));
+        ArrayList<String> results = new ArrayList<String>();
+        File[] files = new File("src/img/avatars/user").listFiles();
+        for (File file : files) {
+            if (file.isFile()) {
+                results.add(file.getName());
+            }
         }
+
+        for (String s:
+             results) {
+            avatarsList.add(new ClassToComboBox(s.replaceFirst("[.][^.]+$", "")));
+        }
+
+//        for(int k = 1; k < 11; k++ ){
+//            avatarsList.add(new ClassToComboBox("avatar"+ k));
+//        }
         listPropertyAvatar = new SimpleListProperty<>(); //OBSlUGA Comboboxa z listy
         avatarObservableList = FXCollections.observableArrayList(avatarsList);
         listPropertyAvatar.set(avatarObservableList);
@@ -74,8 +92,30 @@ public class EditProfileController {
 
     @FXML
     private void confirmAction(){
-        String oldPassword = oldPasswordField.getText();
-        String newPassword = newPasswordField.getText();
+
+
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        md5.update(StandardCharsets.UTF_8.encode(oldPasswordField.getText()));
+        String oldPassword = String.format("%032x", new BigInteger(1, md5.digest()));
+
+
+        MessageDigest md52 = null;
+        try {
+            md52 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        md52.update(StandardCharsets.UTF_8.encode(newPasswordField.getText()));
+        String newPassword = String.format("%032x", new BigInteger(1, md52.digest()));
+
+
+
+
         String newPath;
 
         if(oldPassword ==""){

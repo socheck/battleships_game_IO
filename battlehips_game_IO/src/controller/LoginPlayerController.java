@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 import sample.User;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 
@@ -87,10 +91,22 @@ public class LoginPlayerController {
     public void loginAction() throws IOException {
         errorDataLabel.setText("");
         String login = loginTextField.getText();
-        String password = passwordTextField.getText();
+
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        md5.update(StandardCharsets.UTF_8.encode(passwordTextField.getText()));
+        String password = String.format("%032x", new BigInteger(1, md5.digest()));
+
 
         for (User u:
              userArrayList) {
+            if(login.equals(u.getUsername()) && password.equals(u.getPassword()) && u.getId() < 4){
+                return;
+            }
             if(plyer1WithAi){
                 if(u.getPassword().equals(password) && u.getUsername().equals(login)) {
                     loginPlayerLevelAiController.setPlayer1(u);

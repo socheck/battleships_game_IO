@@ -5,7 +5,7 @@ public class ClassToComboBox {
     private String dispayText;
 
     public ClassToComboBox(String dispayText) {
-        this.path = "/img/avatars/" + dispayText + ".jpg";
+        this.path = "/img/avatars/user/" + dispayText + ".jpg";
         this.dispayText = dispayText;
     }
 

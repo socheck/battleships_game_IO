@@ -379,7 +379,8 @@ public class Controller {
                                 if(player1Board.endGame()){
                                     winner("Player 2 is the winner");
                                     saveGameToDB(player1Board,player2Board, player1.getId(), player2.getId(),player2.getId() );
-
+                                    player1BattleViewController.player2Pane.getChildren().remove(player1.getPhoto());
+                                    player1BattleViewController.winnerPane.getChildren().add(player2.getPhoto());
 
                                     //dbConnection db = new dbConnection();
     //                                try {
@@ -466,6 +467,8 @@ public class Controller {
 
                                 if(player2Board.endGame()){
                                   winner("Player 1 is the winner");
+                                    player1BattleViewController.player2Pane.getChildren().remove(player2.getPhoto());
+                                    player1BattleViewController.winnerPane.getChildren().add(player1.getPhoto());
                                     saveGameToDB(player1Board,player2Board, player1.getId(), player2.getId(),player1.getId() );
 
                                 }
@@ -496,6 +499,8 @@ public class Controller {
 
                             if(ai1Board.endGame()){
                                winner("Player 1 is the winner");
+                                player1BattleViewController.player2Pane.getChildren().remove(player2.getPhoto());
+                                player1BattleViewController.winnerPane.getChildren().add(player1.getPhoto());
                                 saveGameToDB(player1Board,ai1Board, player1.getId(), player2.getId(),player1.getId() );
 
 
@@ -508,6 +513,8 @@ public class Controller {
                                 aiShootInPlayer1();
                                 if(ai1Board.endGame()){
                                     winner("Player 1 is the winner");
+                                    player1BattleViewController.player2Pane.getChildren().remove(player2.getPhoto());
+                                    player1BattleViewController.winnerPane.getChildren().add(player1.getPhoto());
                                     saveGameToDB(player1Board,ai1Board, player1.getId(), player2.getId(),player1.getId() );
 
                                 }
@@ -578,6 +585,8 @@ public void aiShootInPlayer1(){
                 player1Board = ai.moveAI();
                 if(player1Board.endGame()){
                   winner("AI is the winner");
+                    player1BattleViewController.player1Pane.getChildren().remove(player1.getPhoto());
+                    player1BattleViewController.winnerPane.getChildren().add(player2.getPhoto());
                     saveGameToDB(player1Board,ai1Board, player1.getId(), player2.getId(),player2.getId() );
 
                     super.stop();
@@ -628,6 +637,8 @@ public void aiShootInPlayer1(){
                     ai1Board = ai.moveAI();
                     if(ai1Board.endGame()){
                         winner("AI 2 is the winner");
+                        player1BattleViewController.player2Pane.getChildren().remove(player1.getPhoto());
+                        player1BattleViewController.winnerPane.getChildren().add(player2.getPhoto());
                         saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player2.getId() );
 
                         super.stop();
@@ -661,6 +672,20 @@ public void aiShootInPlayer1(){
         player1BattleViewController.playerNumberLabel.setText("Tura AI 1");
         player1BattleViewController.player1Label.setText("AI level " + ai1Level);
         player1BattleViewController.player2Label.setText("AI level " + ai2Level);
+        try {
+            player1BattleViewController.player1Pane.getChildren().remove(player1.getPhoto());
+            player1BattleViewController.player2Pane.getChildren().remove(player2.getPhoto());
+        } catch (Exception e) {
+
+        }
+        try {
+            player1BattleViewController.player1Pane.getChildren().remove(player2.getPhoto());
+            player1BattleViewController.player2Pane.getChildren().remove(player1.getPhoto());
+        } catch (Exception e) {
+
+        }
+        player1BattleViewController.player1Pane.getChildren().add(player1.getPhoto());
+        player1BattleViewController.player2Pane.getChildren().add(player2.getPhoto());
         long time = System.nanoTime();
 
         AnimationTimer changeView2 = new AnimationTimer() {
@@ -684,6 +709,15 @@ public void aiShootInPlayer1(){
                 if(l - (timeOfAiCahnge+timeOfAiCahnge/2) > time){
                     ai = new AI(ai2Level, ai1Board);
                     ai1Board = ai.moveAI();
+                    if(ai1Board.endGame()){
+                        winner("AI 2 is the winner");
+                        player1BattleViewController.player2Pane.getChildren().remove(player1.getPhoto());
+                        player1BattleViewController.winnerPane.getChildren().add(player2.getPhoto());
+                        saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player2.getId() );
+
+                        super.stop();
+                        return;
+                    }
                     if (ai1Board.isPreviousShotTelling()){
                       super.stop();
                       ai2ShootInAi1();
@@ -691,6 +725,8 @@ public void aiShootInPlayer1(){
                     }
                     if(ai1Board.endGame()){
                         winner("AI 2 is the winner");
+                        player1BattleViewController.player2Pane.getChildren().remove(player1.getPhoto());
+                        player1BattleViewController.winnerPane.getChildren().add(player2.getPhoto());
                         saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player2.getId() );
 
                         super.stop();
@@ -712,6 +748,10 @@ public void aiShootInPlayer1(){
                     player1BattleViewController.playerNumberLabel.setText("Tura AI 2");
                     player1BattleViewController.player2Label.setText("AI level " + ai1Level);
                     player1BattleViewController.player1Label.setText("AI level " + ai2Level);
+                    player1BattleViewController.player1Pane.getChildren().remove(player1.getPhoto());
+                    player1BattleViewController.player2Pane.getChildren().remove(player2.getPhoto());
+                    player1BattleViewController.player1Pane.getChildren().add(player2.getPhoto());
+                    player1BattleViewController.player2Pane.getChildren().add(player1.getPhoto());
                     hideBoardPl1(player1BattleViewController.nextButton.getScene());
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
                     insertBoardShip(player1BattleViewController.nextButton.getScene(), ai2Board);
@@ -730,18 +770,32 @@ public void aiShootInPlayer1(){
                 if(l - (timeOfAiCahnge/2) > time){
                     ai = new AI(ai1Level, ai2Board);
                     ai2Board = ai.moveAI();
+                    if(ai2Board.endGame()){
+                        winner("AI 1 is the winner");
+                        player1BattleViewController.player2Pane.getChildren().remove(player2.getPhoto());
+                        player1BattleViewController.winnerPane.getChildren().add(player1.getPhoto());
+                        System.out.println("dupa1");
+                        super.stop();
+                        saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player1.getId() );
+                        return;
+                    }
+
                     if(ai2Board.isPreviousShotTelling()) {
                         super.stop();
                         aiVsAiStartGame();
+                        player1BattleViewController.player1Pane.getChildren().remove(player1.getPhoto());
+                        player1BattleViewController.player2Pane.getChildren().remove(player2.getPhoto());
+                        player1BattleViewController.player1Pane.getChildren().add(player1.getPhoto());
+                        player1BattleViewController.player2Pane.getChildren().add(player2.getPhoto());
                         return;
                     }
 
                     if(ai2Board.endGame()){
                         winner("AI 1 is the winner");
+                        player1BattleViewController.player2Pane.getChildren().remove(player2.getPhoto());
+                        player1BattleViewController.winnerPane.getChildren().add(player1.getPhoto());
 
                         System.out.println("dupa1");
-
-
                         super.stop();
                         saveGameToDB(ai1Board,ai2Board, player1.getId(), player2.getId(),player1.getId() );
 //                        DbConnection dbConnection = new DbConnection();
@@ -762,9 +816,6 @@ public void aiShootInPlayer1(){
 //                        primaryStage.setScene(new Scene(pane));
 //                        primaryStage.show();
 //                        battleReplaysController.setToReplays(ai1Board.getInitilaState(ai1Board), ai2Board.getInitilaState(ai2Board), ai1Board.getChangeShootToDB(), ai2Board.getChangeShootToDB());
-
-
-
                         return;
                     }
                     hideBoardPl2(player1BattleViewController.nextButton.getScene());
@@ -781,12 +832,15 @@ public void aiShootInPlayer1(){
         DbConnection dbConnection = new DbConnection();
         board2.makeChangesShootToDB();
         board1.makeChangesShootToDB();
-        System.out.println("===================1");
-        System.out.println(dbConnection.setGame(board1.getInitilaState(board1), board2.getInitilaState(board2), board1.getChangesToDB(), board2.getChangesToDB(), player1,player2,winner));
-        System.out.println("===================2");
-        System.out.println(dbConnection.updateUser_statistics(board2.getShotsAmount(),board2.getHitsAmount() , player1,winner));
-        System.out.println("===================3");
-        System.out.println(dbConnection.updateUser_statistics(board1.getShotsAmount(),board1.getHitsAmount(), player2,winner));
+        dbConnection.setGame(board1.getInitilaState(board1), board2.getInitilaState(board2), board1.getChangesToDB(), board2.getChangesToDB(), player1,player2,winner);
+        dbConnection.updateUser_statistics(board2.getShotsAmount(),board2.getHitsAmount() , player1,winner);
+        dbConnection.updateUser_statistics(board1.getShotsAmount(),board1.getHitsAmount(), player2,winner);
+//        System.out.println("===================1");
+//        System.out.println(dbConnection.setGame(board1.getInitilaState(board1), board2.getInitilaState(board2), board1.getChangesToDB(), board2.getChangesToDB(), player1,player2,winner));
+//        System.out.println("===================2");
+//        System.out.println(dbConnection.updateUser_statistics(board2.getShotsAmount(),board2.getHitsAmount() , player1,winner));
+//        System.out.println("===================3");
+//        System.out.println(dbConnection.updateUser_statistics(board1.getShotsAmount(),board1.getHitsAmount(), player2,winner));
     }
 
 

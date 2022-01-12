@@ -3,15 +3,126 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
 <Pane id="pl1Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player1ViewController">
    <children>
-      <Pane id="boarderpl1" fx:id="boarderpl1_fxml" layoutX="243.0" layoutY="73.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: RED;" />
-      <Button fx:id="switchToP2Button" layoutX="117.0" layoutY="160.0" mnemonicParsing="false" onAction="#SignInP2" text="Switch to P2" />
-      <Label layoutX="108.0" layoutY="118.0" text="Place all Ships First" />
+      <Button fx:id="switchToP2Button" layoutX="116.0" layoutY="188.0" mnemonicParsing="false" onAction="#SignInP2" text="Switch to P2" />
+      <Label layoutX="107.0" layoutY="158.0" text="Place all Ships First" />
       <Button fx:id="randomButton" layoutX="127.0" layoutY="223.0" mnemonicParsing="false" onAction="#randomAction" text="Random" />
       <Button fx:id="startGameAiButton" layoutX="112.0" layoutY="310.0" mnemonicParsing="false" onAction="#startGameAiAction" text="Start Game AI" />
       <Button fx:id="clearBoardButton" layoutX="118.0" layoutY="271.0" mnemonicParsing="false" onAction="#clearBoardAction" text="Clear board" />
-      <Pane id="im" layoutX="62.0" layoutY="14.0" prefHeight="90.0" prefWidth="100.0" />
+      <Pane layoutX="250.0" layoutY="35.0" prefHeight="330.0" prefWidth="330.0" style="-fx-background-color: blue;">
+         <children>
+            <Pane layoutX="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+               </children>
+            </Pane>
+            <Pane layoutX="60.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B" />
+               </children>
+            </Pane>
+            <Pane prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </children>
+            </Pane>
+            <Pane layoutY="30.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+               </children>
+            </Pane>
+            <Pane layoutY="60.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+               </children>
+            </Pane>
+            <Pane layoutY="90.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+               </children>
+            </Pane>
+            <Pane layoutY="120.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+               </children>
+            </Pane>
+            <Pane layoutY="150.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" />
+               </children>
+            </Pane>
+            <Pane layoutY="180.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6" />
+               </children>
+            </Pane>
+            <Pane layoutY="210.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="7" />
+               </children>
+            </Pane>
+            <Pane layoutY="240.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8" />
+               </children>
+            </Pane>
+            <Pane layoutY="270.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="9" />
+               </children>
+            </Pane>
+            <Pane layoutY="300.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="8.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+               </children>
+            </Pane>
+            <Pane layoutX="90.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
+               </children>
+            </Pane>
+            <Pane layoutX="150.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E" />
+               </children>
+            </Pane>
+            <Pane layoutX="180.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+               </children>
+            </Pane>
+            <Pane layoutX="120.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D" />
+               </children>
+            </Pane>
+            <Pane layoutX="210.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="G" />
+               </children>
+            </Pane>
+            <Pane layoutX="240.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H" />
+               </children>
+            </Pane>
+            <Pane layoutX="270.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I" />
+               </children>
+            </Pane>
+            <Pane layoutX="300.0" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: lightblue; -fx-border-color: black;">
+               <children>
+                  <Text layoutX="11.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="J" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane id="boarderpl1" fx:id="boarderpl1_fxml" layoutX="280.0" layoutY="65.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: RED;" />
+      <Pane fx:id="player1Pane" layoutX="107.0" layoutY="51.0" prefHeight="100.0" prefWidth="100.0" />
+      <Label fx:id="playerUsernameLabel" layoutX="143.0" layoutY="18.0" text="Label" />
    </children>
 </Pane>

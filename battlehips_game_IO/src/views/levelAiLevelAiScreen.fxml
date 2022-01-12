@@ -6,27 +6,28 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LevelAiLevelAiController">
    <children>
-      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="466.0" layoutY="47.0" prefHeight="53.0" prefWidth="75.0" text="AI">
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="468.0" layoutY="6.0" prefHeight="53.0" prefWidth="75.0" text="AI">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
       <Button fx:id="startGameButton" layoutX="282.0" layoutY="331.0" mnemonicParsing="false" onAction="#startGameAction" text="Start Game" />
       <Button fx:id="backToMenuButton" layoutX="53.0" layoutY="364.0" mnemonicParsing="false" onAction="#backToMenuAction" text="Back to Menu" />
-      <RadioButton fx:id="easyRadioButton2" layoutX="460.0" layoutY="134.0" mnemonicParsing="false" onAction="#easyAction2" text="Easy" />
+      <RadioButton fx:id="easyRadioButton2" layoutX="461.0" layoutY="150.0" mnemonicParsing="false" onAction="#easyAction2" text="Easy" />
       <RadioButton fx:id="mediumRadioButton2" layoutX="460.0" layoutY="184.0" mnemonicParsing="false" onAction="#mediumAction2" text="Medium" />
       <RadioButton fx:id="hardRadioButton2" layoutX="460.0" layoutY="225.0" mnemonicParsing="false" onAction="#hardAction2" text="Hard" />
       <Label layoutX="206.0" layoutY="298.0" text="Przycisk pojawia się po zalogowaniu graczy" />
-      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="54.0" prefHeight="53.0" prefWidth="75.0" text="AI">
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="60.0" layoutY="6.0" prefHeight="53.0" prefWidth="75.0" text="AI">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <RadioButton fx:id="easyRadioButton1" layoutX="53.0" layoutY="141.0" mnemonicParsing="false" onAction="#easyAction1" text="Easy" />
+      <RadioButton fx:id="easyRadioButton1" layoutX="52.0" layoutY="159.0" mnemonicParsing="false" onAction="#easyAction1" text="Easy" />
       <RadioButton fx:id="mediumRadioButton1" layoutX="53.0" layoutY="191.0" mnemonicParsing="false" onAction="#mediumAction1" text="Medium" />
       <RadioButton fx:id="hardRadioButton1" layoutX="53.0" layoutY="232.0" mnemonicParsing="false" onAction="#hardAction1" text="Hard" />
+      <Pane fx:id="player1Pane" layoutX="36.0" layoutY="59.0" prefHeight="100.0" prefWidth="100.0" />
+      <Pane fx:id="player2Pane" layoutX="443.0" layoutY="50.0" prefHeight="100.0" prefWidth="100.0" />
    </children>
 </Pane>

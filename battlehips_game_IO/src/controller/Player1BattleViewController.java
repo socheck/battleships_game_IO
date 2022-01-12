@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sample.Controller;
 
@@ -27,6 +28,12 @@ public class Player1BattleViewController {
     public Label  player2Label;
     @FXML
     public Button backToMenuButton;
+    @FXML
+    public Pane player1Pane;
+    @FXML
+    public Pane player2Pane;
+    @FXML
+    public Pane winnerPane;
 
     Controller controller;
     private boolean ifPlayer1 = true; //true oznacza gracza 1
@@ -48,17 +55,21 @@ public class Player1BattleViewController {
             nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = false;
             playerNumberLabel.setText("Tura Gracza Nr 2");
-            player1Label.setText(controller.getPlayer1().getUsername());
-            player2Label.setText(controller.getPlayer2().getUsername());
+            player1Label.setText(controller.getPlayer2().getUsername());
+            player2Label.setText(controller.getPlayer1().getUsername());
+            player1Pane.getChildren().add(controller.getPlayer2().getPhoto());
+            player2Pane.getChildren().add(controller.getPlayer1().getPhoto());
 
-        }else { // przełączamy ba gracza 1
+        }else { // przełączamy na gracza 1
             controller.insertBoardShip(nextPlayerReadyButton.getScene(), controller.player1Board);
             controller.insertBoardShoot(nextPlayerReadyButton.getScene(), controller.player2Board);
             nextPlayerReadyButton.setDisable(true);
             ifPlayer1 = true;
             playerNumberLabel.setText("Tura Gracza Nr 1");
-            player1Label.setText(controller.getPlayer2().getUsername());
-            player2Label.setText(controller.getPlayer1().getUsername());
+            player1Label.setText(controller.getPlayer1().getUsername());
+            player2Label.setText(controller.getPlayer2().getUsername());
+            player1Pane.getChildren().add(controller.getPlayer1().getPhoto());
+            player2Pane.getChildren().add(controller.getPlayer2().getPhoto());
         }
     }
 

@@ -2,6 +2,8 @@ package sample;
 
 import javafx.scene.image.ImageView;
 
+import java.text.DecimalFormat;
+
 public class User {
     private int id;
     private String username;
@@ -38,13 +40,12 @@ public class User {
         if(shots_amount == 0){
             this.aimRatio = 0;
         }else {
-            this.aimRatio = (double) hits_amount/(double) shots_amount;
+            this.aimRatio = (int)(Math.round((double) hits_amount/(double) shots_amount * 100))/100.0;
         }
 
 
 
         ImageView photo = new ImageView(avatar_path);
-       // ImageView photo = new ImageView("/img/avatars/avatar_2.jpg");
         this.photo = photo;
 
     }

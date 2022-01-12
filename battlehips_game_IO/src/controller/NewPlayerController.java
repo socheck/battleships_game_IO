@@ -17,7 +17,12 @@ import javafx.stage.Stage;
 import sample.ClassToComboBox;
 import sample.User;
 
+import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 
@@ -37,7 +42,8 @@ public class NewPlayerController {
     public ImageView avatarImageView;
     @FXML
     public Label errorLabel;
-
+    @FXML
+    public Label succesLabel;
 
 
     ArrayList<ClassToComboBox> avatarsList = new ArrayList<>();
@@ -46,9 +52,33 @@ public class NewPlayerController {
     private ListProperty<ClassToComboBox> listPropertyAvatar;
 
     public void initialize(){
-        for(int k = 1; k < 11; k++ ){
-            avatarsList.add(new ClassToComboBox("avatar_"+ k));
+        ArrayList<String> results = new ArrayList<String>();
+        File[] files = new File("src/img/avatars/user").listFiles();
+        for (File file : files) {
+            if (file.isFile()) {
+                results.add(file.getName());
+            }
         }
+
+        for (String s:
+                results) {
+            avatarsList.add(new ClassToComboBox(s.replaceFirst("[.][^.]+$", "")));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+//        for(int k = 1; k < 11; k++ ){
+//            avatarsList.add(new ClassToComboBox("avatar"+ k));
+//        }
         listPropertyAvatar = new SimpleListProperty<>(); //OBSlUGA Comboboxa z listy
         avatarObservableList = FXCollections.observableArrayList(avatarsList);
         listPropertyAvatar.set(avatarObservableList);
@@ -61,7 +91,29 @@ public class NewPlayerController {
         errorLabel.setText("");
         DbConnection dbConnection = new DbConnection();
         String username = usernameTextField.getText();
-        String password = paswordPaswordField.getText();
+
+
+
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        md5.update(StandardCharsets.UTF_8.encode(paswordPaswordField.getText()));
+        String password = String.format("%032x", new BigInteger(1, md5.digest()));
+
+
+
+
+
+
+
+
+
+
+
+
         if(avatarComboBox.getSelectionModel().getSelectedItem() == null){
            errorLabel.setText("Choose avatar");
            return;
@@ -87,6 +139,12 @@ public class NewPlayerController {
         paswordPaswordField.setText("");
 
         dbConnection.setUser(username,password,((ClassToComboBox)avatarComboBox.getSelectionModel().getSelectedItem()).getPath());
+        succesLabel.setText("Succesfuly Created Player "+ username);
+        usernameTextField.setDisable(true);
+        paswordPaswordField.setDisable(true);
+        creatUserButton.setDisable(true);
+
+
 
     }
     public void  avatarComboboxAction(){

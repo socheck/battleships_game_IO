@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sample.Controller;
 import sample.User;
@@ -32,6 +33,11 @@ public class LevelAiLevelAiController {
     public Button startGameButton;
     @FXML
     public Button backToMenuButton;
+    @FXML
+    public Pane player1Pane;
+    @FXML
+    public Pane player2Pane;
+
     private int ai1Level = 0,ai2Level = 0;
     private User playerAI1, playerAI2;
     private boolean ai1LevelSet = false, ai2LevelSet = false;
@@ -47,7 +53,7 @@ public class LevelAiLevelAiController {
 
     @FXML
     public void startGameAction() throws IOException { // przełączenie na ustawianie statków gracza 1
-        setplayerAI();
+//        setplayerAI();
         controller = new Controller();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/player1BattleView.fxml"));
         Parent root2 = (Parent) fxmlLoader.load();
@@ -76,7 +82,7 @@ public class LevelAiLevelAiController {
         controller.setAi1Level(ai1Level);
         controller.setAi2Level(ai2Level);
 
-        controller.aiVsAiStartGame();
+
 
 
         controller.createBoardAi1();
@@ -85,8 +91,11 @@ public class LevelAiLevelAiController {
         controller.insertBoardShoot(scene,controller.ai2Board);
         controller.setPlayer1(playerAI1);
         controller.setPlayer2(playerAI2);
+        controller.player1BattleViewController.player1Pane.getChildren().add(playerAI1.getPhoto());
+        controller.player1BattleViewController.player2Pane.getChildren().add(playerAI2.getPhoto());
         //ustawiono staki 1 i strzelanie 2
         ((Stage) startGameButton.getScene().getWindow()).close();
+        controller.aiVsAiStartGame();
 
 
     }
@@ -104,6 +113,7 @@ public class LevelAiLevelAiController {
         easyRadioButton2.setDisable(true);
         mediumRadioButton2.setDisable(false);
         hardRadioButton2.setDisable(false);
+        setAiUser1();
     }
     @FXML
     public void mediumAction1(){
@@ -116,6 +126,7 @@ public class LevelAiLevelAiController {
         easyRadioButton2.setDisable(false);
         mediumRadioButton2.setDisable(true);
         hardRadioButton2.setDisable(false);
+        setAiUser1();
     }
     @FXML
     public void hardAction1(){
@@ -127,6 +138,7 @@ public class LevelAiLevelAiController {
         easyRadioButton2.setDisable(false);
         mediumRadioButton2.setDisable(false);
         hardRadioButton2.setDisable(true);
+        setAiUser1();
     }
     @FXML
     public void easyAction2(){
@@ -138,6 +150,7 @@ public class LevelAiLevelAiController {
         easyRadioButton1.setDisable(true);
         mediumRadioButton1.setDisable(false);
         hardRadioButton1.setDisable(false);
+        setAiUser2();
     }
     @FXML
     public void mediumAction2(){
@@ -149,6 +162,7 @@ public class LevelAiLevelAiController {
         easyRadioButton1.setDisable(false);
         mediumRadioButton1.setDisable(true);
         hardRadioButton1.setDisable(false);
+        setAiUser2();
     }
     @FXML
     public void hardAction2(){
@@ -160,6 +174,7 @@ public class LevelAiLevelAiController {
         easyRadioButton1.setDisable(false);
         mediumRadioButton1.setDisable(false);
         hardRadioButton1.setDisable(true);
+        setAiUser2();
 
     }
 
@@ -197,6 +212,7 @@ public class LevelAiLevelAiController {
     public void setAi2Level(int ai2Level) {
         this.ai2Level = ai2Level;
     }
+
     public void setplayerAI(){
         for (User u :
                 aiUserList) {
@@ -206,12 +222,41 @@ public class LevelAiLevelAiController {
             if(ai2Level == (u.getId()-1)){
                 playerAI2 = u;
             }
+        }
+    }
 
+    public void setAiUser1(){
+        try {
+            player2Pane.getChildren().remove(playerAI1.getPhoto());
+        } catch (Exception e) {
+        }finally {
+            for (User u :
+                    aiUserList) {
+                if ((u.getId() - 1) == ai1Level) {
+                    playerAI1 = u;
+                    player1Pane.getChildren().add(playerAI1.getPhoto());
+                    return;
+                }
+            }
         }
 
-
-
+    }
+    public void setAiUser2(){
+        try {
+            player2Pane.getChildren().remove(playerAI2.getPhoto());
+        } catch (Exception e) {
+        }finally {
+            for (User u :
+                    aiUserList) {
+                if ((u.getId() - 1) == ai2Level) {
+                    playerAI2 = u;
+                    player2Pane.getChildren().add(playerAI2.getPhoto());
+                    return;
+                }
+            }
+        }
 
     }
+
 }
 

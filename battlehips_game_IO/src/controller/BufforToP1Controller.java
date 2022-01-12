@@ -49,6 +49,9 @@ public class BufforToP1Controller {
         player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
         player1BattleViewController.player1Label.setText(controller.getPlayer1().getUsername());
         player1BattleViewController.player2Label.setText(controller.getPlayer2().getUsername());
+        player1BattleViewController.player1Pane.getChildren().add(controller.getPlayer1().getPhoto());
+        player1BattleViewController.player2Pane.getChildren().add(controller.getPlayer2().getPhoto());
+
         player1BattleViewController.continueButton.setDisable(true);
 
     }

@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -24,6 +25,10 @@ public class Player1ViewController {
     public Button startGameAiButton;
     @FXML
     public Button clearBoardButton;
+    @FXML
+    public Pane player1Pane;
+    @FXML
+    public Label playerUsernameLabel;
 
     private boolean nextGameWithAi = false; // true następna gra jest z botem
     private Controller controller;
@@ -31,6 +36,7 @@ public class Player1ViewController {
 
     public void initialize(){
         switchToP2Button.setDisable(false);
+
     }
     @FXML
     public void SignInP2() throws IOException {
@@ -84,6 +90,8 @@ public class Player1ViewController {
         controller.setPlayer1BattleViewController(player1BattleViewController);
         controller.insertBoardPl1Ready(scene);
         controller.insertBoardShoot(scene,controller.ai1Board);
+        controller.player1BattleViewController.player1Pane.getChildren().add(controller.getPlayer1().getPhoto());
+        controller.player1BattleViewController.player2Pane.getChildren().add(controller.getPlayer2().getPhoto());
 
         stage.show();
         try{
