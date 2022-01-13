@@ -7,8 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sample.Controller;
@@ -104,7 +102,7 @@ public class Player1ViewController {
         player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
         player1BattleViewController.player1Label.setText(controller.getPlayer1().getUsername());
         player1BattleViewController.player2Label.setText("AI level " + controller.getAi1Level());
-        player1BattleViewController.continueButton.setDisable(true);
+        player1BattleViewController.exitButton.setDisable(true);
         player1BattleViewController.nextPlayerReadyButton.setVisible(false);
         player1BattleViewController.nextButton.setVisible(false);
 

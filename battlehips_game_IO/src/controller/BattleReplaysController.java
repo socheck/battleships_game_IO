@@ -136,7 +136,7 @@ public class BattleReplaysController {
             return;
         }
       //  playerNumberLabel.setText("Now is turn player: " + player1.getUsername());
-        long  timeOfAiCahnge = 1_000_000;  // zmienić 1 na 1_000_000_000 do testów zmniejszone
+        long  timeOfAiCahnge = 1_000_000_000;  // zmienić 1 na 1_000_000_000 do testów zmniejszone
         time = System.nanoTime();
         AnimationTimer timerAi1 = new AnimationTimer() {
 

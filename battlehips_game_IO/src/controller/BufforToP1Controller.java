@@ -53,7 +53,7 @@ public class BufforToP1Controller {
         player1BattleViewController.player2Pane.getChildren().add(controller.getPlayer2().getPhoto());
 
 
-        player1BattleViewController.continueButton.setDisable(true);
+        player1BattleViewController.exitButton.setDisable(true);
 
     }
 }

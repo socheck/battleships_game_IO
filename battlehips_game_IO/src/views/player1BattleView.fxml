@@ -17,7 +17,7 @@
       </Label>
       <Button fx:id="nextButton" layoutX="446.0" layoutY="403.0" mnemonicParsing="false" onAction="#nextAction" prefHeight="25.0" prefWidth="107.0" text="NEXT" />
       <Button fx:id="nextPlayerReadyButton" layoutX="445.0" layoutY="449.0" mnemonicParsing="false" onAction="#player2ReadyAction" text="Next Player Ready" />
-      <Button fx:id="continueButton" layoutX="461.0" layoutY="531.0" mnemonicParsing="false" onAction="#continueAction" prefHeight="25.0" prefWidth="79.0" text="Exit" />
+      <Button fx:id="exitButton" layoutX="461.0" layoutY="531.0" mnemonicParsing="false" onAction="#exitAction" prefHeight="25.0" prefWidth="79.0" text="Exit" />
       <Button fx:id="backToMenuButton" layoutX="455.0" layoutY="484.0" mnemonicParsing="false" onAction="#backToMenuAction" text="Back to Menu" />
       <Label layoutX="200.0" layoutY="59.0" text="My Board" />
       <Label layoutX="753.0" layoutY="59.0" text="Enemy Board" />

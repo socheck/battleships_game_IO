@@ -72,18 +72,15 @@ public class LevelAiLevelAiController {
 
         }
         controller.setPlayer1BattleViewController(player1BattleViewController);
-        player1BattleViewController.nextButton.setDisable(true);
-        player1BattleViewController.nextPlayerReadyButton.setDisable(true);
+
+
         player1BattleViewController.playerNumberLabel.setText("Tura AI  1");
-        player1BattleViewController.continueButton.setDisable(true);
+
 
         controller.setAi1Is(true);
         controller.setAi2Is(true);
         controller.setAi1Level(ai1Level);
         controller.setAi2Level(ai2Level);
-
-
-
 
         controller.createBoardAi1();
         controller.createBoardAi2();
@@ -93,6 +90,10 @@ public class LevelAiLevelAiController {
         controller.setPlayer2(playerAI2);
         controller.player1BattleViewController.player1Pane.getChildren().add(playerAI1.getPhoto());
         controller.player1BattleViewController.player2Pane.getChildren().add(playerAI2.getPhoto());
+        player1BattleViewController.nextButton.setDisable(true);
+        controller.player1BattleViewController.nextButton.setVisible(false);
+        player1BattleViewController.nextPlayerReadyButton.setDisable(true);
+        controller.player1BattleViewController.nextPlayerReadyButton.setVisible(false);
         //ustawiono staki 1 i strzelanie 2
         ((Stage) startGameButton.getScene().getWindow()).close();
         controller.aiVsAiStartGame();

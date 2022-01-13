@@ -21,7 +21,7 @@ public class Player1BattleViewController {
     @FXML
     public Label playerNumberLabel;
     @FXML
-    public Button continueButton;
+    public Button exitButton;
     @FXML
     public Label  player1Label;
     @FXML
@@ -83,15 +83,16 @@ public class Player1BattleViewController {
         }
     }
 
-    public void continueAction(){
-        ((Stage)(continueButton.getScene().getWindow())).close();
+    public void exitAction(){
+        controller.setExitToMenu(true);
+        ((Stage)(exitButton.getScene().getWindow())).close();
     }
 
     public void setContinueButtonDisable(){
-        continueButton.setDisable(true);
+        exitButton.setDisable(true);
     }
     public void setContinueButtonEnable(){
-        continueButton.setDisable(false);
+        exitButton.setDisable(false);
     }
     public void setNextButtonDisable(){
         nextButton.setDisable(true);
