@@ -28,5 +28,6 @@
       <Button fx:id="backToMenuButton" layoutX="33.0" layoutY="344.0" mnemonicParsing="false" onAction="#backToMenuAction" text="Back to Menu" />
       <Pane fx:id="player1Pane" layoutX="63.0" layoutY="88.0" prefHeight="100.0" prefWidth="100.0" />
       <Pane fx:id="player2Pane" layoutX="440.0" layoutY="88.0" prefHeight="100.0" prefWidth="100.0" />
+      <Label fx:id="pleaseLoginLabel" layoutX="279.0" layoutY="45.0" text="Label" />
    </children>
 </Pane>

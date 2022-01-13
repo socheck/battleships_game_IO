@@ -105,6 +105,8 @@ public class Player1ViewController {
         player1BattleViewController.player1Label.setText(controller.getPlayer1().getUsername());
         player1BattleViewController.player2Label.setText("AI level " + controller.getAi1Level());
         player1BattleViewController.continueButton.setDisable(true);
+        player1BattleViewController.nextPlayerReadyButton.setVisible(false);
+        player1BattleViewController.nextButton.setVisible(false);
 
 
 

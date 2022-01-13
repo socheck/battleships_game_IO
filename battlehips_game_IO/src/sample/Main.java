@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
@@ -40,12 +42,6 @@ public class Main extends Application {
 //            // directories.
 //            System.out.println("kurwica");
 //        }
-        String rootFolder = "/img/avatars/";
-
-
-
-
-
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();

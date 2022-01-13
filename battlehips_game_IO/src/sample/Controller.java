@@ -79,7 +79,7 @@ public class Controller {
     private boolean player2AllShipSet = false , player1AllShipSet = false;
     private boolean player1ShotNow = true, player2ShotNow = true;
 
-    private long  timeOfAiCahnge = 1_000;   // do testó ustawiona mała wartość wrócić do 1_000_000_000
+    private long  timeOfAiCahnge = 1_000_000_000;   // do testó ustawiona mała wartość wrócić do 1_000_000_000
     private boolean exitToMenu = false;
 
     public void setExitToMenu(boolean exitToMenu) {
@@ -499,6 +499,7 @@ public class Controller {
                             if(ai1Board.endGame()){
                                winner("Player 1 is the winner");
                                 player1BattleViewController.player2Pane.getChildren().remove(player2.getPhoto());
+                                player1BattleViewController.player1Pane.getChildren().remove(player1.getPhoto());
                                 player1BattleViewController.winnerPane.getChildren().add(player1.getPhoto());
                                 saveGameToDB(player1Board,ai1Board, player1.getId(), player2.getId(),player1.getId() );
 

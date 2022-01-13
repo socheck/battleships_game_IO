@@ -47,6 +47,16 @@ public class Player1BattleViewController {
         nextPlayerReadyButton.setDisable(false);
         controller.hideBoardPl1(nextButton.getScene());
         controller.hideBoardPl2(nextButton.getScene());
+
+
+        if (playerNumberLabel.getText().equals("Tura Gracza Nr 2") ){
+            playerNumberLabel.setText("Next player: " + controller.getPlayer1().getUsername());
+        }else if (playerNumberLabel.getText().equals("Tura Gracza Nr 1") ){
+            playerNumberLabel.setText("Next player: " + controller.getPlayer2().getUsername());
+        }else{
+            playerNumberLabel.setText("Switching Players");
+        }
+
     }
     public void player2ReadyAction() {
         if (ifPlayer1) { // skonczyła się tura gracza 1 i przłączamy na gracza 2

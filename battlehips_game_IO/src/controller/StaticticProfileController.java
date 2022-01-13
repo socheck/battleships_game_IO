@@ -35,11 +35,6 @@ public class StaticticProfileController {
     @FXML
     public TableColumn<User,String> battlesTablecolumn;
 
-    @FXML
-    public TableColumn<User,Integer> hitsTablecolumn;
-
-    @FXML
-    public TableColumn<User,String> allShootsTablecolumn;
 
     @FXML
     public TableColumn<User,String> ratioTablecolumn;
@@ -63,13 +58,23 @@ public class StaticticProfileController {
     ArrayList<User> userArrayList;
     public void initialize(){
         dbConnection = new DbConnection();
-        userArrayList = dbConnection.getAllUser_list();
+
+
+        userArrayList = dbConnection.getAllUser_listToGameStatistic();
+//        for (User u :
+//                userArrayList) {
+//            if(u.getBattles() == 0 && u.getId() > 3){
+//                userArrayList.remove(userArrayList.get(userArrayList.indexOf(u)));
+//                System.out.println(u.getId());
+//            }
+//
+//        }
+
+
         avatarTableColumn.setCellValueFactory(new PropertyValueFactory<>("photo"));
         UsarnameTableColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         winsTablecolumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
         battlesTablecolumn.setCellValueFactory(new PropertyValueFactory<>("battles"));
-        hitsTablecolumn.setCellValueFactory(new PropertyValueFactory<>("hits_amount"));
-        allShootsTablecolumn.setCellValueFactory(new PropertyValueFactory<>("shots_amount"));
         ratioTablecolumn.setCellValueFactory(new PropertyValueFactory<>("aimRatio"));
 
 
@@ -99,6 +104,7 @@ public class StaticticProfileController {
         stage.show();
         editProfileController.setSelectedUser(selectedUser);
         editProfileController.setAvatarView();
+
 
     }
 
@@ -161,12 +167,8 @@ public void addPlayerAction() throws IOException {
         stage.show();
     }
     public void menuContexMenuAction(){
-        System.out.println("dupa1");
         User userToDelete = (User) statisticTableView.getSelectionModel().getSelectedItem();
         ArrayList<GameDB> gameDBS = dbConnection.getGamesArray(userToDelete.getId());
-        System.out.println(gameDBS);
-        System.out.println(gameDBS.size());
-
         if(userToDelete.getId() < 4){
             deleteMenuItem.setVisible(false);
             return;
@@ -179,9 +181,8 @@ public void addPlayerAction() throws IOException {
         }else {
             deleteMenuItem.setVisible(true);
         }
-
-
-
     }
+
+
 
 }

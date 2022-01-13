@@ -31,13 +31,13 @@ import java.util.ArrayList;
 public class EditProfileController {
 
     @FXML
-    private Button confirbButton;
+    public Button confirbButton;
     @FXML
-    private TextField oldPasswordField;
+    public TextField oldPasswordField;
     @FXML
-    private TextField newPasswordField;
+    public TextField newPasswordField;
     @FXML
-    private ComboBox avatarComboBox;
+    public ComboBox avatarComboBox;
     @FXML
     public ImageView xd;
     @FXML
@@ -46,6 +46,8 @@ public class EditProfileController {
     public Label succesLabel;
     @FXML
     public Button backToStatisticButton;
+    @FXML
+    public Button changeAvatarButton;
     private User selectedUser;
 
     ArrayList<ClassToComboBox> avatarsList = new ArrayList<>();
@@ -116,7 +118,7 @@ public class EditProfileController {
 
 
 
-        String newPath;
+
 
         if(oldPassword ==""){
             errorPaswordLabel.setText("InvalidData");
@@ -132,15 +134,11 @@ public class EditProfileController {
         }
         errorPaswordLabel.setText("");
 
-        if(avatarComboBox.getSelectionModel().getSelectedItem() == null){
-            newPath = selectedUser.getAvatar_path();
-        }else {
-            newPath = ((ClassToComboBox)avatarComboBox.getSelectionModel().getSelectedItem()).getPath();
-        }
+
         //zapisujemy do bazy
         DbConnection dbConnection = new DbConnection();
         dbConnection.updateUser_password(newPassword, selectedUser.getId());
-        dbConnection.updateUser_avatar(newPath, selectedUser.getId());
+
 
         oldPasswordField.setText("");
         newPasswordField.setText("");
@@ -177,5 +175,49 @@ public class EditProfileController {
         stage.setTitle("Statistic/Profile");
         stage.show();
 
+    }
+
+    public void changeAvatarAction(){
+        String newPath;
+
+        if(avatarComboBox.getSelectionModel().getSelectedItem() == null){
+            newPath = selectedUser.getAvatar_path();
+        }else {
+            newPath = ((ClassToComboBox)avatarComboBox.getSelectionModel().getSelectedItem()).getPath();
+        }
+        if(newPath.equals(selectedUser.getAvatar_path())){
+            return;
+        }
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        md5.update(StandardCharsets.UTF_8.encode(oldPasswordField.getText()));
+        String oldPassword = String.format("%032x", new BigInteger(1, md5.digest()));
+
+        if(oldPassword ==""){
+            errorPaswordLabel.setText("InvalidData");
+            return;
+        }
+        if(!oldPassword.equals(selectedUser.getPassword())){
+            errorPaswordLabel.setText("InvalidData");
+            return;
+        }
+        errorPaswordLabel.setText("");
+
+
+
+        DbConnection dbConnection = new DbConnection();
+        dbConnection.updateUser_avatar(newPath, selectedUser.getId());
+        oldPasswordField.setText("");
+        newPasswordField.setText("");
+        succesLabel.setText("Successfully changed!");
+        oldPasswordField.setDisable(true);
+        newPasswordField.setDisable(true);
+        confirbButton.setDisable(true);
+        avatarComboBox.setDisable(true);
+        changeAvatarButton.setDisable(true);
     }
 }

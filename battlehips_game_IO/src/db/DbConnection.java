@@ -194,6 +194,56 @@ public class DbConnection {
         }
         return userArrayList;
     }
+    public ArrayList<User> getAllUser_listToGameStatistic(){
+        ArrayList<User> userArrayList = new ArrayList<User>();
+        Connection connection = null;
+        try {
+            connection = getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        PreparedStatement preparedStatement= null;
+        ResultSet resultSet = null;
+
+        String komendaSQL = "SELECT * FROM users_list WHERE battles <> 0;";
+
+        try {
+            preparedStatement = connection.prepareStatement(komendaSQL);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+//                System.out.println(resultSet.getInt("id") +  "\t" +
+//                        resultSet.getString("username") + "\t" +
+//                        resultSet.getString("password") + "\t" +
+//                        resultSet.getString("avatar_path") + "\t" +
+//                        resultSet.getInt("wins") + "\t" +
+//                        resultSet.getInt("battles") + "\t" +
+//                        resultSet.getDouble("aim_ratio"));
+//                System.out.println("===========================================================");
+
+                userArrayList.add(new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getInt("shots_amount"), resultSet.getInt("hits_amount")));
+
+            }
+            return userArrayList;
+
+        } catch (SQLException throwables) {
+            System.out.println("Coś poszło nie tak getUser_list");
+            throwables.printStackTrace();
+        }finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
+                resultSet.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return userArrayList;
+    }
 
     public boolean setUser(String username, String password, String avatar_path){
         Connection connection = null;

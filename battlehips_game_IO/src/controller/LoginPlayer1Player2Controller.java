@@ -34,6 +34,8 @@ public class LoginPlayer1Player2Controller {
     public Pane player1Pane;
     @FXML
     public Pane player2Pane;
+    @FXML
+    public Label pleaseLoginLabel;
     private Controller controller;
     private DbConnection dbConnection;
     private ArrayList<User> userArrayList;
@@ -136,6 +138,11 @@ public class LoginPlayer1Player2Controller {
     public void setPlayer1(User player1) {
         this.player1 = player1;
         player1Pane.getChildren().add(player1.getPhoto());
+        loginPlayer2Button.setDisable(false);
+        pleaseLoginLabel.setText("Pleas login player 2");
+        loginPlayer1Button.setDisable(true);
+        loginPlayer2Button.setVisible(true);
+        loginPlayer1Button.setVisible(false);
     }
 
     public User getPlayer2() {
@@ -146,5 +153,10 @@ public class LoginPlayer1Player2Controller {
     public void setPlayer2(User player2) {
         this.player2 = player2;
         player2Pane.getChildren().add(player2.getPhoto());
+        pleaseLoginLabel.setText("");
+        loginPlayer2Button.setDisable(true);
+        loginPlayer2Button.setVisible(false);
+        startGameButton.setVisible(true);
+
     }
 }

@@ -40,6 +40,8 @@ public class LoginPlayerLevelAiController {
     public Pane player1Pane;
     @FXML
     public Pane player2Pane;
+    @FXML
+    public Label pleaseLoginLabel;
 
     private Controller controller;
     private int aiLevel = 0;
@@ -65,6 +67,13 @@ public class LoginPlayerLevelAiController {
     public void setPlayer1(User player1) {
         this.player1 = player1;
         player1Pane.getChildren().add(player1.getPhoto());
+        loginPlayer1Button.setDisable(true);
+        loginPlayer1Button.setVisible(false);
+        easyRadioButton.setVisible(true);
+        mediumRadioButton.setVisible(true);
+        hardRadioButton.setVisible(true);
+        pleaseLoginLabel.setText("Chose AI level");
+
     }
 
     public LoginPlayerLevelAiController getLoginPlayerLevelAiController() {
@@ -144,6 +153,7 @@ public class LoginPlayerLevelAiController {
         hardRadioButton.setSelected(false);
         aiLevel = 0;
         setAiUser();
+        startGameButton.setVisible(true);
 
     }
     @FXML
@@ -152,7 +162,7 @@ public class LoginPlayerLevelAiController {
         hardRadioButton.setSelected(false);
         aiLevel = 1;
         setAiUser();
-
+        startGameButton.setVisible(true);
     }
     @FXML
     public void hardAction(){
@@ -160,7 +170,7 @@ public class LoginPlayerLevelAiController {
         easyRadioButton.setSelected(false);
         aiLevel = 2;
         setAiUser();
-
+        startGameButton.setVisible(true);
 
 
     }

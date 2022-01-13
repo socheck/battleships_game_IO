@@ -128,7 +128,7 @@ public class NewPlayerController {
             errorLabel.setText("Choose password");
             return;
         }
-        ArrayList<User> userArrayList = dbConnection.getUser_list();
+        ArrayList<User> userArrayList = dbConnection.getAllUser_list();
 
         for (User user :
                 userArrayList) {

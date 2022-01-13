@@ -12,14 +12,12 @@
    <children>
       <Button fx:id="backToMenuButton" layoutX="88.0" layoutY="340.0" mnemonicParsing="false" onAction="#backToMenuAction" text="Back to Menu" />
       <Button fx:id="exitButton" layoutX="496.0" layoutY="340.0" mnemonicParsing="false" onAction="#exitAction" text="Exit" />
-      <TableView fx:id="statisticTableView" layoutX="25.0" layoutY="14.0" onMouseClicked="#selectProfileOnMouseClicked" prefHeight="300.0" prefWidth="550.0">
+      <TableView fx:id="statisticTableView" layoutX="83.0" layoutY="14.0" onMouseClicked="#selectProfileOnMouseClicked" prefHeight="300.0" prefWidth="440.0">
         <columns>
           <TableColumn fx:id="avatarTableColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Avatar" />
           <TableColumn fx:id="UsarnameTableColumn" prefWidth="85.0" style="-fx-alignment: CENTER;" text="Username" />
             <TableColumn fx:id="winsTablecolumn" prefWidth="60.0" style="-fx-alignment: CENTER;" text="Wins" />
             <TableColumn fx:id="battlesTablecolumn" prefWidth="75.0" style="-fx-alignment: CENTER;" text="Battles" />
-            <TableColumn fx:id="hitsTablecolumn" prefWidth="50.0" style="-fx-alignment: CENTER;" text="Hits" />
-            <TableColumn fx:id="allShootsTablecolumn" prefWidth="75.0" style="-fx-alignment: CENTER;" text="All Shoots" />
             <TableColumn fx:id="ratioTablecolumn" prefWidth="105.0" style="-fx-alignment: CENTER;" text="Ratio [%]" />
         </columns>
          <contextMenu>
