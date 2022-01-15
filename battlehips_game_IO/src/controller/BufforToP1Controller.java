@@ -29,7 +29,7 @@ public class BufforToP1Controller {
         Scene scene = new Scene(root2);
         stage.setTitle("player1BattleView");
         stage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setResizable(false);
         controller.setPlayer1BattleViewController(player1BattleViewController);

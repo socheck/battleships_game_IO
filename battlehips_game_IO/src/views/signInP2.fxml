@@ -5,13 +5,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="130.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInP2Controller">
+<AnchorPane prefHeight="130.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInP2Controller">
    <children>
       <ImageView fitHeight="130.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/succesScreenBackGround.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="login_pl_2" layoutX="75.0" layoutY="52.0" mnemonicParsing="false" onAction="#changetopl2" text="Zalogowano P2" />
+      <Button fx:id="login_pl_2" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" onAction="#changetopl2" text="Player's 2 time to place his Ships" />
    </children>
 </AnchorPane>

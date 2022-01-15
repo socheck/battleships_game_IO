@@ -36,7 +36,7 @@ public class Player2ViewController {
         Stage stage = (Stage) ((Node)startGameButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(true);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("bufforToP1View.fxml");
         stage.show();

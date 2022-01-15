@@ -62,7 +62,7 @@ public class LevelAiLevelAiController {
         stage.setTitle("AI vs AI");
         stage.setScene(scene);
         stage.setResizable(false);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.show();
         try{
@@ -173,7 +173,7 @@ public class LevelAiLevelAiController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         Scene scene = new Scene(pane);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);

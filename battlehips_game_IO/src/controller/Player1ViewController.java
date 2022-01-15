@@ -46,7 +46,7 @@ public class Player1ViewController {
         scene = new Scene(root2);
         Stage stage = (Stage) ((Node)switchToP2Button).getScene().getWindow();
         stage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setResizable(true);
         stage.setTitle("signInP2.fxml");
@@ -73,7 +73,7 @@ public class Player1ViewController {
         Scene scene = new Scene(root2);
         stage.setTitle("player1BattleView");
         stage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setResizable(false);
         controller.setPlayer1BattleViewController(player1BattleViewController);

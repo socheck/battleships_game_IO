@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginPlayerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginPlayerController">
    <children>
       <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,6 +22,6 @@
       <TextField fx:id="loginTextField" layoutX="90.0" layoutY="95.0" />
       <PasswordField fx:id="passwordTextField" layoutX="90.0" layoutY="146.0" />
       <Button fx:id="exitButton" layoutX="45.0" layoutY="221.0" mnemonicParsing="false" onAction="#exitAction" prefWidth="80.0" text="Exit" />
-      <Label fx:id="errorDataLabel" alignment="CENTER" layoutX="90.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" text="Label" />
+      <Label fx:id="errorDataLabel" alignment="CENTER" layoutX="90.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" />
    </children>
 </Pane>
