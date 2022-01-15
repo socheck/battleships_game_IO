@@ -1,0 +1,23 @@
+.button {
+    -fx-border-color: rgb(15,57,57);
+    -fx-border-width: 3;
+    -fx-background-color: rgb(42,132,132);
+    -fx-text-fill: rgb(255,255,254);
+    -fx-font-family: "Tahoma";
+    -fx-font-weight: bold;
+    -fx-prefHeight:25;
+
+}
+.table-view .column-header {
+     -fx-border-color: rgb(15,57,57);
+    -fx-border-width: 3;
+    -fx-background-color: rgb(42,132,132);
+    -fx-text-fill: white;
+    -fx-font-family: "Tahoma";
+    -fx-font-weight: bold;
+    -fx-prefHeight:25;
+
+}
+
+
+

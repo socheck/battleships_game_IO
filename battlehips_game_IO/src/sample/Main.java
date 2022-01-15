@@ -47,7 +47,13 @@ public class Main extends Application {
         Parent pane =(Parent) fxmlLoader.load();
         stage.setTitle("MENU");
         stage.setResizable(false);
-        stage.setScene(new Scene(pane));
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
+
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
+
         stage.show();
 
 

@@ -30,6 +30,8 @@ public class MenuController {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("New Game");
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
 
 
@@ -43,6 +45,8 @@ public class MenuController {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Replays");
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
 
     }
@@ -55,6 +59,8 @@ public class MenuController {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Statistic/Profile");
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
 
     }

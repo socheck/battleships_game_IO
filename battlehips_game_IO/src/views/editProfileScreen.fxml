@@ -4,26 +4,57 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <Pane id="editProfileMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditProfileController">
    <children>
-      <Label layoutX="119.0" layoutY="54.0" text="Old password" />
-      <Label layoutX="116.0" layoutY="141.0" text="New password" />
-      <Button fx:id="confirbButton" layoutX="99.0" layoutY="243.0" mnemonicParsing="false" onAction="#confirmAction" text="Change password" />
-      <ComboBox fx:id="avatarComboBox" layoutX="381.0" layoutY="175.0" onAction="#selectNewAvatarAction" prefWidth="150.0" />
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="406.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" fx:id="xd" />
-      <PasswordField fx:id="oldPasswordField" layoutX="81.0" layoutY="91.0" />
-      <PasswordField fx:id="newPasswordField" layoutX="81.0" layoutY="175.0" />
-      <Label fx:id="errorPaswordLabel" layoutX="134.0" layoutY="116.0" text="Label" />
-      <Label fx:id="succesLabel" layoutX="21.0" layoutY="302.0" prefHeight="70.0" prefWidth="550.0" textFill="#f52121">
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/ShipStandard.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="succesLabel" layoutX="25.0" layoutY="315.0" prefHeight="70.0" prefWidth="550.0" textFill="#f52121">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="backToStatisticButton" layoutX="246.0" layoutY="277.0" mnemonicParsing="false" onAction="#backToStatisticAction" text="Back to Statistic" />
-      <Button fx:id="changeAvatarButton" layoutX="410.0" layoutY="243.0" mnemonicParsing="false" onAction="#changeAvatarAction" text="Change avatar" />
+      <Button fx:id="backToStatisticButton" layoutX="250.0" layoutY="303.0" mnemonicParsing="false" onAction="#backToStatisticAction" text="Back to Statistic" />
+      <VBox alignment="TOP_CENTER" layoutX="67.0" layoutY="20.0" prefHeight="300.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" text="Old password/confirm change avatar" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="15.0" />
+            <PasswordField fx:id="oldPasswordField" maxWidth="150.0" prefWidth="150.0" />
+            <Label prefHeight="15.0" />
+            <Label fx:id="errorPaswordLabel" text="Label" />
+            <Label prefHeight="15.0" />
+            <Label text="New password" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="15.0" />
+            <PasswordField fx:id="newPasswordField" maxHeight="0.0" maxWidth="150.0" prefWidth="150.0" />
+            <Label prefHeight="15.0" />
+            <Button fx:id="confirbButton" mnemonicParsing="false" onAction="#confirmAction" text="Change password" />
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="331.0" layoutY="20.0" prefHeight="300.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="48.0" />
+            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" fx:id="xd" />
+            <Label prefHeight="30.0" />
+            <ComboBox fx:id="avatarComboBox" onAction="#selectNewAvatarAction" prefWidth="150.0" />
+            <Label prefHeight="30.0" />
+            <Button fx:id="changeAvatarButton" mnemonicParsing="false" onAction="#changeAvatarAction" text="Change avatar" />
+         </children>
+      </VBox>
    </children>
 </Pane>
