@@ -157,6 +157,8 @@ public class ReplaysMenuController {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("MENU");
         stage.show();
     }
@@ -172,13 +174,18 @@ public class ReplaysMenuController {
         BattleReplaysController battleReplaysController = (BattleReplaysController) fxmlLoader.getController();
         Stage stage = (Stage) ((Node)replaysButton).getScene().getWindow();
         stage.setTitle("Replays");
-        stage.setScene(new Scene(pane));
+
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
+
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
         battleReplaysController.setToReplays(player1,player2,new GameDB(gameDB.getId(), gameDB.getPlayer1ID(), gameDB.getPlayer2ID(), gameDB.getWinnerID()));
     }
 
     public void playerComboBoxAction(){
-        System.out.println("dupa1");
+
         replaysComboBox.setPromptText("");
         replaysButton.setDisable(true);
         selectedPlayer = (User) playerComboBox.getSelectionModel().getSelectedItem();

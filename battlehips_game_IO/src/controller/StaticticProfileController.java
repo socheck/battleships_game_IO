@@ -100,7 +100,9 @@ public class StaticticProfileController {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setResizable(true);
-        stage.setTitle("Modyfi profile");
+        stage.setTitle("Modify profile");
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
         editProfileController.setSelectedUser(selectedUser);
         editProfileController.setAvatarView();
@@ -131,6 +133,8 @@ public void addPlayerAction() throws IOException {
     Stage stage = (Stage) ((Node)modyfiProfileButton).getScene().getWindow();
     stage.setResizable(false);
     stage.setScene(scene);
+    String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+    scene.getStylesheets().add(css);
     stage.setTitle("New Player");
     stage.show();
 
@@ -150,6 +154,8 @@ public void addPlayerAction() throws IOException {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("MENU");
         stage.show();
 
@@ -163,6 +169,8 @@ public void addPlayerAction() throws IOException {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(scene);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("Statistic/Profile");
         stage.show();
     }

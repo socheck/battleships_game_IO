@@ -6,12 +6,18 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StaticticProfileController">
    <children>
-      <Button fx:id="backToMenuButton" layoutX="88.0" layoutY="340.0" mnemonicParsing="false" onAction="#backToMenuAction" text="Back to Menu" />
-      <Button fx:id="exitButton" layoutX="496.0" layoutY="340.0" mnemonicParsing="false" onAction="#exitAction" text="Exit" />
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/ShipStandard.jpg" />
+         </image>
+      </ImageView>
       <TableView fx:id="statisticTableView" layoutX="83.0" layoutY="14.0" onMouseClicked="#selectProfileOnMouseClicked" prefHeight="300.0" prefWidth="440.0">
         <columns>
           <TableColumn fx:id="avatarTableColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Avatar" />
@@ -28,8 +34,18 @@
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <Button fx:id="modyfiProfileButton" layoutX="229.0" layoutY="340.0" mnemonicParsing="false" onAction="#modyfiProfileAction" text="Modyfi Profile" />
       <Label fx:id="errorLabel" alignment="CENTER" layoutX="162.0" layoutY="314.0" prefHeight="17.0" prefWidth="277.0" />
-      <Button fx:id="addPlayer" layoutX="365.0" layoutY="340.0" mnemonicParsing="false" onAction="#addPlayerAction" text="Add Player" />
+      <HBox layoutY="331.0" prefHeight="35.0" prefWidth="600.0">
+         <children>
+            <Label minHeight="0.0" minWidth="25.0" prefWidth="25.0" />
+            <Button fx:id="backToMenuButton" mnemonicParsing="false" onAction="#backToMenuAction" prefWidth="125.0" text="Back to Menu" />
+            <Label minHeight="0.0" minWidth="25.0" prefWidth="25.0" />
+            <Button fx:id="modyfiProfileButton" mnemonicParsing="false" onAction="#modyfiProfileAction" prefWidth="125.0" text="Modify Profile" />
+            <Label minHeight="0.0" minWidth="33.0" prefWidth="33.0" />
+            <Button fx:id="addPlayer" mnemonicParsing="false" onAction="#addPlayerAction" prefWidth="100.0" text="Add Player" />
+            <Label minHeight="0.0" minWidth="33.0" prefWidth="33.0" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitAction" prefWidth="100.0" text="Exit" />
+         </children>
+      </HBox>
    </children>
 </Pane>
