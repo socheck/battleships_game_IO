@@ -14,8 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import sample.ClassToComboBox;
-import sample.User;
+import bs_game_backend.ClassToComboBox;
+import bs_game_backend.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,32 +58,14 @@ public class NewPlayerController {
                 results.add(file.getName());
             }
         }
-
         for (String s :
                 results) {
             avatarsList.add(new ClassToComboBox(s.replaceFirst("[.][^.]+$", "")));
         }
-
-
-
-
-
-
-
-
-
-
-
-
-//        for(int k = 1; k < 11; k++ ){
-//            avatarsList.add(new ClassToComboBox("avatar"+ k));
-//        }
         listPropertyAvatar = new SimpleListProperty<>(); //OBSlUGA Comboboxa z listy
         avatarObservableList = FXCollections.observableArrayList(avatarsList);
         listPropertyAvatar.set(avatarObservableList);
         avatarComboBox.itemsProperty().bindBidirectional(listPropertyAvatar);
-
-
     }
 
     public void  createUserAction() {
@@ -94,8 +76,6 @@ public class NewPlayerController {
         }
         DbConnection dbConnection = new DbConnection();
         String username = usernameTextField.getText();
-
-
         MessageDigest md5 = null;
         try {
             md5 = MessageDigest.getInstance("MD5");
@@ -104,17 +84,6 @@ public class NewPlayerController {
         }
         md5.update(StandardCharsets.UTF_8.encode(paswordPaswordField.getText()));
         String password = String.format("%032x", new BigInteger(1, md5.digest()));
-
-
-
-
-
-
-
-
-
-
-
 
         if(avatarComboBox.getSelectionModel().getSelectedItem() == null){
            errorLabel.setText("Choose avatar");
@@ -146,8 +115,6 @@ public class NewPlayerController {
         paswordPaswordField.setDisable(true);
         creatUserButton.setDisable(true);
 
-
-
     }
     public void  avatarComboboxAction(){
         errorLabel.setText("");
@@ -168,6 +135,4 @@ public class NewPlayerController {
         stage.show();
 
     }
-
-
 }

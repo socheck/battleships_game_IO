@@ -1,7 +1,6 @@
 package AI;
-import bs_game_backend.*;
 import bs_game_backend.Cell;
-import sample.BoardController;
+import bs_game_backend.BoardController;
 
 import java.util.ArrayList;
 import java.util.Random;

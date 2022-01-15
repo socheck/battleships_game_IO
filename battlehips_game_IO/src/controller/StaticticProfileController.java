@@ -9,12 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.sqlite.core.DB;
-import sample.User;
+import bs_game_backend.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,11 +31,8 @@ public class StaticticProfileController {
     public TableColumn<User,String> winsTablecolumn;
     @FXML
     public TableColumn<User,String> battlesTablecolumn;
-
-
     @FXML
     public TableColumn<User,String> ratioTablecolumn;
-
     @FXML
     public Button modyfiProfileButton;
     @FXML
@@ -48,9 +42,6 @@ public class StaticticProfileController {
     @FXML
     public MenuItem deleteMenuItem;
 
-
-
-
     private  User selectedUser;
 
 
@@ -59,24 +50,13 @@ public class StaticticProfileController {
     public void initialize(){
         dbConnection = new DbConnection();
 
-
         userArrayList = dbConnection.getAllUser_listToGameStatistic();
-//        for (User u :
-//                userArrayList) {
-//            if(u.getBattles() == 0 && u.getId() > 3){
-//                userArrayList.remove(userArrayList.get(userArrayList.indexOf(u)));
-//                System.out.println(u.getId());
-//            }
-//
-//        }
-
 
         avatarTableColumn.setCellValueFactory(new PropertyValueFactory<>("photo"));
         UsarnameTableColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         winsTablecolumn.setCellValueFactory(new PropertyValueFactory<>("wins"));
         battlesTablecolumn.setCellValueFactory(new PropertyValueFactory<>("battles"));
         ratioTablecolumn.setCellValueFactory(new PropertyValueFactory<>("aimRatio"));
-
 
         for (User u :
                 userArrayList) {
@@ -106,8 +86,6 @@ public class StaticticProfileController {
         stage.show();
         editProfileController.setSelectedUser(selectedUser);
         editProfileController.setAvatarView();
-
-
     }
 
     public void selectProfileOnMouseClicked(){
@@ -119,13 +97,10 @@ public class StaticticProfileController {
                 return;
             }
         } catch (Exception e) {
-
         }
-
     }
 
 public void addPlayerAction() throws IOException {
-
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/newPlayerScreen.fxml"));
     Pane pane =(Pane) fxmlLoader.load();
     NewPlayerController newPlayerController = (NewPlayerController)  fxmlLoader.getController();
@@ -137,11 +112,7 @@ public void addPlayerAction() throws IOException {
     scene.getStylesheets().add(css);
     stage.setTitle("New Player");
     stage.show();
-
 }
-
-
-
     @FXML
     public void exitAction(){
         ((Stage) exitButton.getScene().getWindow()).close();
@@ -190,7 +161,4 @@ public void addPlayerAction() throws IOException {
             deleteMenuItem.setVisible(true);
         }
     }
-
-
-
 }

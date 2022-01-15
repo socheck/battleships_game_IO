@@ -2,10 +2,6 @@ package bs_game_backend;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import sample.BoardController;
-
-import javax.sound.sampled.*;
-import java.io.*;
 
 
 public class Cell extends Rectangle {
@@ -22,10 +18,9 @@ public class Cell extends Rectangle {
                 '}';
     }
 
-    //zmienić na privet
-    public Ship ship = null; // Is part of any ship?
+    public Ship ship = null;
     private boolean isWasShot = false;
-    private BoardController boardController; // Reference to including on board (my or enemy)
+    private BoardController boardController;
 
 
     public Cell(int x, int y, BoardController boardController){

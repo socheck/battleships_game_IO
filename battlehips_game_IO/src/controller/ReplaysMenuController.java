@@ -1,9 +1,7 @@
 package controller;
 
 import db.DbConnection;
-import db.game_Classes.Changes;
 import db.game_Classes.GameDB;
-import db.game_Classes.InitialState;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -19,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import sample.User;
+import bs_game_backend.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,34 +58,19 @@ class GameToComboBox{
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public int getPlayer1ID() {
         return player1ID;
     }
-
-    public void setPlayer1ID(int player1ID) {
-        this.player1ID = player1ID;
-    }
-
     public int getPlayer2ID() {
         return player2ID;
     }
-
-    public void setPlayer2ID(int player2ID) {
-        this.player2ID = player2ID;
-    }
-
     public int getWinnerID() {
         return winnerID;
     }
 
-    public void setWinnerID(int winnerID) {
-        this.winnerID = winnerID;
-    }
 }
 
 public class ReplaysMenuController {
@@ -122,7 +105,6 @@ public class ReplaysMenuController {
     private GameToComboBox gameDB;
     private User player1, player2, playerShow;
 
-
     ArrayList<User> userArrayList;
     private ObservableList<User> playerObservableList;
     private ListProperty<User> listPropertyPlayer;
@@ -143,12 +125,6 @@ public class ReplaysMenuController {
         replaysButton.setDisable(true);
         replaysComboBox.setDisable(true);
     }
-
-
-
-
-
-
 
     public void backToMenuAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
@@ -193,23 +169,16 @@ public class ReplaysMenuController {
         winsaLabel.setText(String.valueOf(selectedPlayer.getWins()));
         batlesLabel.setText(String.valueOf(selectedPlayer.getBattles()));
         Image photo = new Image(selectedPlayer.getAvatar_path());
-        System.out.println("dupa2");
         plyerImageView.setImage(photo);
-        System.out.println("dupa2.2.2");
         setReplaceInComboBox();
-        System.out.println("dupa22");
         enemyUsernameLabel.setText("");
         enemyWinsaLabel.setText("");
         enemyBatlesLabel.setText("");
         winnerLabel.setText("");
         enemyImageView.setImage(null);
-
-
     }
 
     public void replaysComboBoxAction(){
-        System.out.println("dupa3");
-
         gameDB = (GameToComboBox) replaysComboBox.getSelectionModel().getSelectedItem();
         if(gameDB == null){
             return;
@@ -218,9 +187,6 @@ public class ReplaysMenuController {
         player2 = dbConnection.getUser(gameDB.getPlayer2ID());
         playerShow = player2;
         if(player2.getId() == selectedPlayer.getId()){
-//            User tmp = player2;
-//            player2 = player1;
-//            player1 = tmp;
             playerShow = player1;
         }
         enemyUsernameLabel.setText(playerShow.getUsername());
@@ -246,7 +212,7 @@ public class ReplaysMenuController {
             gameArrayList.add(new GameToComboBox(game.getId(), game.getPlayer1ID(), game.getPlayer2ID(), game.getWinnerID()));
         }
         replaysComboBox.setItems(null);
-        listPropertyGame = new SimpleListProperty<>(); //OBSlUGA Comboboxa z listy
+        listPropertyGame = new SimpleListProperty<>();
         gameObservableList = FXCollections.observableArrayList(gameArrayList);
         listPropertyGame.set(gameObservableList);
         replaysComboBox.itemsProperty().bindBidirectional(listPropertyGame);

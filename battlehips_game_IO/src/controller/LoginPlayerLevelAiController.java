@@ -9,13 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.sqlite.core.DB;
-import sample.Controller;
-import sample.User;
+import bs_game_backend.Controller;
+import bs_game_backend.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,13 +49,9 @@ public class LoginPlayerLevelAiController {
 
 
     public void initialize(){
-
         DbConnection dbConnection = new DbConnection();
         aiUserList = dbConnection.getAI_list();
-
     }
-
-
 
     public User getPlayer1() {
         return player1;
@@ -73,19 +66,16 @@ public class LoginPlayerLevelAiController {
         mediumRadioButton.setVisible(true);
         hardRadioButton.setVisible(true);
         pleaseLoginLabel.setText("Chose AI level");
-
     }
 
-    public LoginPlayerLevelAiController getLoginPlayerLevelAiController() {
-        return loginPlayerLevelAiController;
-    }
+
 
     public void setLoginPlayerLevelAiController(LoginPlayerLevelAiController loginPlayerLevelAiController) {
         this.loginPlayerLevelAiController = loginPlayerLevelAiController;
     }
 
     @FXML
-    public void startGameAction() throws IOException { // przełączenie na ustawianie statków gracza 1
+    public void startGameAction() throws IOException {
 
         controller = new Controller();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/player1View.fxml"));
@@ -110,13 +100,10 @@ public class LoginPlayerLevelAiController {
         controller.createBoardAi1();
         controller.setPlayer1(player1);
         controller.setPlayer2(playerAi);
-        System.out.println("dupa");
-        System.out.println(player1);
-        System.out.println(playerAi);
 
         player1ViewController.setSwitchToP2ButtonDisabel();
         player1ViewController.startGameAiButton.setDisable(true);
-        player1ViewController.setNextGameWithAi(true);  // następna gra z botem
+        player1ViewController.setNextGameWithAi(true);
         player1ViewController.switchToP2Button.setVisible(false);
         player1ViewController.player1Pane.getChildren().add(player1.getPhoto());
 
@@ -191,10 +178,6 @@ public class LoginPlayerLevelAiController {
         }
         startGameButton.setDisable(false);
     }
-
-    public void setAiLevel(int aiLevel) {
-        this.aiLevel = aiLevel;
-    }
     public void setAiUser(){
 
         try {
@@ -209,9 +192,6 @@ public class LoginPlayerLevelAiController {
                     return;
                 }
             }
-
-
         }
-
     }
 }

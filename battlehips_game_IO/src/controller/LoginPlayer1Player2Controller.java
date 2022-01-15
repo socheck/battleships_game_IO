@@ -10,8 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import sample.Controller;
-import sample.User;
+import bs_game_backend.Controller;
+import bs_game_backend.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,9 +59,7 @@ public class LoginPlayer1Player2Controller {
         Parent root2 = (Parent) fxmlLoader.load();
         Player1ViewController player1ViewController = (Player1ViewController) fxmlLoader.getController();
         player1ViewController.setController(controller);
-
         Scene scene = new Scene(root2);
-
         Stage stage = (Stage) ((Node)startGameButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
@@ -137,9 +135,6 @@ public class LoginPlayer1Player2Controller {
         }
 
     }
-
-
-
 
     public User getPlayer1() {
         return player1;

@@ -1,4 +1,4 @@
-package sample;
+package bs_game_backend;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,6 @@ public class ShipToDB {
 
 
         private int type;
-//        private boolean vertical = true;
         private boolean vertical;
         private int health;
 

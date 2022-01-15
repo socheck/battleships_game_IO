@@ -11,8 +11,6 @@ public class SuccesController {
     public Button okButton;
     @FXML
     public Label textLabel;
-
-
     public void okAction(){
         ((Stage) okButton.getScene().getWindow()).close();
 

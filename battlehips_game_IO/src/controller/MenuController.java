@@ -19,8 +19,6 @@ public class MenuController {
     @FXML
     public Button exitButton;
 
-
-
     @FXML
     public void newGameAction() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/newGameScreen.fxml"));

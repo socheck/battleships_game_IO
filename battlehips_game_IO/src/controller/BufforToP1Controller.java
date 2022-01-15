@@ -6,15 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import sample.Controller;
-
+import bs_game_backend.Controller;
 import java.io.IOException;
 
 public class BufforToP1Controller {
 
     @FXML
     private Button goP1Turn;
-
     Controller controller;
 
     public void setController(Controller controller) {
@@ -53,8 +51,6 @@ public class BufforToP1Controller {
         player1BattleViewController.player2Label.setText(controller.getPlayer2().getUsername());
         player1BattleViewController.player1Pane.getChildren().add(controller.getPlayer1().getPhoto());
         player1BattleViewController.player2Pane.getChildren().add(controller.getPlayer2().getPhoto());
-
-
         player1BattleViewController.exitButton.setDisable(true);
 
     }

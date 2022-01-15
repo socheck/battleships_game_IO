@@ -1,4 +1,4 @@
-package sample;
+package bs_game_backend;
 
 import javafx.scene.image.ImageView;
 

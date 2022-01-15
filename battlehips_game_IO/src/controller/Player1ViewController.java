@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import sample.Controller;
+import bs_game_backend.Controller;
 
 import java.io.*;
 
@@ -28,7 +28,7 @@ public class Player1ViewController {
     @FXML
     public Label playerUsernameLabel;
 
-    private boolean nextGameWithAi = false; // true następna gra jest z botem
+    private boolean nextGameWithAi = false;
     private Controller controller;
     private Scene scene;
 
@@ -44,13 +44,6 @@ public class Player1ViewController {
         signInP2Controller.setController(controller);
 
         scene = new Scene(root2);
-//        Stage stage = new Stage();
-//        stage.setScene(scene);
-//        stage.setResizable(false);
-//        stage.setTitle("signInP2.fxml");
-//        stage.show();
-//        ((Stage) switchToP2Button.getScene().getWindow()).close();
-
         Stage stage = (Stage) ((Node)switchToP2Button).getScene().getWindow();
         stage.setScene(scene);
         String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
@@ -59,7 +52,6 @@ public class Player1ViewController {
         stage.setTitle("signInP2.fxml");
         stage.show();
     }
-
 
     public void randomAction() throws FileNotFoundException {
         controller.randomPositionShipAi(controller.getList_of_ships1(), controller.player1Board);
@@ -70,11 +62,6 @@ public class Player1ViewController {
         if (isNextGameWithAi()) {
             setStartGameAiButtonEnable();
         }
-
-        //System.out.println(controller.player1Board.getInitilaState(controller.player1Board));
-
-
-
     }
     @FXML
     public void startGameAiAction() throws IOException {
@@ -110,28 +97,16 @@ public class Player1ViewController {
         player1BattleViewController.nextPlayerReadyButton.setVisible(false);
         player1BattleViewController.nextButton.setVisible(false);
 
-
-
-
-
-
     }
 
     public void setController(Controller controller) {
         this.controller = controller;
-    }
-
-    public Button getSwitchToP2Button() {
-        return switchToP2Button;
     }
     public void setSwitchToP2ButtonDisabel(){      //ustwaienie przycisku na nie klikalny
         switchToP2Button.setDisable(true);
      }
     public void setSwitchToP2ButtonEnable(){             //ustwaienie przycisku na klikalny
         switchToP2Button.setDisable(false);
-    }
-    public void setStartGameAiButtonDisable(){
-        startGameAiButton.setDisable(true);
     }
     public void setStartGameAiButtonEnable(){
         startGameAiButton.setDisable(false);
@@ -141,9 +116,6 @@ public class Player1ViewController {
     }
     public void setNextGameWithAi(boolean nextGameWithAi) {
         this.nextGameWithAi = nextGameWithAi;
-    }
-    public Button getStartGameAiButton() {
-        return startGameAiButton;
     }
 
     @FXML

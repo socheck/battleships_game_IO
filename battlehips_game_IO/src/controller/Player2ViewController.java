@@ -1,6 +1,5 @@
 package controller;
 
-import controller.BufforToP1Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import sample.Controller;
+import bs_game_backend.Controller;
 
 import java.io.IOException;
 
@@ -34,12 +33,6 @@ public class Player2ViewController {
         BufforToP1Controller bufforToP1Controller = (BufforToP1Controller) fxmlLoader.getController();
         bufforToP1Controller.setController(controller);
         Scene scene = new Scene(root2);
-//        Stage stage = new Stage();
-//        stage.setScene(new Scene(root2));
-//        stage.setResizable(false);
-//        stage.setTitle("bufforToP1View.fxml");
-//        stage.show();
-
         Stage stage = (Stage) ((Node)startGameButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(true);
@@ -48,22 +41,12 @@ public class Player2ViewController {
         stage.setTitle("bufforToP1View.fxml");
         stage.show();
 
-//        try{
-//            ((Stage) startGameButton.getScene().getWindow()).close();
-//        }catch (Exception e){
-//
-//        }
-
-
     }
 
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
-    public Button getStartGameButton() {
-        return startGameButton;
-    }
     public void setStartGameButtonDisable(){
         startGameButton.setDisable(true);
 
@@ -77,8 +60,6 @@ public class Player2ViewController {
     }
     public void randomAction(){
         controller.randomPositionShipAi(controller.getList_of_ships2(), controller.player2Board);
-
-
         setStartGameEnable();
     }
     @FXML

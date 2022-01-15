@@ -17,7 +17,7 @@
             <Image url="@../img/ShipStandard.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="winnerLabel" layoutX="140.0" layoutY="270.0" text="Label" />
+      <Label fx:id="winnerLabel" layoutX="140.0" layoutY="270.0" />
       <Label layoutX="416.0" layoutY="141.0" text="Enemy" textFill="WHITE">
          <font>
             <Font name="Tahoma Bold" size="12.0" />
@@ -61,9 +61,9 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="usernameLabel" text="Label" />
-                  <Label fx:id="winsaLabel" text="Label" />
-                  <Label fx:id="batlesLabel" text="Label" />
+                  <Label fx:id="usernameLabel" />
+                  <Label fx:id="winsaLabel" />
+                  <Label fx:id="batlesLabel" />
                </children>
             </VBox>
          </children>
@@ -105,9 +105,9 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="enemyUsernameLabel" text="Label" />
-                  <Label fx:id="enemyWinsaLabel" text="Label" />
-                  <Label fx:id="enemyBatlesLabel" text="Label" />
+                  <Label fx:id="enemyUsernameLabel" />
+                  <Label fx:id="enemyWinsaLabel" />
+                  <Label fx:id="enemyBatlesLabel" />
                </children>
             </VBox>
          </children>

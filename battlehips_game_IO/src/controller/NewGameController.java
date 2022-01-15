@@ -68,14 +68,6 @@ public class NewGameController {
         loginPlayerLevelAiController.easyRadioButton.setVisible(false);
         loginPlayerLevelAiController.mediumRadioButton.setVisible(false);
         loginPlayerLevelAiController.hardRadioButton.setVisible(false);
-
-//        loginPlayerLevelAiController.hardRadioButton.setSelected(true);
-//        loginPlayerLevelAiController.setAiLevel(2);
-//        loginPlayerLevelAiController.setAiUser();
-
-
-//        loginPlayerLevelAiController.hardAction();
-
     }
     @FXML
     public void aiVsAiAction() throws IOException {
@@ -92,31 +84,6 @@ public class NewGameController {
         stage.setResizable(false);
         stage.setTitle("AI Vs AI");
         stage.show();
-
-
-        //do wyrzucenia ułatwienie testowania
-
-//        levelAiLevelAiController.easyAction1();
-//        levelAiLevelAiController.hardAction2();
-
-//        levelAiLevelAiController.hardRadioButton2.setSelected(true);
-//        levelAiLevelAiController.hardRadioButton1.setDisable(true);
-//        levelAiLevelAiController.easyRadioButton1.setSelected(true);
-//        levelAiLevelAiController.easyRadioButton2.setDisable(true);
-//        levelAiLevelAiController.startGameButton.setDisable(false);
-//        levelAiLevelAiController.setAi2Level(2);
-//        levelAiLevelAiController.setAiUser1();
-//        levelAiLevelAiController.setAiUser2();
-
-//        levelAiLevelAiController.hardRadioButton1.setSelected(true);
-//        levelAiLevelAiController.hardRadioButton2.setDisable(true);
-//        levelAiLevelAiController.easyRadioButton2.setSelected(true);
-//        levelAiLevelAiController.easyRadioButton1.setDisable(true);
-//        levelAiLevelAiController.startGameButton.setDisable(false);
-//        levelAiLevelAiController.setAi1Level(2);
-//        levelAiLevelAiController.setAiUser1();
-//        levelAiLevelAiController.setAiUser2();
-
     }
     @FXML
     public void exitAction(){
@@ -136,6 +103,4 @@ public class NewGameController {
         stage.show();
 
     }
-
-
 }

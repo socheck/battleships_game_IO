@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import sample.User;
+import bs_game_backend.User;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -40,16 +40,9 @@ public class LoginPlayerController {
     private LoginPlayer1Player2Controller loginPlayer1Player2Controller;
     private LoginPlayerLevelAiController loginPlayerLevelAiController;
 
-    public boolean isPlyer1WithAi() {
-        return plyer1WithAi;
-    }
 
     public void setPlyer1WithAi(boolean plyer1WithAi) {
         this.plyer1WithAi = plyer1WithAi;
-    }
-
-    public LoginPlayerLevelAiController getLoginPlayerLevelAiController() {
-        return loginPlayerLevelAiController;
     }
 
     public void setLoginPlayerLevelAiController(LoginPlayerLevelAiController loginPlayerLevelAiController) {
@@ -102,7 +95,6 @@ public class LoginPlayerController {
         }
         md5.update(StandardCharsets.UTF_8.encode(passwordTextField.getText()));
         String password = String.format("%032x", new BigInteger(1, md5.digest()));
-
 
         for (User u:
              userArrayList) {
@@ -161,14 +153,5 @@ public class LoginPlayerController {
             }
         }
        errorDataLabel.setText("Invalid data");
-
-
-
-
-
-
-
     }
-
-
 }

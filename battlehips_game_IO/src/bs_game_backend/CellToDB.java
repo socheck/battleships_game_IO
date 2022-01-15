@@ -1,6 +1,4 @@
-package sample;
-
-import bs_game_backend.Ship;
+package bs_game_backend;
 
 
 public class CellToDB {

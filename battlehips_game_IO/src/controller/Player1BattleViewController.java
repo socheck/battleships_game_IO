@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import sample.Controller;
+import bs_game_backend.Controller;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class Player1BattleViewController {
     public Pane winnerPane;
 
     Controller controller;
-    private boolean ifPlayer1 = true; //true oznacza gracza 1
+    private boolean ifPlayer1 = true;
 
     public void setController(Controller controller) {
         this.controller = controller;
@@ -48,7 +48,6 @@ public class Player1BattleViewController {
         controller.hideBoardPl1(nextButton.getScene());
         controller.hideBoardPl2(nextButton.getScene());
 
-
         if (playerNumberLabel.getText().equals("Tura Gracza Nr 2") ){
             playerNumberLabel.setText("Next player: " + controller.getPlayer1().getUsername());
         }else if (playerNumberLabel.getText().equals("Tura Gracza Nr 1") ){
@@ -56,10 +55,9 @@ public class Player1BattleViewController {
         }else{
             playerNumberLabel.setText("Switching Players");
         }
-
     }
     public void player2ReadyAction() {
-        if (ifPlayer1) { // skonczyła się tura gracza 1 i przłączamy na gracza 2
+        if (ifPlayer1) {
             controller.insertBoardShip(nextPlayerReadyButton.getScene(), controller.player2Board);
             controller.insertBoardShoot(nextPlayerReadyButton.getScene(), controller.player1Board);
             nextPlayerReadyButton.setDisable(true);
@@ -70,7 +68,7 @@ public class Player1BattleViewController {
             player1Pane.getChildren().add(controller.getPlayer2().getPhoto());
             player2Pane.getChildren().add(controller.getPlayer1().getPhoto());
 
-        }else { // przełączamy na gracza 1
+        }else {
             controller.insertBoardShip(nextPlayerReadyButton.getScene(), controller.player1Board);
             controller.insertBoardShoot(nextPlayerReadyButton.getScene(), controller.player2Board);
             nextPlayerReadyButton.setDisable(true);
@@ -88,14 +86,8 @@ public class Player1BattleViewController {
         ((Stage)(exitButton.getScene().getWindow())).close();
     }
 
-    public void setContinueButtonDisable(){
-        exitButton.setDisable(true);
-    }
     public void setContinueButtonEnable(){
         exitButton.setDisable(false);
-    }
-    public void setNextButtonDisable(){
-        nextButton.setDisable(true);
     }
     public void setNextButtonEnable(){
         nextButton.setDisable(false);
@@ -117,7 +109,4 @@ public class Player1BattleViewController {
         return;
 
     }
-
-
-
 }

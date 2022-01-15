@@ -1,9 +1,7 @@
-package sample;
+package bs_game_backend;
 import java.util.ArrayList;
 import java.util.List;
 
-import bs_game_backend.Cell;
-import bs_game_backend.Ship;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;

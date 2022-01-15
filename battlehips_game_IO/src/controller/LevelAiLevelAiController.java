@@ -10,8 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import sample.Controller;
-import sample.User;
+import bs_game_backend.Controller;
+import bs_game_backend.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,15 +45,13 @@ public class LevelAiLevelAiController {
 
     private ArrayList<User> aiUserList;
 
-
     public void initialize(){
         DbConnection dbConnection = new DbConnection();
         aiUserList = dbConnection.getAI_list();
     }
 
     @FXML
-    public void startGameAction() throws IOException { // przełączenie na ustawianie statków gracza 1
-//        setplayerAI();
+    public void startGameAction() throws IOException {
         controller = new Controller();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../views/player1BattleView.fxml"));
         Parent root2 = (Parent) fxmlLoader.load();
@@ -70,14 +68,10 @@ public class LevelAiLevelAiController {
         try{
             ((Stage) startGameButton.getScene().getWindow()).close();
         }catch (Exception e){
-
         }
         controller.setPlayer1BattleViewController(player1BattleViewController);
 
-
         player1BattleViewController.playerNumberLabel.setText("Tura AI  1");
-
-
         controller.setAi1Is(true);
         controller.setAi2Is(true);
         controller.setAi1Level(ai1Level);
@@ -95,23 +89,19 @@ public class LevelAiLevelAiController {
         controller.player1BattleViewController.nextButton.setVisible(false);
         player1BattleViewController.nextPlayerReadyButton.setDisable(true);
         controller.player1BattleViewController.nextPlayerReadyButton.setVisible(false);
-        //ustawiono staki 1 i strzelanie 2
         ((Stage) startGameButton.getScene().getWindow()).close();
         controller.aiVsAiStartGame();
-
 
     }
 
 
     @FXML
     public void easyAction1(){
-
         mediumRadioButton1.setSelected(false);
         hardRadioButton1.setSelected(false);
         ai1Level = 0;
         ai1LevelSet = true;
         setStartGameButtonEnable();
-
         easyRadioButton2.setDisable(true);
         mediumRadioButton2.setDisable(false);
         hardRadioButton2.setDisable(false);
@@ -124,7 +114,6 @@ public class LevelAiLevelAiController {
         ai1Level = 1;
         ai1LevelSet = true;
         setStartGameButtonEnable();
-
         easyRadioButton2.setDisable(false);
         mediumRadioButton2.setDisable(true);
         hardRadioButton2.setDisable(false);
@@ -177,7 +166,6 @@ public class LevelAiLevelAiController {
         mediumRadioButton1.setDisable(false);
         hardRadioButton1.setDisable(true);
         setAiUser2();
-
     }
 
     @FXML
@@ -185,11 +173,6 @@ public class LevelAiLevelAiController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/menuScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         Scene scene = new Scene(pane);
-//        Stage primaryStage = new Stage();
-//        primaryStage.setTitle("MENU");
-//        primaryStage.setScene(new Scene(pane));
-//        primaryStage.show();
-//        ((Stage) backToMenuButton.getScene().getWindow()).close();
         String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
         scene.getStylesheets().add(css);
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
@@ -197,7 +180,6 @@ public class LevelAiLevelAiController {
         stage.setResizable(true);
         stage.setTitle("MENU");
         stage.show();
-
     }
     public void setStartGameButtonEnable(){
         if(ai1LevelSet && ai2LevelSet) {
@@ -207,27 +189,6 @@ public class LevelAiLevelAiController {
     public void setStartGameButtonDisable(){
         startGameButton.setDisable(true);
     }
-
-    public void setAi1Level(int ai1Level) {
-        this.ai1Level = ai1Level;
-    }
-
-    public void setAi2Level(int ai2Level) {
-        this.ai2Level = ai2Level;
-    }
-
-    public void setplayerAI(){
-        for (User u :
-                aiUserList) {
-            if(ai1Level == (u.getId()-1)){
-                playerAI1 = u;
-            }
-            if(ai2Level == (u.getId()-1)){
-                playerAI2 = u;
-            }
-        }
-    }
-
     public void setAiUser1(){
         try {
             player2Pane.getChildren().remove(playerAI1.getPhoto());

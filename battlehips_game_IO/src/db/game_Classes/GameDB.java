@@ -1,6 +1,6 @@
 package db.game_Classes;
 
-import sample.CellToDB;
+import bs_game_backend.CellToDB;
 
 import java.util.ArrayList;
 

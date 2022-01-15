@@ -17,8 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import sample.ClassToComboBox;
-import sample.User;
+import bs_game_backend.ClassToComboBox;
+import bs_game_backend.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,15 +63,10 @@ public class EditProfileController {
                 results.add(file.getName());
             }
         }
-
         for (String s:
              results) {
             avatarsList.add(new ClassToComboBox(s.replaceFirst("[.][^.]+$", "")));
         }
-
-//        for(int k = 1; k < 11; k++ ){
-//            avatarsList.add(new ClassToComboBox("avatar"+ k));
-//        }
         listPropertyAvatar = new SimpleListProperty<>(); //OBSlUGA Comboboxa z listy
         avatarObservableList = FXCollections.observableArrayList(avatarsList);
         listPropertyAvatar.set(avatarObservableList);
@@ -87,15 +82,11 @@ public class EditProfileController {
                 avatarComboBox.setPromptText(classToComboBox.getDispayText());
                 return;
             }
-
         }
-
     }
 
     @FXML
     private void confirmAction(){
-
-
         MessageDigest md5 = null;
         try {
             md5 = MessageDigest.getInstance("MD5");
@@ -105,7 +96,6 @@ public class EditProfileController {
         md5.update(StandardCharsets.UTF_8.encode(oldPasswordField.getText()));
         String oldPassword = String.format("%032x", new BigInteger(1, md5.digest()));
 
-
         MessageDigest md52 = null;
         try {
             md52 = MessageDigest.getInstance("MD5");
@@ -114,11 +104,6 @@ public class EditProfileController {
         }
         md52.update(StandardCharsets.UTF_8.encode(newPasswordField.getText()));
         String newPassword = String.format("%032x", new BigInteger(1, md52.digest()));
-
-
-
-
-
 
         if(oldPassword ==""){
             errorPaswordLabel.setText("InvalidData");
@@ -134,11 +119,8 @@ public class EditProfileController {
         }
         errorPaswordLabel.setText("");
 
-
-        //zapisujemy do bazy
         DbConnection dbConnection = new DbConnection();
         dbConnection.updateUser_password(newPassword, selectedUser.getId());
-
 
         oldPasswordField.setText("");
         newPasswordField.setText("");
@@ -149,11 +131,6 @@ public class EditProfileController {
         avatarComboBox.setDisable(true);
         changeAvatarButton.setDisable(true);
 
-
-    }
-
-    public User getSelectedUser() {
-        return selectedUser;
     }
 
     public void setSelectedUser(User selectedUser) {
@@ -209,8 +186,6 @@ public class EditProfileController {
             return;
         }
         errorPaswordLabel.setText("");
-
-
 
         DbConnection dbConnection = new DbConnection();
         dbConnection.updateUser_avatar(newPath, selectedUser.getId());

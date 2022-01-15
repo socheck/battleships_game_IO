@@ -1,11 +1,10 @@
 package db;
 
-import bs_game_backend.Cell;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import db.game_Classes.Changes;
 import db.game_Classes.GameDB;
-import sample.CellToDB;
-import sample.User;
+import bs_game_backend.CellToDB;
+import bs_game_backend.User;
 import db.game_Classes.InitialState;
 
 import java.io.IOException;

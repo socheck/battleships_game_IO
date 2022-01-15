@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import sample.Controller;
+import bs_game_backend.Controller;
 
 import java.io.IOException;
 

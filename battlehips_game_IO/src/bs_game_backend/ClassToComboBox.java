@@ -1,4 +1,4 @@
-package sample;
+package bs_game_backend;
 
 public class ClassToComboBox {
     private String path;
@@ -18,15 +18,8 @@ public class ClassToComboBox {
         return path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
-
     public String getDispayText() {
         return dispayText;
     }
 
-    public void setDispayText(String dispayText) {
-        this.dispayText = dispayText;
-    }
 }
