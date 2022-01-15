@@ -147,6 +147,7 @@ public class EditProfileController {
         newPasswordField.setDisable(true);
         confirbButton.setDisable(true);
         avatarComboBox.setDisable(true);
+        changeAvatarButton.setDisable(true);
 
 
     }

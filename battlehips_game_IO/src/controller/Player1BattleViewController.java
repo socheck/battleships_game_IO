@@ -107,7 +107,10 @@ public class Player1BattleViewController {
         Parent pane =(Parent) fxmlLoader.load();
         Stage primaryStage = new Stage();
         primaryStage.setTitle("MENU");
-        primaryStage.setScene(new Scene(pane));
+        Scene scene = new Scene(pane);
+        primaryStage.setScene(scene);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         primaryStage.show();
 
         ((Stage) backToMenuButton.getScene().getWindow()).close();

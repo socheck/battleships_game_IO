@@ -27,6 +27,10 @@ public class SignInP2Controller {
         Scene scene = new Scene(root2);
         Stage stage = (Stage) ((Node)login_pl_2).getScene().getWindow();
         stage.setScene(scene);
+
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
         stage.setResizable(true);
         stage.setTitle("player2View.fxml");
         stage.show();

@@ -64,7 +64,8 @@ public class LevelAiLevelAiController {
         stage.setTitle("AI vs AI");
         stage.setScene(scene);
         stage.setResizable(false);
-
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
         try{
             ((Stage) startGameButton.getScene().getWindow()).close();
@@ -189,7 +190,8 @@ public class LevelAiLevelAiController {
 //        primaryStage.setScene(new Scene(pane));
 //        primaryStage.show();
 //        ((Stage) backToMenuButton.getScene().getWindow()).close();
-
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(true);

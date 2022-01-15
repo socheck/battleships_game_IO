@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/ShipMenu.jpg" />
+            <Image url="@../img/ShipStandard.jpg" />
          </image>
       </ImageView>
       <Label layoutX="167.0" layoutY="14.0" text="Select Mode" textFill="WHITE">

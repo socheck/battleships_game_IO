@@ -66,6 +66,8 @@ public class LoginPlayer1Player2Controller {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("player1View.fxml");
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
 
         controller.setPlayer1Is(true);
@@ -88,6 +90,8 @@ public class LoginPlayer1Player2Controller {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("MENU");
         stage.show();
 
@@ -100,7 +104,10 @@ public class LoginPlayer1Player2Controller {
         Stage stage = new Stage();
         stage.setResizable(false);
         stage.setTitle("Log in");
-        stage.setScene(new Scene(pane));
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
         loginPlayerController.playerLoginLabel.setText("Player 1 Login");
         loginPlayerController.setLoginPlayer1Player2Controller(loginPlayer1Player2Controller);
@@ -113,7 +120,10 @@ public class LoginPlayer1Player2Controller {
         LoginPlayerController loginPlayerController = (LoginPlayerController) fxmlLoader.getController();
         Stage stage = new Stage();
         stage.setTitle("Log in");
-        stage.setScene(new Scene(pane));
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
         loginPlayerController.playerLoginLabel.setText("Player 2 Login");
         loginPlayerController.setLoginPlayer1Player2Controller(loginPlayer1Player2Controller);

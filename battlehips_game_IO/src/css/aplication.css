@@ -18,6 +18,16 @@
     -fx-prefHeight:25;
 
 }
+.label  {
+        -fx-font-family: "Tahoma";
+        -fx-font-weight: bold;
+        -fx-text-fill: white;
+}
+.radio-button{
+ -fx-font-family: "Tahoma";
+        -fx-font-weight: bold;
+        -fx-text-fill: white;
+}
 
 
 

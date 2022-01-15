@@ -35,11 +35,13 @@ public class NewGameController {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Players login");
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
         loginPlayer1Player2Controller.setLoginPlayer1Player2Controller(loginPlayer1Player2Controller);
         loginPlayer1Player2Controller.startGameButton.setDisable(true);
         loginPlayer1Player2Controller.loginPlayer2Button.setDisable(true);
-        loginPlayer1Player2Controller.pleaseLoginLabel.setText("Pleas login player 1");
+        loginPlayer1Player2Controller.pleaseLoginLabel.setText("Please login player 1");
         loginPlayer1Player2Controller.loginPlayer2Button.setVisible(false);
         loginPlayer1Player2Controller.startGameButton.setVisible(false);
 
@@ -56,11 +58,12 @@ public class NewGameController {
         Stage stage = (Stage) ((Node)playerVsAiButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
-
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("Player VS AI");
         stage.show();
         loginPlayerLevelAiController.setLoginPlayerLevelAiController(loginPlayerLevelAiController);
-        loginPlayerLevelAiController.pleaseLoginLabel.setText("Pleas login player");
+        loginPlayerLevelAiController.pleaseLoginLabel.setText("Please login player");
         loginPlayerLevelAiController.startGameButton.setVisible(false);
         loginPlayerLevelAiController.easyRadioButton.setVisible(false);
         loginPlayerLevelAiController.mediumRadioButton.setVisible(false);
@@ -82,7 +85,8 @@ public class NewGameController {
         Scene scene = new Scene(pane);
 
         levelAiLevelAiController.setStartGameButtonDisable();
-
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         Stage stage = (Stage) ((Node)aiVsAiButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
@@ -126,6 +130,8 @@ public class NewGameController {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("MENU");
         stage.show();
 

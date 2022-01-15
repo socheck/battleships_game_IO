@@ -4,17 +4,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginPlayerController">
    <children>
+      <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/loginPlayerBackGround.jpg" />
+         </image>
+      </ImageView>
       <Label fx:id="playerLoginLabel" layoutX="118.0" layoutY="30.0" text="Player Login" />
       <Label layoutX="42.0" layoutY="99.0" text="Login" />
       <Label layoutX="32.0" layoutY="150.0" text="Password" />
-      <Button fx:id="loginButton" layoutX="202.0" layoutY="221.0" mnemonicParsing="false" onAction="#loginAction" text="Log in" />
+      <Button fx:id="loginButton" layoutX="175.0" layoutY="221.0" mnemonicParsing="false" onAction="#loginAction" prefWidth="80.0" text="Log in" />
       <TextField fx:id="loginTextField" layoutX="90.0" layoutY="95.0" />
       <PasswordField fx:id="passwordTextField" layoutX="90.0" layoutY="146.0" />
-      <Button fx:id="exitButton" layoutX="73.0" layoutY="221.0" mnemonicParsing="false" onAction="#exitAction" text="Exit" />
+      <Button fx:id="exitButton" layoutX="45.0" layoutY="221.0" mnemonicParsing="false" onAction="#exitAction" prefWidth="80.0" text="Exit" />
       <Label fx:id="errorDataLabel" alignment="CENTER" layoutX="90.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" text="Label" />
    </children>
 </Pane>

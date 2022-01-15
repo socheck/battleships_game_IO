@@ -241,7 +241,10 @@ public class BattleReplaysController {
         Parent pane =(Parent) fxmlLoader.load();
         Stage primaryStage = new Stage();
         primaryStage.setTitle("MENU");
-        primaryStage.setScene(new Scene(pane));
+        Scene scene = new Scene(pane);
+        primaryStage.setScene(scene);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         primaryStage.show();
 
         ((Stage) backToMenuButton.getScene().getWindow()).close();
@@ -260,6 +263,8 @@ public class BattleReplaysController {
         Stage stage = (Stage) ((Node)backToReplaysButton).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(scene);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("Replays");
         stage.show();
 

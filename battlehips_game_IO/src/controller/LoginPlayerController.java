@@ -82,6 +82,8 @@ public class LoginPlayerController {
         Scene scene = new Scene(root2);
         stage.setTitle("Succes");
         stage.setScene(scene);
+        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setResizable(false);
         stage.show();
         succesController.textLabel.setText("Player " + u.getUsername() + " logged.");
