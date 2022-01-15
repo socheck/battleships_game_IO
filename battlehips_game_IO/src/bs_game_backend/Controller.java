@@ -281,7 +281,7 @@ public class Controller {
                             } catch (IndexOutOfBoundsException e) {
                             }
                             if(list_of_ships1.isEmpty()){
-                                System.out.println("Już postawiono wszystkie statki");
+                                // system.out.println("Już postawiono wszystkie statki");
                                 if (!player1ViewController.isNextGameWithAi()) {
                                     player1ViewController.setSwitchToP2ButtonEnable();
                                 }
@@ -292,7 +292,7 @@ public class Controller {
                         }
                     }
                     else{
-                        System.out.println("Już postawiono wszystkie statki");
+                        // system.out.println("Już postawiono wszystkie statki");
                         try {
                             if (!player1ViewController.isNextGameWithAi()) {
                                 player1ViewController.setSwitchToP2ButtonEnable();
@@ -371,7 +371,7 @@ public class Controller {
                         }
                     }
                     else {
-                        System.out.println("Juz postawiono wszystkie statki");
+                        // system.out.println("Juz postawiono wszystkie statki");
                         try {
                             player2ViewController.setStartGameButtonEnable();
                         } catch (Exception e) {

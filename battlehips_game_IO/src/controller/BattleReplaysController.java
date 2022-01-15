@@ -209,7 +209,7 @@ public class BattleReplaysController {
         primaryStage.setTitle("MENU");
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         primaryStage.show();
         ((Stage) backToMenuButton.getScene().getWindow()).close();
@@ -225,7 +225,7 @@ public class BattleReplaysController {
         Stage stage = (Stage) ((Node)backToReplaysButton).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("Replays");
         stage.show();

@@ -66,7 +66,7 @@ public class GameDB {
         else if(id == this.getPlayer2ID()){
             return this.initialState.getP2InitialArray();
         }else{
-            System.out.println("błąd GameDB getInitialStateArray");
+            // system.out.println("błąd GameDB getInitialStateArray");
             return null;
         }
     }
@@ -79,7 +79,7 @@ public class GameDB {
         else if(id == this.getPlayer2ID()){
             return this.initialState.getP2InitialArray();
         }else{
-            System.out.println("błąd GameDB getChangesArray");
+            // system.out.println("błąd GameDB getChangesArray");
             return null;
         }
     }

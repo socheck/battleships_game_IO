@@ -64,7 +64,7 @@ public class LoginPlayer1Player2Controller {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("player1View.fxml");
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.show();
 
@@ -88,7 +88,7 @@ public class LoginPlayer1Player2Controller {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("MENU");
         stage.show();
@@ -105,7 +105,7 @@ public class LoginPlayer1Player2Controller {
         stage.setTitle("Log in");
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.show();
         loginPlayerController.playerLoginLabel.setText("Player 1 Login");
@@ -122,7 +122,7 @@ public class LoginPlayer1Player2Controller {
         stage.setTitle("Log in");
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.show();
         loginPlayerController.playerLoginLabel.setText("Player 2 Login");
@@ -146,7 +146,7 @@ public class LoginPlayer1Player2Controller {
         this.player1 = player1;
         player1Pane.getChildren().add(player1.getPhoto());
         loginPlayer2Button.setDisable(false);
-        pleaseLoginLabel.setText("Pleas login player 2");
+        pleaseLoginLabel.setText("Please login player 2");
         loginPlayer1Button.setDisable(true);
         loginPlayer2Button.setVisible(true);
         loginPlayer1Button.setVisible(false);

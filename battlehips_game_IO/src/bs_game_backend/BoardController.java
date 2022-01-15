@@ -333,7 +333,7 @@ public class BoardController extends Parent {
 
             }
         }
-//        System.out.println("metoda neighborShip "+ neighborList);
+//        // system.out.println("metoda neighborShip "+ neighborList);
         return neighborList.toArray(new Cell[0]);
     }
 
@@ -366,14 +366,14 @@ public class BoardController extends Parent {
         if (ship.isVertical()) {
             for (int i = y; i < y + length; i++) {
                 if (!isValidPoint(x, i)){
-                    System.out.println("1");
+                    // system.out.println("1");
                     return false;
                 }
 
 
                 Cell cell = getCell(x, i);
                 if (cell.ship != null){
-                    System.out.println("2");
+                    // system.out.println("2");
                     return false;
                 }
 
@@ -381,13 +381,13 @@ public class BoardController extends Parent {
 
                 for (Cell neighbor : getNeighbors(x, i)) {
                     if (!isValidPoint(x, i)){
-                        System.out.println("3");
+                        // system.out.println("3");
                         return false;
                     }
 
 
                     if (neighbor.ship != null){
-                        System.out.println("4");
+                        // system.out.println("4");
                         return false;
                     }
 

@@ -90,7 +90,7 @@ public class NewPlayerController {
            return;
         }
         if(username == ""){
-            errorLabel.setText("Chose username");
+            errorLabel.setText("Choose username");
             return;
         }
         if(password == ""){
@@ -102,7 +102,7 @@ public class NewPlayerController {
         for (User user :
                 userArrayList) {
             if(user.getUsername().equals(username)){
-                errorLabel.setText("This player exist!");
+                errorLabel.setText("This player exists!");
                 return;
             }
         }
@@ -110,7 +110,7 @@ public class NewPlayerController {
         paswordPaswordField.setText("");
 
         dbConnection.setUser(username,password,((ClassToComboBox)avatarComboBox.getSelectionModel().getSelectedItem()).getPath());
-        succesLabel.setText("Succesfuly Created Player "+ username);
+        succesLabel.setText("Successfully Created Player "+ username);
         usernameTextField.setDisable(true);
         paswordPaswordField.setDisable(true);
         creatUserButton.setDisable(true);
@@ -129,7 +129,7 @@ public class NewPlayerController {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("MENU");
         stage.show();

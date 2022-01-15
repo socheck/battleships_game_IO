@@ -154,7 +154,7 @@ public class EditProfileController {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setResizable(true);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("Statistic/Profile");
         stage.show();

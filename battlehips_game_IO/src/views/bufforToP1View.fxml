@@ -14,6 +14,6 @@
          </image>
       </ImageView>
       <Label layoutX="98.0" layoutY="42.0" />
-      <Button fx:id="goP1Turn" layoutX="55.0" layoutY="53.0" mnemonicParsing="false" onAction="#player1BattleView" prefWidth="150.0" text="Player 2 Now" />
+      <Button fx:id="goP1Turn" layoutX="55.0" layoutY="53.0" mnemonicParsing="false" onAction="#player1BattleView" prefWidth="150.0" text="Player's 1 turn" />
    </children>
 </AnchorPane>

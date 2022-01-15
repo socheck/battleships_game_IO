@@ -81,7 +81,7 @@ public class StaticticProfileController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.setTitle("Modify profile");
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.show();
         editProfileController.setSelectedUser(selectedUser);
@@ -108,7 +108,7 @@ public void addPlayerAction() throws IOException {
     Stage stage = (Stage) ((Node)modyfiProfileButton).getScene().getWindow();
     stage.setResizable(false);
     stage.setScene(scene);
-    String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+    String css = this.getClass().getResource("/css/application.css").toExternalForm();
     scene.getStylesheets().add(css);
     stage.setTitle("New Player");
     stage.show();
@@ -125,7 +125,7 @@ public void addPlayerAction() throws IOException {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("MENU");
         stage.show();
@@ -140,9 +140,9 @@ public void addPlayerAction() throws IOException {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
-        stage.setTitle("Statistic/Profile");
+        stage.setTitle("Statistics/Profile");
         stage.show();
     }
     public void menuContexMenuAction(){

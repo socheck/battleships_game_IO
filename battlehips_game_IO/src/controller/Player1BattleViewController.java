@@ -101,7 +101,7 @@ public class Player1BattleViewController {
         primaryStage.setTitle("MENU");
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         primaryStage.show();
 

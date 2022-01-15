@@ -87,7 +87,7 @@ public class LoginPlayerLevelAiController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.setTitle("player1View.fxml");
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.show();
         controller.setPlayer1Is(true);
@@ -119,7 +119,7 @@ public class LoginPlayerLevelAiController {
         primaryStage.setTitle("Log in");
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         primaryStage.show();
         loginPlayerController.playerLoginLabel.setText("Player 1 Login");
@@ -134,7 +134,7 @@ public class LoginPlayerLevelAiController {
         Scene scene = new Scene(pane);
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setResizable(true);
         stage.setTitle("MENU");

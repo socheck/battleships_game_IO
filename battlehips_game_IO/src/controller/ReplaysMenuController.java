@@ -133,7 +133,7 @@ public class ReplaysMenuController {
         Stage stage = (Stage) ((Node)backToMenuButton).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("MENU");
         stage.show();
@@ -154,7 +154,7 @@ public class ReplaysMenuController {
         Scene scene = new Scene(pane);
         stage.setScene(scene);
 
-        String css = this.getClass().getResource("/css/aplication.css").toExternalForm();
+        String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.show();
         battleReplaysController.setToReplays(player1,player2,new GameDB(gameDB.getId(), gameDB.getPlayer1ID(), gameDB.getPlayer2ID(), gameDB.getWinnerID()));
