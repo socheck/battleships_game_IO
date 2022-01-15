@@ -96,6 +96,7 @@ public class LoginPlayer1Player2Controller {
     }
     @FXML
     public void loginPlayer1Action() throws IOException {
+        loginPlayer1Button.setDisable(true);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/loginPlayerScreen.fxml"));
         Parent pane =(Parent) fxmlLoader.load();
         LoginPlayerController loginPlayerController = (LoginPlayerController) fxmlLoader.getController();
@@ -110,6 +111,7 @@ public class LoginPlayer1Player2Controller {
         loginPlayerController.playerLoginLabel.setText("Player 1 Login");
         loginPlayerController.setLoginPlayer1Player2Controller(loginPlayer1Player2Controller);
         loginPlayerController.setPlayer1(true);
+        loginPlayer1Button.setDisable(false);
     }
     @FXML
     public void loginPlayer2Action() throws IOException {
