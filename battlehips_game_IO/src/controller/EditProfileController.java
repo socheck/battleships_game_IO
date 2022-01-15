@@ -87,6 +87,10 @@ public class EditProfileController {
 
     @FXML
     private void confirmAction(){
+        if (newPasswordField.getText() == "") {
+            errorPaswordLabel.setText("Choose password");
+            return;
+        }
         MessageDigest md5 = null;
         try {
             md5 = MessageDigest.getInstance("MD5");
@@ -158,6 +162,10 @@ public class EditProfileController {
     }
 
     public void changeAvatarAction(){
+        if (oldPasswordField.getText() == "") {
+            errorPaswordLabel.setText("Choose password");
+            return;
+        }
         String newPath;
 
         if(avatarComboBox.getSelectionModel().getSelectedItem() == null){
