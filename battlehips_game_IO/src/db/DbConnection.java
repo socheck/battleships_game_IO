@@ -60,14 +60,14 @@ public class DbConnection {
             preparedStatement = connection.prepareStatement(komendaSQL);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-//                System.out.println(resultSet.getInt("id") +  "\t" +
+//                // system.out.println(resultSet.getInt("id") +  "\t" +
 //                        resultSet.getString("username") + "\t" +
 //                        resultSet.getString("password") + "\t" +
 //                        resultSet.getString("avatar_path") + "\t" +
 //                        resultSet.getInt("wins") + "\t" +
 //                        resultSet.getInt("battles") + "\t" +
 //                        resultSet.getDouble("aim_ratio"));
-//                System.out.println("===========================================================");
+//                // system.out.println("===========================================================");
 
                 userArrayList.add(new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getInt("shots_amount"), resultSet.getInt("hits_amount")));
 
@@ -75,7 +75,7 @@ public class DbConnection {
             return userArrayList;
 
         } catch (SQLException throwables) {
-            System.out.println("Coś poszło nie tak getUser_list");
+            // // system.out.println("Coś poszło nie tak getUser_list");
             throwables.printStackTrace();
         }finally {
             try {
@@ -111,14 +111,14 @@ public class DbConnection {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
-//                System.out.println(resultSet.getInt("id") +  "\t" +
+//                // system.out.println(resultSet.getInt("id") +  "\t" +
 //                        resultSet.getString("username") + "\t" +
 //                        resultSet.getString("password") + "\t" +
 //                        resultSet.getString("avatar_path") + "\t" +
 //                        resultSet.getInt("wins") + "\t" +
 //                        resultSet.getInt("battles") + "\t" +
 //                        resultSet.getDouble("aim_ratio"));
-//                System.out.println("===========================================================");
+//                // system.out.println("===========================================================");
 
                 userArrayList.add(new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getInt("shots_amount"), resultSet.getInt("hits_amount")));
 
@@ -126,7 +126,7 @@ public class DbConnection {
             return userArrayList;
 
         } catch (SQLException throwables) {
-            System.out.println("Coś poszło nie tak getUser_list");
+            // // system.out.println("Coś poszło nie tak getUser_list");
             throwables.printStackTrace();
         }finally {
             try {
@@ -162,14 +162,14 @@ public class DbConnection {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
-//                System.out.println(resultSet.getInt("id") +  "\t" +
+//                // system.out.println(resultSet.getInt("id") +  "\t" +
 //                        resultSet.getString("username") + "\t" +
 //                        resultSet.getString("password") + "\t" +
 //                        resultSet.getString("avatar_path") + "\t" +
 //                        resultSet.getInt("wins") + "\t" +
 //                        resultSet.getInt("battles") + "\t" +
 //                        resultSet.getDouble("aim_ratio"));
-//                System.out.println("===========================================================");
+//                // system.out.println("===========================================================");
 
                 userArrayList.add(new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getInt("shots_amount"), resultSet.getInt("hits_amount")));
 
@@ -177,7 +177,7 @@ public class DbConnection {
             return userArrayList;
 
         } catch (SQLException throwables) {
-            System.out.println("Coś poszło nie tak getUser_list");
+            // // system.out.println("Coś poszło nie tak getUser_list");
             throwables.printStackTrace();
         }finally {
             try {
@@ -212,14 +212,14 @@ public class DbConnection {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
-//                System.out.println(resultSet.getInt("id") +  "\t" +
+//                // system.out.println(resultSet.getInt("id") +  "\t" +
 //                        resultSet.getString("username") + "\t" +
 //                        resultSet.getString("password") + "\t" +
 //                        resultSet.getString("avatar_path") + "\t" +
 //                        resultSet.getInt("wins") + "\t" +
 //                        resultSet.getInt("battles") + "\t" +
 //                        resultSet.getDouble("aim_ratio"));
-//                System.out.println("===========================================================");
+//                // system.out.println("===========================================================");
 
                 userArrayList.add(new User(resultSet.getInt("id"), resultSet.getString("username"), resultSet.getString("password"), resultSet.getString("avatar_path"), resultSet.getInt("wins"), resultSet.getInt("battles"), resultSet.getInt("shots_amount"), resultSet.getInt("hits_amount")));
 
@@ -227,7 +227,7 @@ public class DbConnection {
             return userArrayList;
 
         } catch (SQLException throwables) {
-            System.out.println("Coś poszło nie tak getUser_list");
+            // // system.out.println("Coś poszło nie tak getUser_list");
             throwables.printStackTrace();
         }finally {
             try {
@@ -265,7 +265,7 @@ public class DbConnection {
             preparedStatement.execute();
             return true;
         } catch (SQLException throwables) {
-            System.out.println("Dodawanie Usera nie powiodło się");
+            // // system.out.println("Dodawanie Usera nie powiodło się");
             throwables.printStackTrace();
             return false;
         }finally {
@@ -296,7 +296,7 @@ public class DbConnection {
             return true;
 
         } catch (SQLException throwables) {
-            System.out.println("Update hasła nie powiódł się");
+            // // system.out.println("Update hasła nie powiódł się");
             throwables.printStackTrace();
             return false;
         }finally {
@@ -327,7 +327,7 @@ public class DbConnection {
             return true;
 
         } catch (SQLException throwables) {
-            System.out.println("Update avatar_path nie powiódł się");
+            // // system.out.println("Update avatar_path nie powiódł się");
             throwables.printStackTrace();
             return false;
         }finally {
@@ -357,7 +357,7 @@ public class DbConnection {
             return true;
 
         } catch (SQLException throwables) {
-            System.out.println("Usuwanie Usera nie powiodło się");
+            // // system.out.println("Usuwanie Usera nie powiodło się");
             throwables.printStackTrace();
             return false;
         }finally {
@@ -400,7 +400,7 @@ public class DbConnection {
             return true;
 
         } catch (SQLException throwables) {
-            System.out.println("Update statystyk nie powiódł się");
+            // // system.out.println("Update statystyk nie powiódł się");
             throwables.printStackTrace();
             return false;
         }finally {
@@ -435,7 +435,7 @@ public class DbConnection {
             }
 
         } catch (SQLException throwables) {
-            System.out.println("Liczenie ID Pokoju z bazy nie powiodło się");
+            // // system.out.println("getUser z bazy nie powiodło się");
             throwables.printStackTrace();
 
         }finally {
@@ -486,7 +486,7 @@ public class DbConnection {
             preparedStatement.execute();
             return true;
         } catch (SQLException throwables) {
-            System.out.println("Dodawanie Gry nie powiodło się");
+            // // system.out.println("Dodawanie Gry nie powiodło się");
             throwables.printStackTrace();
             return false;
         }finally {
@@ -525,7 +525,7 @@ public class DbConnection {
 
             return g;
         } catch (SQLException throwables) {
-            System.out.println("getGamesArray nie powiodło się");
+            // // system.out.println("getGamesArray nie powiodło się");
             throwables.printStackTrace();
 //            return gamesArray;
             return g;
@@ -564,21 +564,21 @@ public class DbConnection {
 
                     initialState = MyJson.fromJsonMy(resultSet.getString("initial_state"), InitialState.class);
                 } catch (IOException e) {
-                    System.out.println("initialState error");
+                    // system.out.println("initialState error");
                     e.printStackTrace();
                 }
                 Changes changes = null;
                 try {
                     changes = MyJson.fromJsonMy(resultSet.getString("changes"), Changes.class);
                 } catch (IOException e) {
-                    System.out.println("changes error");
+                    // system.out.println("changes error");
                     e.printStackTrace();
                 }
                 return new GameDB( resultSet.getInt("id"), initialState , changes,  resultSet.getInt("player1"), resultSet.getInt("player2"), resultSet.getInt("winner"));
             }
 
         } catch (SQLException throwables) {
-            System.out.println("Liczenie ID Pokoju z bazy nie powiodło się");
+            // system.out.println("Liczenie ID Pokoju z bazy nie powiodło się");
             throwables.printStackTrace();
 
         }finally {
@@ -626,7 +626,7 @@ public class DbConnection {
 ////            return gamesArray;
 //        return g;
 //    } catch (SQLException throwables) {
-//        System.out.println("getGamesArray nie powiodło się");
+//        // system.out.println("getGamesArray nie powiodło się");
 //        throwables.printStackTrace();
 ////            return gamesArray;
 //        return g;
