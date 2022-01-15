@@ -2,8 +2,9 @@
 
 Elegancki projekt statków na zaliczenie Inżynierii Oprogramowania :)
 
+Proszę dodać /lib z JavaFX w project structure
 
-##vm start option do main: 
+vm start option do main: 
 
 Podmienić ścieżkę do swojego javafx
 
