@@ -70,6 +70,10 @@ public class NewPlayerController {
 
     public void  createUserAction() {
         errorLabel.setText("");
+        if(usernameTextField.getLength() > 49){
+            errorLabel.setText("To long username");
+            return;
+        }
         if (paswordPaswordField.getText() == "") {
             errorLabel.setText("Choose password");
             return;

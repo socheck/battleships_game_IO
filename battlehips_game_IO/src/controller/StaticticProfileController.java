@@ -61,12 +61,21 @@ public class StaticticProfileController {
         for (User u :
                 userArrayList) {
             statisticTableView.getItems().add(u);
+
+
         }
+        statisticTableView.getSelectionModel().select(userArrayList.get(0));
         modyfiProfileButton.setDisable(true);
+
 
     }
 
     public void modyfiProfileAction() throws IOException {
+        if(selectedUser == null){
+            modyfiProfileButton.setDisable(true);
+            return;
+
+        }
         if(selectedUser.getId() < 4){
             errorLabel.setText("You can't modify this AI");
             return;
@@ -160,5 +169,8 @@ public void addPlayerAction() throws IOException {
         }else {
             deleteMenuItem.setVisible(true);
         }
+    }
+    public void dd(){
+        modyfiProfileButton.setDisable(true);
     }
 }

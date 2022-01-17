@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="editProfileMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditProfileController">
+<Pane id="editProfileMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditProfileController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -32,8 +32,7 @@
             </Label>
             <Label prefHeight="15.0" />
             <PasswordField fx:id="oldPasswordField" maxWidth="150.0" prefWidth="150.0" />
-            <Label prefHeight="15.0" />
-            <Label fx:id="errorPaswordLabel" />
+            <Label fx:id="errorPaswordLabel" prefHeight="32.0" textAlignment="CENTER" wrapText="true" />
             <Label prefHeight="15.0" />
             <Label text="New password" textFill="WHITE">
                <font>

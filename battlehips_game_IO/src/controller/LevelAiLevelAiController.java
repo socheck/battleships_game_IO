@@ -191,7 +191,8 @@ public class LevelAiLevelAiController {
     }
     public void setAiUser1(){
         try {
-            player2Pane.getChildren().remove(playerAI1.getPhoto());
+            player1Pane.getChildren().remove(playerAI1.getPhoto());
+
         } catch (Exception e) {
         }finally {
             for (User u :

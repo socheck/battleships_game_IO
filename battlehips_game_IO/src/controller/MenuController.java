@@ -54,13 +54,13 @@ public class MenuController {
         Parent pane =(Parent) fxmlLoader.load();
         Scene scene = new Scene(pane);
         Stage stage = (Stage) ((Node)newGameButton).getScene().getWindow();
+        StaticticProfileController staticticProfileController = (StaticticProfileController) fxmlLoader.getController();
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Statistic/Profile");
         String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.show();
-
     }
     @FXML
     public void exitAction() {

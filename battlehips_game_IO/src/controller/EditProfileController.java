@@ -87,6 +87,12 @@ public class EditProfileController {
 
     @FXML
     private void confirmAction(){
+        if(newPasswordField.getText().equals(oldPasswordField.getText())){
+            errorPaswordLabel.setText("New password cannot be the same as old password");
+            return;
+
+        }
+
         if (newPasswordField.getText() == "") {
             errorPaswordLabel.setText("Choose password");
             return;

@@ -118,6 +118,7 @@ public class LoginPlayerLevelAiController {
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Log in");
         Scene scene = new Scene(pane);
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         String css = this.getClass().getResource("/css/application.css").toExternalForm();
         scene.getStylesheets().add(css);

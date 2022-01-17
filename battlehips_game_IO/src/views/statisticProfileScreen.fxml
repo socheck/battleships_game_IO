@@ -18,7 +18,7 @@
             <Image url="@../img/ShipStandard.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="statisticTableView" layoutX="83.0" layoutY="14.0" onMouseClicked="#selectProfileOnMouseClicked" prefHeight="300.0" prefWidth="440.0">
+      <TableView fx:id="statisticTableView" layoutX="83.0" layoutY="14.0" onMouseClicked="#selectProfileOnMouseClicked" onSort="#dd" prefHeight="300.0" prefWidth="440.0">
         <columns>
           <TableColumn fx:id="avatarTableColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Avatar" />
           <TableColumn fx:id="UsarnameTableColumn" prefWidth="85.0" style="-fx-alignment: CENTER;" text="Username" />
