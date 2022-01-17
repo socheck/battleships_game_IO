@@ -428,7 +428,7 @@ public class Controller {
                             if (cell.getShip() == null) {
                                 player1ShotNow = false;
                                // strzelanie bota
-                                player1BattleViewController.playerNumberLabel.setText("Strzela Komputer");
+                                player1BattleViewController.playerNumberLabel.setText("Computer shoots");
                                 aiSootWithPlayer1Now = true;
                                 aiShootInPlayer1();
                                 if(ai1Board.endGame()){
@@ -505,7 +505,7 @@ public void aiShootInPlayer1(){
                 }
                 hideBoardPl1(player1BattleViewController.nextButton.getScene());
                 insertBoardShip(player1BattleViewController.nextButton.getScene(),player1Board);
-                player1BattleViewController.playerNumberLabel.setText("Tura Gracza Nr 1");
+                player1BattleViewController.playerNumberLabel.setText("Player's turn");
                 super.stop();
                 if(player1Board.isPreviousShotTelling()){
                     aiShootInPlayer1();
@@ -574,7 +574,7 @@ public void aiShootInPlayer1(){
         if(exitToMenu){
             return;
         }
-        player1BattleViewController.playerNumberLabel.setText("Tura AI 1");
+        player1BattleViewController.playerNumberLabel.setText("AI's 1 turn");
         player1BattleViewController.player1Label.setText("AI level " + ai1Level);
         player1BattleViewController.player2Label.setText("AI level " + ai2Level);
         try {
@@ -650,7 +650,7 @@ public void aiShootInPlayer1(){
             @Override
             public void handle(long l) {
                 if(l - timeOfAiCahnge > time){
-                    player1BattleViewController.playerNumberLabel.setText("Tura AI 2");
+                    player1BattleViewController.playerNumberLabel.setText("AI's 2 turn");
                     player1BattleViewController.player2Label.setText("AI level " + ai1Level);
                     player1BattleViewController.player1Label.setText("AI level " + ai2Level);
                     player1BattleViewController.player1Pane.getChildren().remove(player1.getPhoto());
